@@ -3,7 +3,7 @@ import React from 'react';
 const Profile = (props) => {
   return (
     <div>
-      <h1>Profile page</h1>
+      <h1>Collab page</h1>
     </div>
   );
 };
