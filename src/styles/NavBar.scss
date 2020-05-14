@@ -1,4 +1,4 @@
-.NavMain {
+.Nav {
   background-color: transparent;
   color: rgb(57, 57, 57);
   display: flex;
@@ -7,11 +7,11 @@
   height: 70px;
 }
 
-.NavMain .nav-list {
+.Nav .Nav__list {
   margin-left: auto;
   display: flex;
 }
 
-.NavMain .nav-list li:not(:last-child) {
+.Nav .Nav__list .Nav__item:not(:last-child) {
   margin-right: 20px;
 }

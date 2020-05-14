@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import NavMain from './components/NavMain';
+import NavBar from './components/NavBar';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 // import ProtectedRoute from './components/ProtectedRoute';
@@ -14,7 +14,7 @@ import About from './pages/About';
 function App() {
   return (
     <div className="App">
-      <NavMain />
+      <NavBar />
       <Switch>
         <Route exact path="/" component={ProfilesFeed} />
         <Route exact path="/collabs" component={CollabsFeed} />
