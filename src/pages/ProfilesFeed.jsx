@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfilesFeed = (props) => {
+const ProfilesFeed = () => {
   return <div></div>;
 };
 

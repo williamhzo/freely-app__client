@@ -10,8 +10,24 @@
 .Nav .Nav__list {
   margin-left: auto;
   display: flex;
+  align-items: center;
 }
 
 .Nav .Nav__list .Nav__item:not(:last-child) {
   margin-right: 20px;
+}
+
+.Nav__link:first-child {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.Nav__item {
+  img {
+    height: 35px;
+  }
 }

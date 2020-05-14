@@ -21,15 +21,20 @@ const NavBar = (props) => {
 
   return (
     <nav className="Nav">
-      <NavLink exact to="/">
+      <NavLink className="Nav__link" exact to="/">
         <h3 className="Nav__logo">
-          Shark Attack{' '}
-          <span role="img" aria-label="shark-emoji">
-            🦈
-          </span>
+          Shark <br></br> Attack
         </h3>
+        <span role="img" aria-label="shark-emoji">
+          🦈
+        </span>
       </NavLink>
       <ul className="Nav__list">
+        <li className="Nav__item">
+          <NavLink className="Nav__link" to="/profile">
+            <img src="media/avatar.png" alt="avatar" />
+          </NavLink>
+        </li>
         {context.isLoggedIn && (
           <React.Fragment>
             <li className="Nav__item">
