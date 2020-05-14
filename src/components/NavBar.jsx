@@ -36,11 +36,28 @@ const NavBar = (props) => {
             </span>
           </NavLink>
           <ul className="Nav__list">
-            <li className="Nav__item">
-              <NavLink className="Nav__link" exact to="/collabs-create">
-                <img className="Nav__icon" src="media/plus-icon.svg" alt="+" />
-              </NavLink>
-            </li>
+            {context.user && (
+              <li className="Nav__item">
+                <NavLink className="Nav__link" exact to="/collabs-create">
+                  <img
+                    className="Nav__icon"
+                    src="media/plus-icon.svg"
+                    alt="+"
+                  />
+                </NavLink>
+              </li>
+            )}
+            {!context.user && (
+              <li className="Nav__item">
+                <NavLink className="Nav__link" exact to="/login">
+                  <img
+                    className="Nav__icon"
+                    src="media/plus-icon.svg"
+                    alt="+"
+                  />
+                </NavLink>
+              </li>
+            )}
             {context.user && (
               <div className="Nav__avatar">
                 <li className="Nav__item">
@@ -53,7 +70,7 @@ const NavBar = (props) => {
             {!context.user && (
               <li className="Nav__item">
                 <div className="Nav__avatar">
-                  <NavLink className="Nav__link" to="/profile">
+                  <NavLink className="Nav__link" to="/login">
                     <img src="media/avatar.png" alt="avatar" />
                   </NavLink>
                 </div>
@@ -61,6 +78,9 @@ const NavBar = (props) => {
             )}
             <li className="Nav__item">
               <img className="Nav__icon" src="media/hamburger.svg" alt="menu" />
+              {/* <li className="Nav__item">
+                  <p onClick={handleLogout}>Logout</p>
+                </li> */}
             </li>
             {/* {context.isLoggedIn && (
               <React.Fragment>

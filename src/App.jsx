@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
+import Login from './pages/Login';
 // import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './pages/Profile';
 import ProfilesFeed from './pages/ProfilesFeed';
@@ -21,8 +20,7 @@ function App() {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/collab" component={Collab} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
       </Switch>
     </div>
