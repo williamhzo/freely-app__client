@@ -4,9 +4,6 @@ import { withUser } from './Auth/withUser';
 import apiHandler from '../api/apiHandler';
 import UserContext from './Auth/UserContext';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 import '../styles/NavBar.scss';
 
 const NavBar = (props) => {
