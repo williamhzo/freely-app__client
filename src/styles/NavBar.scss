@@ -1,0 +1,47 @@
+.Nav {
+  background-color: transparent;
+  color: rgb(57, 57, 57);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  height: 70px;
+}
+
+.Nav {
+  .Nav__list {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .Nav__item:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    .Nav__item {
+      .Nav__icon {
+        width: 100%;
+        height: 40px;
+      }
+    }
+  }
+
+  .Nav__link {
+    span {
+      font-size: 2rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .Nav__link:first-child {
+    display: flex;
+    align-items: center;
+  }
+
+  .Nav__avatar {
+    border: solid 1px black;
+    border-radius: 50%;
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+  }
+}

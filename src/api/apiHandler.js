@@ -44,6 +44,7 @@ export default {
       .catch(errorHandler);
   },
 
+  // to be customized to our purpose (freelancer, collab, etc.)
   getItems() {
     return service
       .get("/api/items")
