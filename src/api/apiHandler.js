@@ -44,7 +44,6 @@ export default {
       .catch(errorHandler);
   },
 
-  // to be customized to our purpose (freelancer, collab, etc.)
   getUsers() {
     return service
       .get("/api/users")
