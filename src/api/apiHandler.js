@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -18,37 +18,41 @@ export default {
 
   signup(userInfo) {
     return service
-      .post("/api/auth/signup", userInfo)
+      .post('/api/auth/signup', userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   signin(userInfo) {
     return service
-      .post("/api/auth/signin", userInfo)
+      .post('/api/auth/signin', userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   isLoggedIn() {
     return service
-      .get("/api/auth/isLoggedIn")
+      .get('/api/auth/isLoggedIn')
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   logout() {
     return service
-      .get("/api/auth/logout")
+      .get('/api/auth/logout')
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
-  // to be customized to our purpose (freelancer, collab, etc.)
-  getItems() {
+  // get users that have a complete freelancer profile
+  getFreelancers() {
     return service
-      .get("/api/items")
-      .then((res) => res.data)
+      .get('/api/users')
+      .then((res) =>
+        res.data.filter(
+          (el) => el.bio && el.location && el.title && el.userCategory
+        )
+      )
       .catch(errorHandler);
   },
 };
