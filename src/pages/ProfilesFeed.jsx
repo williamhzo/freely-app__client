@@ -1,7 +1,10 @@
 import React from 'react';
 import Tabs from '../components/Tabs';
 import FreelancerCard from '../components/FreelancerCard';
+import FilterFreelance from '../components/FilterFreelance';
 import apiHandler from '../api/apiHandler';
+
+import '../styles/FeedPage.scss';
 
 class ProfilesFeed extends React.Component {
   state = {
@@ -17,7 +20,7 @@ class ProfilesFeed extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='feed-container'>
         {!this.state.freelancers && (
           <h2>
             Sorry, no freelancers found{' '}
@@ -27,13 +30,7 @@ class ProfilesFeed extends React.Component {
           </h2>
         )}
         <Tabs />
-        <form className="filter-group" action="">
-          <label htmlFor="city">City</label>
-          <input name="city" id="city" type="text" />
-          <br></br>
-          <label htmlFor="category">Category</label>
-          <input type="text" name="category" id="category" />
-        </form>
+        <FilterFreelance />
         {this.state.freelancers.map((freelancer, index) => (
           <FreelancerCard key={index} freelancer={freelancer} />
         ))}
