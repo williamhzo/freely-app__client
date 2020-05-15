@@ -1,16 +1,25 @@
 .feed-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .card-frl {
-  width: 80%;
-  margin: 10px auto;
+  width: 90%;
+  margin: 15px auto;
   display: flex;
   align-items: center;
+  border: lightgrey 1px solid;
+  border-radius: 8px;
+  height: 150px;
+  overflow: hidden;
 
   &__aside {
-    width: 25%;
+    width: 33%;
+    margin-right: 12px;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
   }
 
   &__title {
@@ -19,11 +28,17 @@
 
   &__subtitle {
     font-size: 1rem;
+    font-weight: 400;
   }
 
   &__copy {
     font-size: 0.9rem;
+    font-weight: 300;
   }
+}
+
+.filter-group {
+  margin: 15px auto;
 }
 
 // .find().select(field) to remove objects (hassPss)
