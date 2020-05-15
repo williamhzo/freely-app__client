@@ -1,0 +1,29 @@
+.feed-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-frl {
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+
+  &__aside {
+    width: 25%;
+  }
+
+  &__title {
+    font-size: 1rem;
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+  }
+
+  &__copy {
+    font-size: 0.9rem;
+  }
+}
+
+// .find().select(field) to remove objects (hassPss)
