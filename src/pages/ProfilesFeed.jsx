@@ -35,7 +35,7 @@ class ProfilesFeed extends React.Component {
           <input type="text" name="category" id="category" />
         </form>
         {this.state.freelancers.map((freelancer, index) => (
-          <FreelancerCard key={index} data={freelancer} />
+          <FreelancerCard key={index} freelancer={freelancer} />
         ))}
       </div>
     );
