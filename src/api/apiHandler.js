@@ -45,9 +45,16 @@ export default {
   },
 
   // to be customized to our purpose (freelancer, collab, etc.)
-  getItems() {
+  getUsers() {
     return service
-      .get("/api/items")
+      .get("/api/users")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getCollabs() {
+    return service
+      .get("/api/collabs")
       .then((res) => res.data)
       .catch(errorHandler);
   },
