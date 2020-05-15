@@ -14,7 +14,8 @@ class Login extends Component {
   state = {
     accountExists: false,
     email: '',
-    username: '',
+    name: '',
+    userName: '',
     password: '',
   };
 
@@ -23,8 +24,9 @@ class Login extends Component {
   };
 
   handleChange = (event) => {
-    const { key, value } = event.target;
-    this.setState({ [key]: value });
+    console.log('change: ' + event.target.value);
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
@@ -34,8 +36,9 @@ class Login extends Component {
   };
 
   logUser = () => {
+    const { email, password } = this.state;
     apiHandler
-      .signin(this.state)
+      .signin({ email, password })
       .then((data) => {
         this.context.setUser(data);
         this.props.history.push('/');
@@ -46,8 +49,10 @@ class Login extends Component {
   };
 
   createAccount = () => {
+    const { email, password, name, userName } = this.state;
+    console.log(email, password, name, userName);
     apiHandler
-      .signup(this.state)
+      .signup({ email, password, name, userName })
       .then((data) => {
         this.context.setUser(data);
         this.props.history.push('/');
@@ -89,20 +94,19 @@ class Login extends Component {
               <br></br>
               <input
                 className="form__input"
-                type="name"
+                type="text"
                 id="name"
                 name="name"
               />
-              {/* <br></br> */}
-              <label className="form__label" htmlFor="username">
+              <label className="form__label" htmlFor="userName">
                 Username
               </label>
               <br></br>
               <input
                 className="form__input"
-                type="username"
-                id="username"
-                name="username"
+                type="text"
+                id="userName"
+                name="userName"
               />
               <br></br>
             </>
@@ -117,13 +121,23 @@ class Login extends Component {
             Password
           </label>
           <br></br>
-          <input
-            className="form__input"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="5+ characters"
-          />
+          {!this.state.accountExists && (
+            <input
+              className="form__input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="5+ characters"
+            />
+          )}
+          {this.state.accountExists && (
+            <input
+              className="form__input"
+              type="password"
+              id="password"
+              name="password"
+            />
+          )}
 
           {this.state.accountExists ? (
             <button className="form__button">Log in</button>

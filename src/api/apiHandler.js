@@ -53,9 +53,18 @@ export default {
   },
 
   getCollabs() {
+    return service.get("/api/collabs").then((res) => res.data);
+  },
+
+  // get users that have a complete freelancer profile
+  getFreelancers() {
     return service
-      .get("/api/collabs")
-      .then((res) => res.data)
+      .get("/api/users")
+      .then((res) =>
+        res.data.filter(
+          (el) => el.bio && el.location && el.title && el.userCategory
+        )
+      )
       .catch(errorHandler);
   },
 };

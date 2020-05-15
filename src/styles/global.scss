@@ -81,3 +81,10 @@ a {
 ul {
   list-style-type: none;
 }
+
+// Getting rid of Safari's mobile 100vh bug (menu overlay)
+// body {
+//   min-height: 100vh;
+//   /* mobile viewport bug fix */
+//   min-height: -webkit-fill-available;
+// }
