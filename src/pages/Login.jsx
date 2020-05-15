@@ -14,7 +14,8 @@ class Login extends Component {
   state = {
     accountExists: false,
     email: '',
-    username: '',
+    name: '',
+    userName: '',
     password: '',
   };
 
@@ -23,8 +24,9 @@ class Login extends Component {
   };
 
   handleChange = (event) => {
-    const { key, value } = event.target;
-    this.setState({ [key]: value });
+    console.log('change: ' + event.target.value);
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
@@ -34,8 +36,9 @@ class Login extends Component {
   };
 
   logUser = () => {
+    const { email, password } = this.state;
     apiHandler
-      .signin(this.state)
+      .signin({ email, password })
       .then((data) => {
         this.context.setUser(data);
         this.props.history.push('/');
@@ -46,8 +49,10 @@ class Login extends Component {
   };
 
   createAccount = () => {
+    const { email, password, name, userName } = this.state;
+    console.log(email, password, name, userName);
     apiHandler
-      .signup(this.state)
+      .signup({ email, password, name, userName })
       .then((data) => {
         this.context.setUser(data);
         this.props.history.push('/');
@@ -93,7 +98,6 @@ class Login extends Component {
                 id="name"
                 name="name"
               />
-              {/* <br></br> */}
               <label className="form__label" htmlFor="userName">
                 Username
               </label>
