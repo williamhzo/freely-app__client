@@ -89,20 +89,20 @@ class Login extends Component {
               <br></br>
               <input
                 className="form__input"
-                type="name"
+                type="text"
                 id="name"
                 name="name"
               />
               {/* <br></br> */}
-              <label className="form__label" htmlFor="username">
+              <label className="form__label" htmlFor="userName">
                 Username
               </label>
               <br></br>
               <input
                 className="form__input"
-                type="username"
-                id="username"
-                name="username"
+                type="text"
+                id="userName"
+                name="userName"
               />
               <br></br>
             </>
@@ -117,13 +117,23 @@ class Login extends Component {
             Password
           </label>
           <br></br>
-          <input
-            className="form__input"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="5+ characters"
-          />
+          {!this.state.accountExists && (
+            <input
+              className="form__input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="5+ characters"
+            />
+          )}
+          {this.state.accountExists && (
+            <input
+              className="form__input"
+              type="password"
+              id="password"
+              name="password"
+            />
+          )}
 
           {this.state.accountExists ? (
             <button className="form__button">Log in</button>
