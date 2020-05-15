@@ -1,5 +1,7 @@
 import React from "react";
 
+import "../styles/ProfileEdit.scss";
+
 const Profile = (props) => {
   return (
     <div>
