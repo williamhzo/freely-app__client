@@ -11,7 +11,9 @@ const FreelancerCard = ({ freelancer }) => {
       <div style={styleProfilePic} className="card-frl__aside"></div>
       <div className="card-frl__body">
         <h3 className="card-frl__title">
-          {freelancer.userCategory.name || 'Front End Web Developer'}
+          {freelancer.userCategory.map((el) => (
+            <div>{el.name}</div>
+          ))}
         </h3>
         <div className="card-frl__skills"></div>
         <h2 className="card-frl__subtitle">{freelancer.name}</h2>
