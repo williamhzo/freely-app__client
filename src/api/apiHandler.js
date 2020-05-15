@@ -52,6 +52,13 @@ export default {
       .catch(errorHandler);
   },
 
+  getUser(key, value) {
+    return service
+      .get(`/api/users?${key}=${value}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getCollabs() {
     return service.get("/api/collabs").then((res) => res.data);
   },
