@@ -13,11 +13,7 @@ const FreelancerCard = ({ freelancer }) => {
         <h3 className="card-frl__title">
           {freelancer.userCategory.name || 'Front End Web Developer'}
         </h3>
-        <div className="card-frl__skills">
-          {freelancer.map((el) => (
-            <FreelancerSkill freelancer={freelancer} />
-          ))}
-        </div>
+        <div className="card-frl__skills"></div>
         <h2 className="card-frl__subtitle">{freelancer.name}</h2>
         <p className="card-frl__copy">{freelancer.location}</p>
         <p className="card-frl__copy">
