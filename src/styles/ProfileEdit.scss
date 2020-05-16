@@ -34,7 +34,6 @@
     max-width: 60%;
     min-width: 150px;
     margin-top: 30px;
-    margin-bottom: 30px;
   }
   &__category {
     // placeholder 👇
@@ -43,6 +42,49 @@
   &__title {
     max-width: 60%;
     font-size: 1.3em;
+    margin-top: 30px;
+  }
+  &__sociallinks {
+    margin-top: 30px;
+    > * {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+  &__bullets[class] {
+    margin-top: 30px;
+    width: 100%;
+    background: #e0e0e0;
+    padding: 30px;
+    padding-left: 35px;
+  }
+  &__bullet:before {
+    content: "•";
+    margin-left: -5px;
+    margin-right: 5px;
+  }
+  &__skills {
+    margin-top: 30px;
+    align-self: flex-start;
+  }
+}
+
+// Edit buttons
+
+.edit {
+  &--container {
+    position: relative;
+    display: none;
+    margin: 0;
+  }
+  &--right {
+    position: absolute;
+  }
+}
+
+:hover > .edit {
+  &--container {
+    display: inline;
   }
 }
 

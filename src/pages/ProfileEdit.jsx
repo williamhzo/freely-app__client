@@ -83,6 +83,9 @@ export default class ProfileEdit extends Component {
                 </a>
               );
             })}
+            <span className="edit--container">
+              <span className="edit--right">edit</span>
+            </span>
           </div>
         )}
         <ul className="profile__bullets">
