@@ -47,7 +47,7 @@ export default class ProfileEdit extends Component {
           {this.state.remote && (
             <li className="profile__bullet">Open to remote collaboration</li>
           )}
-          <li className="profile__bullet">Prefered method of contact: ____</li>
+          <li className="profile__bullet">Preferred method of contact: ____</li>
         </ul>
         {this.state.userSkills && (
           <div className="profile__skills">

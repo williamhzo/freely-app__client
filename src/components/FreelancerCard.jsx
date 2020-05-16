@@ -1,15 +1,21 @@
 import React from 'react';
+import FreelancerSkill from './FreelancerSkill';
 
 const FreelancerCard = ({ freelancer }) => {
+  const styleProfilePic = {
+    backgroundImage: `url('${freelancer.profilePicture}')`,
+  };
+
   return (
     <div className="card-frl">
-      <div className="card-frl__aside">
-        <div className="card-frl__img">
-          <img src={freelancer.profilePicture} alt="Profile" />
-        </div>
-      </div>
+      <div style={styleProfilePic} className="card-frl__aside"></div>
       <div className="card-frl__body">
-        <h1 className="card-frl__title">{freelancer.userCategory.name}</h1>
+        <h3 className="card-frl__title">
+          {freelancer.userCategory.map((el, index) => (
+            <div key={index}>{el.name}</div>
+          ))}
+        </h3>
+        <div className="card-frl__skills"></div>
         <h2 className="card-frl__subtitle">{freelancer.name}</h2>
         <p className="card-frl__copy">{freelancer.location}</p>
         <p className="card-frl__copy">
