@@ -32,6 +32,9 @@ export default class ProfileEdit extends Component {
     apiHandler.getCategories().then((apiRes) => {
       this.setState({ categoryOptions: apiRes });
     });
+    apiHandler.getSkills().then((apiRes) => {
+      this.setState({ skillOptions: apiRes });
+    });
   }
 
   render() {
@@ -76,7 +79,6 @@ export default class ProfileEdit extends Component {
         {this.state.socialLinks && (
           <div className="profile__sociallinks">
             {this.state.socialLinks.map((link) => {
-              // ADD SCRIPT TO FORMAT LINKS 👈
               return (
                 <a href={link} className="profile__sociallink">
                   {checkLink(link)}
@@ -97,13 +99,22 @@ export default class ProfileEdit extends Component {
           )}
           <li className="profile__bullet">Preferred method of contact: ____</li>
         </ul>
-        {this.state.userSkills && (
-          <div className="profile__skills">
+        {this.state.userSkills && this.state.skillOptions && (
+          <>
             <h2 className="profile__heading">Skills</h2>
-            {this.state.userSkills.map((skill) => {
-              return <div className="profile__skill">{skill.name}</div>;
-            })}
-          </div>
+            <div className="profile__skills">
+              <Autocomplete
+                multiple
+                limitTags={5}
+                id="tags-outlined"
+                options={this.state.skillOptions}
+                defaultValue={this.state.userSkills}
+                getOptionLabel={(option) => option.name} // specify what property to use
+                filterSelectedOptions
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </div>
+          </>
         )}
         {this.state.bio && (
           <>
@@ -112,28 +123,33 @@ export default class ProfileEdit extends Component {
           </>
         )}
         {this.state.portfolio && (
-          <div className="profile__portfolio">
-            {this.state.portfolio.map((portfolioItem) => {
-              return (
-                <div className="profile__portfolioitem">
-                  <img
-                    className="profile__portfolioimage"
-                    src={portfolioItem.image}
-                    alt=""
-                  />
-                  <div className="profile__portfoliotitle">
-                    {portfolioItem.title}
+          <>
+            <h2 className="profile__heading">Portfolio</h2>
+            <div className="profile__portfolio">
+              {this.state.portfolio.map((portfolioItem) => {
+                return (
+                  <div className="profile__portfolioitem">
+                    <img
+                      className="profile__portfolioimage"
+                      src={portfolioItem.image}
+                      alt=""
+                    />
+                    <h3 className="profile__portfoliotitle">
+                      {portfolioItem.title}
+                    </h3>
+                    <div className="profile__portfoliodescription">
+                      {portfolioItem.description}
+                    </div>
+                    {portfolioItem.link && (
+                      <div className="profile__portfoliolink">
+                        <a href={portfolioItem.link}>Link »</a>
+                      </div>
+                    )}
                   </div>
-                  <div className="profile__portfoliodescription">
-                    {portfolioItem.description}
-                  </div>
-                  <div className="profile__portfoliolink">
-                    {portfolioItem.link}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         )}
         {this.state.userCollab && (
           <div className="profile__collabs">

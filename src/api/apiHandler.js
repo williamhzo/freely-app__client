@@ -66,6 +66,10 @@ export default {
     return service.get("/api/categories").then((res) => res.data);
   },
 
+  getSkills() {
+    return service.get("/api/skills").then((res) => res.data);
+  },
+
   // get users that have a complete freelancer profile
   getFreelancers() {
     return service

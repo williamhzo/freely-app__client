@@ -1,8 +1,13 @@
 .profile {
   padding-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  &__heading {
+    margin-top: 30px;
+    align-self: flex-start;
+  }
   &__avatarbox {
     position: relative;
     margin-left: auto;
@@ -64,8 +69,27 @@
     margin-right: 5px;
   }
   &__skills {
-    margin-top: 30px;
     align-self: flex-start;
+  }
+  &__bio {
+    align-self: flex-start;
+  }
+  &__portfolioitem,
+  &__collab {
+    border: 1px solid grey;
+    border-radius: 20px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    margin-top: 20px;
+  }
+  &__portfoliodescription,
+  &__portfoliotitle,
+  &__portfoliolink,
+  &__collabtitle,
+  &__collabdescription {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
   }
 }
 
@@ -97,7 +121,10 @@
 .MuiInput-underline:after {
   border-bottom: none !important;
 }
-.MuiInputBase-root :nth-child(n + 4) {
+.profile__categories .MuiInputBase-root :nth-child(n + 4) {
+  color: red;
+}
+.profile__skills .MuiInputBase-root :nth-child(n + 6) {
   color: red;
 }
 .MuiAutocomplete-option,
