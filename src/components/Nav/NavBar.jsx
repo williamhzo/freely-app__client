@@ -1,25 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { withUser } from './Auth/withUser';
-import apiHandler from '../api/apiHandler';
-import UserContext from './Auth/UserContext';
+import { withUser } from '../Auth/withUser';
+import UserContext from '../Auth/UserContext';
+import HamburgerMenu from './HamburgerMenu';
 
-import '../styles/NavBar.scss';
+import '../../styles/NavBar.scss';
 
-const NavBar = (props) => {
-  const { context } = props;
-
-  function handleLogout() {
-    apiHandler
-      .logout()
-      .then(() => {
-        context.removeUser();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+const NavBar = () => {
+  // console.log(context.user);
   return (
     <UserContext.Consumer>
       {(context) => (
@@ -73,36 +61,15 @@ const NavBar = (props) => {
                 </div>
               </li>
             )}
-            <li className="Nav__item">
+            {/* <li className="Nav__item">
               <img className="Nav__icon" src="media/hamburger.svg" alt="menu" />
               {/* <li className="Nav__item">
                   <p onClick={handleLogout}>Logout</p>
-                </li> */}
+                </li>
+            </li> */}
+            <li className="Nav__item">
+              <HamburgerMenu context={context} />
             </li>
-            {/* {context.isLoggedIn && (
-              <React.Fragment>
-                <li className="Nav__item">
-                  <NavLink className="Nav__link" to="/profile">
-                    {context.user && context.user.email}
-                  </NavLink>
-                </li>
-                <li className="Nav__item">
-                  <p onClick={handleLogout}>Logout</p>
-                </li>
-              </React.Fragment>
-            )} */}
-            {/* {!context.isLoggedIn && (
-              <React.Fragment>
-                <li className="Nav__item">
-                  <NavLink className="Nav__link" to="/signin">
-                    Log in
-                  </NavLink>
-                </li>
-                <li className="Nav__item">
-                  <NavLink to="/signup">Create account</NavLink>
-                </li>
-              </React.Fragment>
-            )} */}
           </ul>
         </nav>
       )}

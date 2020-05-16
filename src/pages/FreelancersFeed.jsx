@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from '../components/Tabs';
+import Tabs from '../components/Nav/Tabs';
 import FreelancerCard from '../components/FreelancerCard';
 import FilterFreelance from '../components/FilterFreelance';
 import apiHandler from '../api/apiHandler';
@@ -20,7 +20,7 @@ class ProfilesFeed extends React.Component {
 
   render() {
     return (
-      <div className='feed-container'>
+      <div className="feed-container">
         {!this.state.freelancers && (
           <h2>
             Sorry, no freelancers found{' '}
