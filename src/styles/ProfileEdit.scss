@@ -1,0 +1,65 @@
+.profile {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__avatarbox {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    width: 50%;
+    max-width: 240px;
+  }
+  &__avatarbox:hover:after {
+    position: absolute;
+    bottom: 15px;
+    right: 25px;
+    content: "edit";
+    color: white;
+  }
+  &__picture {
+    width: 100%;
+  }
+  &__name {
+    // placeholder 👇
+    font-family: inherit;
+    margin-top: 20px;
+    font-size: 2em;
+  }
+  &__categories {
+    display: flex;
+    padding: 0px 30px;
+    max-width: 60%;
+    min-width: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  &__category {
+    // placeholder 👇
+    font-family: inherit;
+  }
+  &__title {
+    max-width: 60%;
+    font-size: 1.3em;
+  }
+}
+
+// Material UI
+
+.MuiAutocomplete-root {
+  width: 100%;
+}
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  border-bottom: none !important;
+}
+.MuiInputBase-root :nth-child(n + 4) {
+  color: red;
+}
+.MuiAutocomplete-option,
+.MuiInputBase-root,
+.MuiChip-root {
+  font-family: "Source Sans Pro";
+}
