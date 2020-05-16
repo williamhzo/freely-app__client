@@ -50,7 +50,6 @@ class Login extends Component {
 
   createAccount = () => {
     const { email, password, name, userName } = this.state;
-    console.log(email, password, name, userName);
     apiHandler
       .signup({ email, password, name, userName })
       .then((data) => {
