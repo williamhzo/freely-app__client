@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.tabs {
+  width: 100%;
+  display: flex;
+  padding: 0 15px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .card-frl {
   width: 90%;
   margin: 15px auto;
