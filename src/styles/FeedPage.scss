@@ -12,18 +12,18 @@
   align-items: center;
 }
 
-.card-frl {
+.card {
   width: 90%;
   margin: 15px auto;
   display: flex;
   align-items: center;
   border: lightgrey 1px solid;
   border-radius: 8px;
-  height: 150px;
+  min-height: 150px;
   overflow: hidden;
 
   &__aside {
-    width: 33%;
+    min-width: 33%;
     margin-right: 12px;
     height: 100%;
     background-position: center center;
@@ -43,6 +43,15 @@
     font-size: 0.9rem;
     font-weight: 300;
   }
+}
+
+.card-collab {
+  width: 90%;
+  margin: 15px auto;
+  border: lightgrey 1px solid;
+  border-radius: 8px;
+  height: 150px;
+  overflow: hidden;
 }
 
 .filter-group {

@@ -7,22 +7,22 @@ const FreelancerCard = ({ freelancer }) => {
   };
 
   return (
-    <div className="card-frl">
-      <div style={styleProfilePic} className="card-frl__aside"></div>
-      <div className="card-frl__body">
-        <h3 className="card-frl__title">
+    <div className="card">
+      <div style={styleProfilePic} className="card__aside"></div>
+      <div className="card__body">
+        <h3 className="card__title">
           {freelancer.userCategory.map((el, index) => (
             <div key={index}>{el.name}</div>
           ))}
         </h3>
-        {/* <div className="card-frl__skills">
+        {/* <div className="card__skills">
           {freelancer.userSkills.map((skill, index) => (
             <FreelancerSkill key={index} skill={skill} />
           ))}
         </div> */}
-        <h2 className="card-frl__subtitle">{freelancer.name}</h2>
-        <p className="card-frl__copy">{freelancer.location}</p>
-        <p className="card-frl__copy">
+        <h2 className="card__subtitle">{freelancer.name}</h2>
+        <p className="card__copy">{freelancer.location}</p>
+        <p className="card__copy">
           {freelancer.remote
             ? "I don't mind working remotely."
             : 'I prefer working on site.'}
