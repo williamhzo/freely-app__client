@@ -15,7 +15,7 @@ export default class ProfileEdit extends Component {
   render() {
     // console.log(this.props.match.params.username);
     return (
-      <div clasName="profile">
+      <div className="profile container">
         {this.state.profilePicture && (
           <div className="profile__avatar">
             <img src={this.state.profilePicture} alt="" />
