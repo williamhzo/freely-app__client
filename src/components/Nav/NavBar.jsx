@@ -13,12 +13,7 @@ const NavBar = () => {
       {(context) => (
         <nav className="Nav">
           <NavLink className="Nav__link" exact to="/">
-            <h3 className="Nav__logo">
-              Shark <br></br> Attack
-            </h3>
-            <span role="img" aria-label="shark-emoji">
-              🦈
-            </span>
+            <h3 className="Nav__logo">Freely</h3>
           </NavLink>
           <ul className="Nav__list">
             {context.user && (
