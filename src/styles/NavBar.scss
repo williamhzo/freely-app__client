@@ -1,10 +1,13 @@
+$NavBar-height: 50px;
+
 .Nav {
   background-color: transparent;
   color: rgb(57, 57, 57);
   display: flex;
   align-items: center;
   padding: 20px;
-  height: 70px;
+  height: $NavBar-height;
+  margin: 15px 0;
 }
 
 .Nav {
@@ -13,39 +16,45 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .Nav__item {
+      height: $NavBar-height;
+      max-width: 50px;
+      .Nav__icon {
+        width: 100%;
+      }
+    }
     .Nav__item:not(:last-child) {
       margin-right: 30px;
     }
+    .Nav__link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: $NavBar-height;
 
-    .Nav__item {
-      height: 50px;
-      width: 50px;
-      .Nav__icon {
-        width: 100%;
-        // height: 40px;
+      span {
+        font-size: 3.5rem;
+        font-weight: 300;
+        margin: 0;
+        padding: 0;
+        // line-height: 50px;
+        // text-align: center;
       }
     }
-  }
 
-  .Nav__link {
-    span {
-      font-size: 2rem;
-      margin-left: 0.5rem;
+    .Nav__avatar {
+      border: solid 1px black;
+      border-radius: 50%;
+      padding: 5px;
+      height: $NavBar-height;
+      width: 50px;
     }
   }
+}
 
-  .Nav__link:first-child {
-    display: flex;
-    align-items: center;
-  }
-
-  .Nav__avatar {
-    border: solid 1px black;
-    border-radius: 50%;
-    padding: 5px;
-    height: 50px;
-    width: 50px;
-  }
+.Nav__logo {
+  font-size: 1.6rem;
 }
 
 .hamb-menu {

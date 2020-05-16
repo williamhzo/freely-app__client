@@ -8,6 +8,7 @@ import '../../styles/NavBar.scss';
 
 const NavBar = () => {
   // console.log(context.user);
+
   return (
     <UserContext.Consumer>
       {(context) => (
@@ -16,52 +17,29 @@ const NavBar = () => {
             <h3 className="Nav__logo">Freely</h3>
           </NavLink>
           <ul className="Nav__list">
+            <li className="Nav__item">
+              <NavLink className="Nav__link" exact to="/collabs-create">
+                <span className="Nav__link--plus-icon">+</span>
+              </NavLink>
+            </li>
             {context.user && (
               <li className="Nav__item">
-                <NavLink className="Nav__link" exact to="/collabs-create">
-                  <img
-                    className="Nav__icon"
-                    src="media/plus-icon.svg"
-                    alt="+"
-                  />
+                <NavLink className="Nav__link" to="/profile">
+                  {/* <div
+                    className="Nav__avatar"
+                    style={`backgroundImage:url("${context.user.profilePicture}")`}
+                  ></div> */}
+                  <img src={context.user.profilePicture} alt="avatar" />
                 </NavLink>
               </li>
             )}
             {!context.user && (
               <li className="Nav__item">
-                <NavLink className="Nav__link" exact to="/login">
-                  <img
-                    className="Nav__icon"
-                    src="media/plus-icon.svg"
-                    alt="+"
-                  />
+                <NavLink className="Nav__link" to="/login">
+                  <img src="media/avatar.png" alt="avatar" />
                 </NavLink>
               </li>
             )}
-            {context.user && (
-              <div className="Nav__avatar">
-                <li className="Nav__item">
-                  <NavLink className="Nav__link" to="/profile">
-                    <img src={context.user.profilePicture} alt="avatar" />
-                  </NavLink>
-                </li>
-              </div>
-            )}
-            {!context.user && (
-              <li className="Nav__item">
-                <div className="Nav__avatar">
-                  <NavLink className="Nav__link" to="/login">
-                    <img src="media/avatar.png" alt="avatar" />
-                  </NavLink>
-                </div>
-              </li>
-            )}
-            {/* <li className="Nav__item">
-              <img className="Nav__icon" src="media/hamburger.svg" alt="menu" />
-              {/* <li className="Nav__item">
-                  <p onClick={handleLogout}>Logout</p>
-                </li>
-            </li> */}
             <li className="Nav__item">
               <HamburgerMenu context={context} />
             </li>
