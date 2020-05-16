@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap");
 
 *,
 *::before,
@@ -70,7 +70,7 @@ img:not([alt]) {
 }
 
 html {
-  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -80,6 +80,26 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+.container {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input--hidden {
+  display: none;
+}
+
+.badge {
+  background: #efefef;
+  border: 1px solid #eee;
+  border-radius: 1em;
+  padding: 5px 15px;
+  margin: 5px;
 }
 
 // Getting rid of Safari's mobile 100vh bug (menu overlay)

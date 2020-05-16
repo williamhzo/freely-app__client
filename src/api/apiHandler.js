@@ -62,6 +62,10 @@ export default {
     return service.get("/api/collabs").then((res) => res.data);
   },
 
+  getCategories() {
+    return service.get("/api/categories").then((res) => res.data);
+  },
+
   // get users that have a complete freelancer profile
   getFreelancers() {
     return service

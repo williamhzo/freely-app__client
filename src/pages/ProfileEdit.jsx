@@ -1,32 +1,73 @@
 import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
 import "../styles/ProfileEdit.scss";
+// import TagAutocomplete from "../components/TagAutocomplete";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+
+const checkLink = (link) => {
+  let icon = "🌐";
+  if (link.match(/facebook.com/)) {
+    icon = "📘";
+  } else if (link.match(/twitter.com/)) {
+    icon = "🐦";
+  } else if (link.match(/linkedin.com/)) {
+    icon = "ℹ️";
+  } else if (link.match(/instagram.com/)) {
+    icon = "📷";
+  }
+  return icon;
+};
 
 export default class ProfileEdit extends Component {
-  state = {};
+  state = {
+    categoryOptions: [],
+  };
   componentDidMount() {
     apiHandler
       .getUser("userName", this.props.match.params.username)
       .then((apiRes) => {
         this.setState(apiRes[0]);
       });
+    apiHandler.getCategories().then((apiRes) => {
+      this.setState({ categoryOptions: apiRes });
+    });
   }
 
   render() {
     // console.log(this.props.match.params.username);
     return (
-      <div className="profile container">
+      <form className="profile container">
         {this.state.profilePicture && (
-          <div className="profile__avatar">
-            <img src={this.state.profilePicture} alt="" />
+          <div className="profile__avatarbox">
+            <label htmlFor="profilePicture">
+              <input
+                type="file"
+                name="profilePicture"
+                id="profilePicture"
+                className="input--hidden"
+              />
+              <img
+                className="profile__picture"
+                src={this.state.profilePicture}
+                alt=""
+              />
+            </label>
           </div>
         )}
         <h2 className="profile__name">{this.state.name}</h2>
         {this.state.userCategory && (
           <div className="profile__categories">
-            {this.state.userCategory.map((category) => {
-              return <div className="profile__category">{category.name}</div>;
-            })}
+            <Autocomplete
+              multiple
+              limitTags={3}
+              id="tags-outlined"
+              options={this.state.categoryOptions}
+              defaultValue={this.state.userCategory}
+              getOptionLabel={(option) => option.name} // specify what property to use
+              filterSelectedOptions
+              renderInput={(params) => <TextField {...params} />}
+            />
           </div>
         )}
         {this.state.title && (
@@ -36,7 +77,11 @@ export default class ProfileEdit extends Component {
           <div className="profile__sociallinks">
             {this.state.socialLinks.map((link) => {
               // ADD SCRIPT TO FORMAT LINKS 👈
-              return <div className="profile__sociallink">{link}</div>;
+              return (
+                <a href={link} className="profile__sociallink">
+                  {checkLink(link)}
+                </a>
+              );
             })}
           </div>
         )}
@@ -107,7 +152,7 @@ export default class ProfileEdit extends Component {
             })}
           </div>
         )}
-      </div>
+      </form>
     );
   }
 }
