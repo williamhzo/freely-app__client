@@ -21,6 +21,7 @@ class ProfilesFeed extends React.Component {
   render() {
     return (
       <div className="feed-container">
+        <Tabs />
         {!this.state.freelancers && (
           <h2>
             Sorry, no freelancers found{' '}
@@ -29,7 +30,6 @@ class ProfilesFeed extends React.Component {
             </span>
           </h2>
         )}
-        <Tabs />
         <FilterFreelance />
         {this.state.freelancers.map((freelancer, index) => (
           <FreelancerCard key={index} freelancer={freelancer} />
