@@ -1,5 +1,5 @@
 import React from 'react';
-import FreelancerSkill from './FreelancerSkill';
+// import FreelancerSkill from './FreelancerSkill';
 
 const FreelancerCard = ({ freelancer }) => {
   const styleProfilePic = {
@@ -15,7 +15,11 @@ const FreelancerCard = ({ freelancer }) => {
             <div key={index}>{el.name}</div>
           ))}
         </h3>
-        <div className="card-frl__skills"></div>
+        {/* <div className="card-frl__skills">
+          {freelancer.userSkills.map((skill, index) => (
+            <FreelancerSkill key={index} skill={skill} />
+          ))}
+        </div> */}
         <h2 className="card-frl__subtitle">{freelancer.name}</h2>
         <p className="card-frl__copy">{freelancer.location}</p>
         <p className="card-frl__copy">
