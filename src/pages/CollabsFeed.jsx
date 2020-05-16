@@ -2,6 +2,7 @@ import React from 'react';
 import Tabs from '../components/Nav/Tabs';
 import apiHandler from '../api/apiHandler';
 import FilterCollab from '../components/FilterCollab';
+import CollabCard from '../components/CollabCard';
 
 import '../styles/FeedPage.scss';
 
