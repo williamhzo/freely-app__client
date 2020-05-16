@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const FreelancerSkill = () => {
+const FreelancerSkill = ({ skill }) => {
   return (
-    <div>
-      
+    <div className="skill-tag">
+      <p className="skill-tag__title">{skill.name}</p>
     </div>
-  )
-}
+  );
+};
 
-export default FreelancerSkill
+export default FreelancerSkill;
