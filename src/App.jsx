@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import NavBar from "./components/NavBar";
-import Login from "./pages/Login";
+import NavBar from './components/NavBar';
+import Login from './pages/Login';
 // import ProtectedRoute from './components/ProtectedRoute';
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
-import ProfilesFeed from "./pages/ProfilesFeed";
-import CollabsFeed from "./pages/CollabsFeed";
-import Collab from "./pages/Collab";
-import About from "./pages/About";
+import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
+import FreelancersFeed from './pages/FreelancersFeed';
+import CollabsFeed from './pages/CollabsFeed';
+import Collab from './pages/Collab';
+import About from './pages/About';
 
 export default class App extends Component {
   render() {
@@ -17,7 +17,7 @@ export default class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/" component={ProfilesFeed} />
+          <Route exact path="/" component={FreelancersFeed} />
           <Route exact path="/collabs" component={CollabsFeed} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/collab" component={Collab} />
