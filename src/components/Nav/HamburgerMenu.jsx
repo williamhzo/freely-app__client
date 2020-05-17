@@ -1,30 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import apiHandler from '../../api/apiHandler';
-// import UserContext from '../Auth/UserContext';
-// import { Slant as Hamburger } from 'hamburger-react';
+import apiHandler from '../../api/apiHandler';
+import UserContext from '../Auth/UserContext';
 
 const HamburgerMenu = (props) => {
   let hamburgerMenuClass = ['hamburger-menu'];
   if (props.show) hamburgerMenuClass.push('open');
 
-  console.log(props.show);
-  console.log(hamburgerMenuClass);
+  const handleLogout = (removeUserCallBack, closeMenu) => {
+    apiHandler
+      .logout()
+      .then(() => {
+        removeUserCallBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // execute callback to backdropClickHandler in App.jsx
+    closeMenu();
+  };
   return (
-    <nav className={hamburgerMenuClass.join(' ')}>
-      <ul className="hamburger-menu__list">
-        <li className="hamburger-menu__item">
-          <Link className="hamburger-menu__link" to="/about">
-            About
-          </Link>
-        </li>
-        <li className="hamburger-menu__item">
-          <Link className="hamburger-menu__link" to="/">
-            Log Out
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <UserContext.Consumer>
+      {(context) => (
+        <nav className={hamburgerMenuClass.join(' ')}>
+          <ul className="hamburger-menu__list">
+            <li className="hamburger-menu__item">
+              <Link
+                className="hamburger-menu__link"
+                to="/about"
+                onClick={props.click}
+              >
+                About
+              </Link>
+            </li>
+            {context.user && (
+              <li className="hamburger-menu__item">
+                <Link
+                  className="hamburger-menu__link"
+                  to="/"
+                  onClick={(e) => handleLogout(context.removeUser, props.click)}
+                >
+                  Log Out
+                </Link>
+              </li>
+            )}
+          </ul>
+        </nav>
+      )}
+    </UserContext.Consumer>
   );
 };
 
