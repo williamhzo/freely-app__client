@@ -5,6 +5,7 @@ import "../styles/ProfileEdit.scss";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { TextareaAutosize } from "@material-ui/core";
+import { objectToFormData } from "object-to-formdata";
 
 const checkLink = (link) => {
   let icon = "🌐";
@@ -45,14 +46,14 @@ export default class ProfileEdit extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    let user = new FormData();
-    user.append(...this.state);
+    let user = { ...this.state };
+    console.log(user);
     delete user.saved;
     delete user.skillOptions;
     delete user.categoryOptions;
     delete user._id;
-    // CONVERT TO FORM DATA
-    apiHandler.patchUser(this.state._id, user).then((apiRes) => {
+    const formData = objectToFormData(user);
+    apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
