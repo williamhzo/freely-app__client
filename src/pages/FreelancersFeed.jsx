@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabs from '../components/Nav/Tabs';
-import FreelancerCard from '../components/FreelancerCard';
-import FilterFreelance from '../components/FilterFreelance';
+import FreelancerCard from '../components/Cards/FreelancerCard';
+import FilterFreelance from '../components/Filters/FilterFreelance';
 import apiHandler from '../api/apiHandler';
 
 import '../styles/FeedPage.scss';
