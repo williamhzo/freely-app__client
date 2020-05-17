@@ -45,11 +45,13 @@ export default class ProfileEdit extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    let user = { ...this.state };
+    let user = new FormData();
+    user.append(...this.state);
     delete user.saved;
     delete user.skillOptions;
     delete user.categoryOptions;
     delete user._id;
+    // CONVERT TO FORM DATA
     apiHandler.patchUser(this.state._id, user).then((apiRes) => {
       this.setState({ apiRes });
       this.setState({ saved: true });
