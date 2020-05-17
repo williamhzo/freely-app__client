@@ -5,10 +5,14 @@ const Tabs = () => {
   return (
     <div className="tabs">
       <div className="tabs__item">
-        <NavLink to="/">Freelancers</NavLink>
+        <NavLink activeClassName="tab--active" to="/">
+          Freelancers
+        </NavLink>
       </div>
       <div className="tabs__item">
-        <NavLink to="/collabs">Collaborations</NavLink>
+        <NavLink activeClassName="tab--active" to="/collabs">
+          Collaborations
+        </NavLink>
       </div>
     </div>
   );
