@@ -7,9 +7,14 @@
 .tabs {
   width: 100%;
   display: flex;
-  padding: 0 15px;
   justify-content: space-evenly;
   align-items: center;
+  margin: 15px;
+
+  .tabs--active {
+    border-bottom: black 2px solid;
+    padding-bottom: 10px;
+  }
 }
 
 .card {
