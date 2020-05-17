@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CollabCard = ({ collab }) => {
-  const styleCollabPic = {
-    backgroundImage: `url('${collab.image}')`,
-  };
   return (
     <Link className="card" to={`/collab/${collab._id}`}>
-      <div style={styleCollabPic} className="card__aside"></div>
+      <div
+        style={{ backgroundImage: `url(${collab.image})` }}
+        className="card__aside"
+      ></div>
       <div className="card__body">
         <h3 className="card__title">{collab.title}</h3>
         <p className="card__copy">{collab.description}</p>
