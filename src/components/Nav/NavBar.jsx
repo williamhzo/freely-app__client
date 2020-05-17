@@ -44,12 +44,12 @@ const NavBar = (props) => {
                 context={context}
               />
             </li>
-            <li className="Nav__item ">
+            <li className="Nav__item hamburger__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
                 About
               </NavLink>
             </li>
-            <li className="Nav__item ">
+            <li className="Nav__item hamburger__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
                 Log Out
               </NavLink>
