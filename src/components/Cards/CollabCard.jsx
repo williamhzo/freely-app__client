@@ -6,7 +6,7 @@ const CollabCard = ({ collab }) => {
     backgroundImage: `url('${collab.image}')`,
   };
   return (
-    <Link className="card" to="/collab/:id">
+    <Link className="card" to={`/collab/${collab._id}`}>
       <div style={styleCollabPic} className="card__aside"></div>
       <div className="card__body">
         <h3 className="card__title">{collab.title}</h3>

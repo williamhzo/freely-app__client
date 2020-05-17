@@ -7,9 +7,8 @@ const FreelancerCard = ({ freelancer }) => {
   const styleProfilePic = {
     backgroundImage: `url('${freelancer.profilePicture}')`,
   };
-
   return (
-    <Link className="card" to="/:username">
+    <Link className="card" to={`/${freelancer.userName}`}>
       <div style={styleProfilePic} className="card__aside"></div>
       <div className="card__body">
         <h3 className="card__title">
