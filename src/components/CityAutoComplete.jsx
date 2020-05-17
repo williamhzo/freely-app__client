@@ -62,7 +62,6 @@ class CityAutoComplete extends Component {
           // className="input"
           type="text"
           name="location"
-          // value={this.state.search}
           id="location"
           value={this.props.userLocation || ''}
           onChange={this.handleSearchChange}
