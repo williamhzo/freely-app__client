@@ -20,7 +20,7 @@ export default class App extends Component {
           <Route exact path="/" component={FreelancersFeed} />
           <Route exact path="/collabs" component={CollabsFeed} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/collab" component={Collab} />
+          <Route exact path="/collab/:id" component={Collab} />
           <Route exact path="/about" component={About} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/:username/edit" component={ProfileEdit} />
