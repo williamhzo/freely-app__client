@@ -23,7 +23,7 @@ select {
     position: absolute;
     bottom: 15px;
     right: 25px;
-    content: "edit";
+    content: 'edit';
     color: white;
   }
   &__name input {
@@ -120,5 +120,27 @@ select {
 .MuiAutocomplete-option,
 .MuiInputBase-root,
 .MuiChip-root {
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
+}
+
+// Mapbox API autocomplete
+
+.CityAutoComplete-results {
+  position: absolute;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #00000011;
+  z-index: 10;
+}
+
+.CityAutoComplete-items {
+  list-style: none;
+  border: 1px solid #00000011;
+  cursor: pointer;
+  padding: 10px 10px;
+}
+
+.CityAutoComplete-items:hover {
+  background-color: #0000ff11;
 }

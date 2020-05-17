@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './CityAutoComplete.scss';
 
 class CityAutoComplete extends Component {
   state = {
@@ -8,7 +7,7 @@ class CityAutoComplete extends Component {
     results: [],
     isLoading: false,
   };
-  
+
   handleSearchChange = (e) => {
     this.setState({
       search: e.target.value,
@@ -20,6 +19,7 @@ class CityAutoComplete extends Component {
 
     // Launch a new request in 1000ms (1s) => Avoids excessive requests to the end point.
     this.timeoutId = setTimeout(() => {
+      // this.state.search.length > 2 && this.performSearch();
       this.performSearch();
     }, 1000);
   };
@@ -35,7 +35,7 @@ class CityAutoComplete extends Component {
 
     axios
       .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.search}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.search}.json?limit=3&types=place&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
       )
       .then((response) => {
         this.setState({
@@ -51,17 +51,20 @@ class CityAutoComplete extends Component {
       search: place.place_name,
       results: [],
     });
-
     this.props.onSelect(place);
   };
 
   render() {
+    console.log(this.state.results);
     return (
-      <div className="CityAutoComplete">
+      <>
         <input
-          className="input"
+          // className="input"
           type="text"
-          value={this.state.search}
+          name="location"
+          // value={this.state.search}
+          id="location"
+          value={this.props.userLocation || ''}
           onChange={this.handleSearchChange}
           placeholder="Enter an address"
         />
@@ -70,16 +73,16 @@ class CityAutoComplete extends Component {
             <li
               key={place.id}
               className="CityAutoComplete-items"
-              // onClick={() => this.handleItemClicked(place)}
+              onClick={() => this.handleItemClicked(place)}
             >
               {place.place_name}
             </li>
           ))}
           {this.state.isLoading && (
-            <li className="CityAutoComplete-items">Loading...</li>
+            <li className="CityAutoComplete-items">Let me think...</li>
           )}
         </ul>
-      </div>
+      </>
     );
   }
 }

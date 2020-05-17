@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import "../styles/Display.scss";
-import "../styles/Edit.scss";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
-import { TextareaAutosize } from "@material-ui/core";
-import { objectToFormData } from "object-to-formdata";
+import React, { Component } from 'react';
+import apiHandler from '../api/apiHandler';
+import '../styles/Display.scss';
+import '../styles/Edit.scss';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { TextareaAutosize } from '@material-ui/core';
+import { objectToFormData } from 'object-to-formdata';
+import CityAutoComplete from '../components/CityAutoComplete';
 
 const checkLink = (link) => {
-  let icon = "🌐";
+  let icon = '🌐';
   if (link.match(/facebook.com/)) {
-    icon = "📘";
+    icon = '📘';
   } else if (link.match(/twitter.com/)) {
-    icon = "🐦";
+    icon = '🐦';
   } else if (link.match(/linkedin.com/)) {
-    icon = "ℹ️";
+    icon = 'ℹ️';
   } else if (link.match(/instagram.com/)) {
-    icon = "📷";
+    icon = '📷';
   }
   return icon;
 };
@@ -28,7 +29,7 @@ export default class ProfileEdit extends Component {
   };
   componentDidMount() {
     apiHandler
-      .getUser("userName", this.props.match.params.username)
+      .getUser('userName', this.props.match.params.username)
       .then((apiRes) => {
         this.setState(apiRes[0]);
       });
@@ -47,7 +48,6 @@ export default class ProfileEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     let user = { ...this.state };
-    console.log(user);
     delete user.saved;
     delete user.skillOptions;
     delete user.categoryOptions;
@@ -64,8 +64,15 @@ export default class ProfileEdit extends Component {
   handleSkillChange = (e, value) => {
     this.setState({ skillOptions: value });
   };
+
+  handlePlaceChange = (place) => {
+    this.setState({ location: place.place_name });
+    // console.log(this.state.location);
+  };
+
   render() {
     // console.log(this.props.match.params.username);
+    // console.log(this.state.location);
     return (
       <form
         onChange={this.handleFormChange}
@@ -74,10 +81,10 @@ export default class ProfileEdit extends Component {
       >
         <button
           className={
-            this.state.saved ? "edit__button saved" : "edit__button unsaved"
+            this.state.saved ? 'edit__button saved' : 'edit__button unsaved'
           }
         >
-          {this.state.saved ? "Saved" : "Save"}
+          {this.state.saved ? 'Saved' : 'Save'}
         </button>
         {this.state.profilePicture && (
           <div className="profile__avatarbox">
@@ -142,12 +149,16 @@ export default class ProfileEdit extends Component {
         <ul className="profile__bullets">
           <li className="profile__bullet">
             Based in
-            <input
+            {/* <input
               type="text"
               name="location"
               id="location"
-              value={this.state.location || ""}
+              value={this.state.location || ''}
               placeholder="Location"
+            /> */}
+            <CityAutoComplete
+              onSelect={this.handlePlaceChange}
+              userLocation={this.state.location}
             />
           </li>
           <li className="profile__bullet">
@@ -157,12 +168,12 @@ export default class ProfileEdit extends Component {
             </select>
           </li>
           <li className="profile__bullet">
-            Preferred method of contact:{" "}
+            Preferred method of contact:{' '}
             <input
               type="text"
               name="contact"
               id="contact"
-              value={this.state.contact || ""}
+              value={this.state.contact || ''}
               placeholder="Contact"
             />
           </li>

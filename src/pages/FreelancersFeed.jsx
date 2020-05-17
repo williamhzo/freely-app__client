@@ -2,7 +2,6 @@ import React from 'react';
 import Tabs from '../components/Nav/Tabs';
 import FreelancerCard from '../components/Cards/FreelancerCard';
 import FilterFreelance from '../components/Filters/FilterFreelance';
-import CityAutoComplete from '../components/CityAutoComplete';
 import apiHandler from '../api/apiHandler';
 
 import '../styles/FeedPage.scss';
@@ -23,7 +22,7 @@ class ProfilesFeed extends React.Component {
     return (
       <div className="feed-container">
         <Tabs />
-        <CityAutoComplete />
+        
         {!this.state.freelancers && (
           <h2>
             Sorry, no freelancers found{' '}
