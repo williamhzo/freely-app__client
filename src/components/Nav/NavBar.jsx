@@ -29,32 +29,24 @@ const NavBar = (props) => {
           <ul className="Nav__list">
             <li className="Nav__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
-                {/* <span className="Nav__link--plus-icon">+</span> */}
+                <span className='Nav__plus-icon'>+</span>
               </NavLink>
             </li>
-            {context.user && (
-              <li className="Nav__item">
-                <NavLink className="Nav__link" to="/profile">
-                  <div
-                    className="Nav__avatar"
-                    style={{
-                      backgroundImage: `url(${context.user.profilePicture})`,
-                    }}
-                  ></div>
-                </NavLink>
-              </li>
-            )}
-            {!context.user && (
-              <li className="Nav__item">
-                <NavLink className="Nav__link" to="/login">
-                  {/* <img src="media/avatar.png" alt="avatar" /> */}
-                  <div
-                    className="Nav__avatar"
-                    style={ `background-image: url(media/avatar.png)` }
-                  ></div>
-                </NavLink>
-              </li>
-            )}
+            <li className="Nav__item">
+              <NavLink
+                className="Nav__link"
+                to={context.user ? '/profile' : '/login'}
+              >
+                <div
+                  className="Nav__avatar"
+                  style={{
+                    backgroundImage: context.user
+                      ? `url(${context.user.profilePicture})`
+                      : 'url("media/avatar.png")',
+                  }}
+                ></div>
+              </NavLink>
+            </li>
             <li className="Nav__item">
               <HamburgerButton
                 click={props.hamburgerClickHandler}
