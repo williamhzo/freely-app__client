@@ -17,14 +17,19 @@
   z-index: 10;
   padding: $Component-margin * 1.5; // TO BE REFACTORED
   background-color: white;
+  border-bottom: lightgray 1px solid;
+
+  &__link {
+    padding: 10px;
+  }
 
   &__item {
     // padding: $Component-margin;
   }
 
   .tabs--active {
-    border-bottom: black 2px solid;
     padding-bottom: 10px;
+    border-bottom: black 2px solid;
   }
 }
 
