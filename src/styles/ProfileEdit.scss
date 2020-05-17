@@ -4,6 +4,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
+  input,
+  textarea {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background: unset;
+  }
+  input:hover,
+  textarea:hover,
+  select:hover {
+    border-bottom: 1px solid grey;
+    margin-bottom: -1px;
+  }
+  // textarea {
+  //   width: 100%;
+  //   display: inline-block;
+  // }
+  &__button {
+    color: white;
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    top: 50px;
+    right: 10px;
+    padding: 7px 12px;
+    border: none;
+    background: unset;
+    border-radius: 5px;
+    margin-top: 0px;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.3);
+    &:focus {
+      outline: none;
+    }
+    &.saved {
+      background: #007bff;
+    }
+    &.unsaved {
+      background: #28a745;
+      cursor: pointer;
+      &:hover {
+        margin-top: -1px;
+        box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
   &__heading {
     margin-top: 30px;
     align-self: flex-start;
@@ -32,6 +84,9 @@
     font-family: inherit;
     margin-top: 20px;
     font-size: 2em;
+    input {
+      text-align: center;
+    }
   }
   &__categories {
     display: flex;
@@ -62,6 +117,23 @@
     background: #e0e0e0;
     padding: 30px;
     padding-left: 35px;
+    input {
+      width: unset;
+      display: inline;
+      margin-left: 4px;
+    }
+    select {
+      width: auto;
+      background: unset;
+      border: none;
+      margin-left: -7px;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        border-bottom: 1px solid grey;
+      }
+    }
   }
   &__bullet:before {
     content: "•";

@@ -4,6 +4,7 @@ import "../styles/ProfileEdit.scss";
 // import TagAutocomplete from "../components/TagAutocomplete";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
+import { TextareaAutosize } from "@material-ui/core";
 
 const checkLink = (link) => {
   let icon = "🌐";
@@ -22,6 +23,7 @@ const checkLink = (link) => {
 export default class ProfileEdit extends Component {
   state = {
     categoryOptions: [],
+    saved: true,
   };
   componentDidMount() {
     apiHandler
@@ -36,11 +38,46 @@ export default class ProfileEdit extends Component {
       this.setState({ skillOptions: apiRes });
     });
   }
+  handleFormChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ saved: false });
+  };
 
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    let user = { ...this.state };
+    delete user.saved;
+    delete user.skillOptions;
+    delete user.categoryOptions;
+    delete user._id;
+    apiHandler.patchUser(this.state._id, user).then((apiRes) => {
+      this.setState({ apiRes });
+      this.setState({ saved: true });
+    });
+  };
+  handleCategoryChange = (e, value) => {
+    this.setState({ categoryOptions: value });
+  };
+  handleSkillChange = (e, value) => {
+    this.setState({ skillOptions: value });
+  };
   render() {
     // console.log(this.props.match.params.username);
     return (
-      <form className="profile container">
+      <form
+        onChange={this.handleFormChange}
+        onSubmit={this.handleFormSubmit}
+        className="profile container"
+      >
+        <button
+          className={
+            this.state.saved
+              ? "profile__button saved"
+              : "profile__button unsaved"
+          }
+        >
+          {this.state.saved ? "Saved" : "Save"}
+        </button>
         {this.state.profilePicture && (
           <div className="profile__avatarbox">
             <label htmlFor="profilePicture">
@@ -58,11 +95,14 @@ export default class ProfileEdit extends Component {
             </label>
           </div>
         )}
-        <h2 className="profile__name">{this.state.name}</h2>
+        <h2 className="profile__name">
+          <input type="text" name="name" id="name" value={this.state.name} />
+        </h2>
         {this.state.userCategory && (
           <div className="profile__categories">
             <Autocomplete
               multiple
+              onChange={this.handleCategoryChange}
               limitTags={3}
               id="tags-outlined"
               options={this.state.categoryOptions}
@@ -74,7 +114,15 @@ export default class ProfileEdit extends Component {
           </div>
         )}
         {this.state.title && (
-          <div className="profile__title">{this.state.title}</div>
+          <TextareaAutosize
+            type="text"
+            name="title"
+            id="title"
+            value={this.state.title}
+            className="profile__title"
+            maxLength={280}
+            placeholder="Intro"
+          />
         )}
         {this.state.socialLinks && (
           <div className="profile__sociallinks">
@@ -91,13 +139,32 @@ export default class ProfileEdit extends Component {
           </div>
         )}
         <ul className="profile__bullets">
-          {this.state.location && (
-            <li className="profile__bullet">Based in {this.state.location}</li>
-          )}
-          {this.state.remote && (
-            <li className="profile__bullet">Open to remote collaboration</li>
-          )}
-          <li className="profile__bullet">Preferred method of contact: ____</li>
+          <li className="profile__bullet">
+            Based in
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={this.state.location || ""}
+              placeholder="Location"
+            />
+          </li>
+          <li className="profile__bullet">
+            <select id="remote" value={this.state.remote} name="remote">
+              <option value={true}>Open to remote collabs</option>
+              <option value={false}>Not open to remote collabs</option>
+            </select>
+          </li>
+          <li className="profile__bullet">
+            Preferred method of contact:{" "}
+            <input
+              type="text"
+              name="contact"
+              id="contact"
+              value={this.state.contact || ""}
+              placeholder="Contact"
+            />
+          </li>
         </ul>
         {this.state.userSkills && this.state.skillOptions && (
           <>
@@ -106,6 +173,7 @@ export default class ProfileEdit extends Component {
               <Autocomplete
                 multiple
                 limitTags={5}
+                onChange={this.handleSkillChange}
                 id="tags-outlined"
                 options={this.state.skillOptions}
                 defaultValue={this.state.userSkills}
@@ -119,7 +187,14 @@ export default class ProfileEdit extends Component {
         {this.state.bio && (
           <>
             <h2 className="profile__heading">About</h2>
-            <div className="profile__bio">{this.state.bio}</div>
+            <TextareaAutosize
+              type="bio"
+              name="bio"
+              id="bio"
+              value={this.state.bio}
+              className="profile__bio"
+              placeholder="Intro"
+            />
           </>
         )}
         {this.state.portfolio && (
