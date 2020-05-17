@@ -5,12 +5,12 @@ const Tabs = () => {
   return (
     <div className="tabs">
       <div className="tabs__item">
-        <NavLink activeClassName="tab--active" to="/">
+        <NavLink exact activeClassName="tabs--active" to="/">
           Freelancers
         </NavLink>
       </div>
       <div className="tabs__item">
-        <NavLink activeClassName="tab--active" to="/collabs">
+        <NavLink exact activeClassName="tabs--active" to="/collabs">
           Collaborations
         </NavLink>
       </div>

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 // import FreelancerSkill from './FreelancerSkill';
 
 const FreelancerCard = ({ freelancer }) => {
-  const styleProfilePic = {
-    backgroundImage: `url('${freelancer.profilePicture}')`,
-  };
   return (
     <Link className="card" to={`/${freelancer.userName}`}>
-      <div style={styleProfilePic} className="card__aside"></div>
+      <div
+        style={{ backgroundImage: `url(${freelancer.profilePicture})` }}
+        className="card__aside"
+      ></div>
       <div className="card__body">
         <h3 className="card__title">
           {freelancer.userCategory.map((el, index) => (

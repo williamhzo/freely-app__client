@@ -2,13 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
 import UserContext from '../Auth/UserContext';
-import HamburgerMenu from './HamburgerMenu';
+import HamburgerButton from './HamburgerButton';
 
 import '../../styles/NavBar.scss';
 
-const NavBar = () => {
-  // console.log(context.user);
-
+const NavBar = (props) => {
   return (
     <UserContext.Consumer>
       {(context) => (
@@ -19,7 +17,7 @@ const NavBar = () => {
           <ul className="Nav__list">
             <li className="Nav__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
-                <span className="Nav__link--plus-icon">+</span>
+                {/* <span className="Nav__link--plus-icon">+</span> */}
               </NavLink>
             </li>
             {context.user && (
@@ -36,12 +34,25 @@ const NavBar = () => {
             {!context.user && (
               <li className="Nav__item">
                 <NavLink className="Nav__link" to="/login">
-                  <img src="media/avatar.png" alt="avatar" />
+                  {/* <img src="media/avatar.png" alt="avatar" /> */}
                 </NavLink>
               </li>
             )}
             <li className="Nav__item">
-              <HamburgerMenu context={context} />
+              <HamburgerButton
+                click={props.hamburgerClickHandler}
+                context={context}
+              />
+            </li>
+            <li className="Nav__item ">
+              <NavLink className="Nav__link" exact to="/collabs-create">
+                About
+              </NavLink>
+            </li>
+            <li className="Nav__item ">
+              <NavLink className="Nav__link" exact to="/collabs-create">
+                Log Out
+              </NavLink>
             </li>
           </ul>
         </nav>
