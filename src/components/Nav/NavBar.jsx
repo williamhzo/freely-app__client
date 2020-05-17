@@ -2,11 +2,23 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
 import UserContext from '../Auth/UserContext';
+import apiHandler from '../../api/apiHandler';
+
 import HamburgerButton from './HamburgerButton';
 
 import '../../styles/NavBar.scss';
 
 const NavBar = (props) => {
+  const handleLogout = (removeUserCallBack) => {
+    apiHandler
+      .logout()
+      .then(() => {
+        removeUserCallBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <UserContext.Consumer>
       {(context) => (
@@ -49,11 +61,18 @@ const NavBar = (props) => {
                 About
               </NavLink>
             </li>
-            <li className="Nav__item hamburger__item">
-              <NavLink className="Nav__link" exact to="/collabs-create">
-                Log Out
-              </NavLink>
-            </li>
+            {context.user && (
+              <li className="Nav__item hamburger__item">
+                <NavLink
+                  className="Nav__link"
+                  exact
+                  to="/"
+                  onClick={(e) => handleLogout(context.removeUser)}
+                >
+                  Log Out
+                </NavLink>
+              </li>
+            )}
           </ul>
         </nav>
       )}

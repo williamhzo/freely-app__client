@@ -49,7 +49,7 @@
   justify-content: space-between;
   align-items: center;
   height: ($NavBar-height - 2 * $Component-margin);
-  width: 44px;
+  width: 36px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -57,7 +57,7 @@
     outline: none;
   }
   &__line {
-    width: 30px;
+    width: 100%;
     height: 2px;
     background: black;
   }

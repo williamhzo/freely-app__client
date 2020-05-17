@@ -36,7 +36,10 @@ export default class App extends Component {
           <Backdrop click={this.backdropClickHandler} />
         ) : null}
         {/* display on/off is handled in the CSS */}
-        <HamburgerMenu show={this.state.hamburgerMenuOpen} />
+        <HamburgerMenu
+          show={this.state.hamburgerMenuOpen}
+          click={this.backdropClickHandler}
+        />
         <main className="main">
           <Switch>
             <Route exact path="/" component={FreelancersFeed} />
