@@ -65,6 +65,20 @@ export default {
       .catch(errorHandler);
   },
 
+  getCollab(id) {
+    return service
+      .get(`/api/collabs/` + id)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  patchCollab(id, object) {
+    return service
+      .patch(`/api/collabs/${id}`, object)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getCollabs() {
     return service.get("/api/collabs").then((res) => res.data);
   },

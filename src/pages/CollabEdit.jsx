@@ -6,31 +6,17 @@ import TextField from "@material-ui/core/TextField";
 import { TextareaAutosize } from "@material-ui/core";
 import { objectToFormData } from "object-to-formdata";
 
-const checkLink = (link) => {
-  let icon = "🌐";
-  if (link.match(/facebook.com/)) {
-    icon = "📘";
-  } else if (link.match(/twitter.com/)) {
-    icon = "🐦";
-  } else if (link.match(/linkedin.com/)) {
-    icon = "ℹ️";
-  } else if (link.match(/instagram.com/)) {
-    icon = "📷";
-  }
-  return icon;
-};
-
-export default class ProfileEdit extends Component {
+export default class CollabEdit extends Component {
   state = {
     categoryOptions: [],
+    skillOptions: [],
     saved: true,
   };
   componentDidMount() {
-    apiHandler
-      .getUser("userName", this.props.match.params.username)
-      .then((apiRes) => {
-        this.setState(apiRes[0]);
-      });
+    console.log(this.props.match.params.id);
+    apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
+      this.setState(apiRes);
+    });
     apiHandler.getCategories().then((apiRes) => {
       this.setState({ categoryOptions: apiRes });
     });
@@ -39,20 +25,20 @@ export default class ProfileEdit extends Component {
     });
   }
   handleFormChange = (e) => {
+    console.log(this.state);
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ saved: false });
   };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    let user = { ...this.state };
-    console.log(user);
-    delete user.saved;
-    delete user.skillOptions;
-    delete user.categoryOptions;
-    delete user._id;
-    const formData = objectToFormData(user);
-    apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
+    let collab = { ...this.state };
+    delete collab.saved;
+    delete collab.skillOptions;
+    delete collab.categoryOptions;
+    delete collab._id;
+    const formData = objectToFormData(collab);
+    apiHandler.patchCollab(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
@@ -98,7 +84,15 @@ export default class ProfileEdit extends Component {
           </div>
         )}
         <h2 className="profile__name">
-          <input type="text" name="name" id="name" value={this.state.name} />
+          <TextareaAutosize
+            type="text"
+            name="title"
+            id="title"
+            value={this.state.title}
+            className="profile__title"
+            maxLength={280}
+            placeholder="Title"
+          />
         </h2>
         {this.state.userCategory && (
           <div className="profile__categories">
@@ -115,31 +109,7 @@ export default class ProfileEdit extends Component {
             />
           </div>
         )}
-        {this.state.title && (
-          <TextareaAutosize
-            type="text"
-            name="title"
-            id="title"
-            value={this.state.title}
-            className="profile__title"
-            maxLength={280}
-            placeholder="Intro"
-          />
-        )}
-        {this.state.socialLinks && (
-          <div className="profile__sociallinks">
-            {this.state.socialLinks.map((link) => {
-              return (
-                <a href={link} className="profile__sociallink">
-                  {checkLink(link)}
-                </a>
-              );
-            })}
-            <span className="edit--container">
-              <span className="edit--right">edit</span>
-            </span>
-          </div>
-        )}
+
         <ul className="profile__bullets">
           <li className="profile__bullet">
             Based in
@@ -252,40 +222,3 @@ export default class ProfileEdit extends Component {
     );
   }
 }
-/*
-
-
-LOOKING FOR PROJECTS?
-PREFERED CONTACT?
-IF IS CREATOR OF COLLAB, SAY SO
-
-
-  "private": false,
-{
-  "userCollab": [
-    {
-      "contributors": [
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec02"
-      ],
-      "skillsNeeded": [
-        "5ebe6df7ac961e11d7dc4e02",
-        "5ebe6df7ac961e11d7dc4f19",
-        "5ebe6df7ac961e11d7dc4dc0"
-      ],
-      "categoryNeeded": [
-        "5ebe6eb26f5abf1203e7e710"
-      ],
-      "image": "https://images.unsplash.com/photo-1487014679447-9f8336841d58?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=900",
-      "_id": "5ebe763d13e90113badd185a",
-      "title": "Straighten your pope hat",
-      "description": "I'm sorry, guys. I never meant to hurt you. Just to destroy everything you ever believed in.",
-      "open": true,
-      "creator": "5ebe6ec22fa92012124eec13",
-      "__v": 0
-    }
-  ],
-}
-
-*/

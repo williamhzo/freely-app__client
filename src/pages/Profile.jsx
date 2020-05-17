@@ -64,7 +64,7 @@ export default class Profile extends Component {
         <ul className="profile__bullets">
           {this.state.location && (
             <li className="profile__bullet">
-              Based in{this.state.location || ""}
+              Based in {this.state.location || ""}
             </li>
           )}
           <li className="profile__bullet">
@@ -145,40 +145,3 @@ export default class Profile extends Component {
     );
   }
 }
-/*
-
-
-LOOKING FOR PROJECTS?
-PREFERED CONTACT?
-IF IS CREATOR OF COLLAB, SAY SO
-
-
-  "private": false,
-{
-  "userCollab": [
-    {
-      "contributors": [
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec02"
-      ],
-      "skillsNeeded": [
-        "5ebe6df7ac961e11d7dc4e02",
-        "5ebe6df7ac961e11d7dc4f19",
-        "5ebe6df7ac961e11d7dc4dc0"
-      ],
-      "categoryNeeded": [
-        "5ebe6eb26f5abf1203e7e710"
-      ],
-      "image": "https://images.unsplash.com/photo-1487014679447-9f8336841d58?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=900",
-      "_id": "5ebe763d13e90113badd185a",
-      "title": "Straighten your pope hat",
-      "description": "I'm sorry, guys. I never meant to hurt you. Just to destroy everything you ever believed in.",
-      "open": true,
-      "creator": "5ebe6ec22fa92012124eec13",
-      "__v": 0
-    }
-  ],
-}
-
-*/
