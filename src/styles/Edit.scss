@@ -1,0 +1,124 @@
+.input--hidden {
+  display: none;
+}
+
+input,
+textarea,
+select {
+  border: none;
+  cursor: pointer;
+  background: unset;
+  border-radius: unset;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    border-bottom: 1px solid grey;
+    margin-bottom: -1px;
+  }
+}
+
+.profile {
+  &__avatarbox:hover:after {
+    position: absolute;
+    bottom: 15px;
+    right: 25px;
+    content: "edit";
+    color: white;
+  }
+  &__name input {
+    text-align: center;
+  }
+  &__bullets[class] {
+    input {
+      // display: inline;
+      margin-left: 4px;
+    }
+    select {
+      width: auto;
+      background: unset;
+      border: none;
+      margin-left: -7px;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        border-bottom: 1px solid grey;
+      }
+    }
+  }
+  &__bio {
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+.edit {
+  &--container {
+    position: relative;
+    display: none;
+    margin: 0;
+  }
+  &--right {
+    position: absolute;
+  }
+}
+
+:hover > .edit {
+  &--container {
+    display: inline;
+  }
+}
+
+.edit__button {
+  color: white;
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  top: 50px;
+  right: 10px;
+  padding: 7px 12px;
+  border: none;
+  background: unset;
+  border-radius: 5px;
+  margin-top: 0px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.3);
+  &:focus {
+    outline: none;
+  }
+  &.saved {
+    background: #007bff;
+  }
+  &.unsaved {
+    background: #28a745;
+    cursor: pointer;
+    &:hover {
+      margin-top: -1px;
+      box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Material UI
+
+.MuiAutocomplete-root {
+  width: 100%;
+}
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  border-bottom: none !important;
+}
+.profile__categories .MuiInputBase-root :nth-child(n + 4) {
+  color: red;
+}
+.profile__skills .MuiInputBase-root :nth-child(n + 6) {
+  color: red;
+}
+.MuiAutocomplete-option,
+.MuiInputBase-root,
+.MuiChip-root {
+  font-family: "Source Sans Pro";
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
-import "../styles/ProfileEdit.scss";
+import "../styles/Display.scss";
+import "../styles/Edit.scss";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { TextareaAutosize } from "@material-ui/core";
@@ -73,9 +74,7 @@ export default class ProfileEdit extends Component {
       >
         <button
           className={
-            this.state.saved
-              ? "profile__button saved"
-              : "profile__button unsaved"
+            this.state.saved ? "edit__button saved" : "edit__button unsaved"
           }
         >
           {this.state.saved ? "Saved" : "Save"}
@@ -233,14 +232,14 @@ export default class ProfileEdit extends Component {
             <h2 className="profile__heading">Collabs</h2>
             {this.state.userCollab.map((collab) => {
               return (
-                <div className="profile__collab">
+                <div className="profile__collabcard">
                   <img
                     src={collab.image}
                     alt=""
-                    className="profile__collabimage"
+                    className="profile__collabcardimage"
                   />
-                  <h3 className="profile__collabtitle">{collab.title}</h3>
-                  <p className="profile__collabdescription">
+                  <h3 className="profile__collabcardtitle">{collab.title}</h3>
+                  <p className="profile__collabcarddescription">
                     {collab.description}
                   </p>
                 </div>
@@ -257,6 +256,7 @@ export default class ProfileEdit extends Component {
 
 LOOKING FOR PROJECTS?
 PREFERED CONTACT?
+
 IF IS CREATOR OF COLLAB, SAY SO
 
 

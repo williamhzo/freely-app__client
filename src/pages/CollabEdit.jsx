@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
-import "../styles/ProfileEdit.scss";
+import "../styles/Display.scss";
+import "../styles/Edit.scss";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { TextareaAutosize } from "@material-ui/core";
@@ -11,6 +12,14 @@ export default class CollabEdit extends Component {
     categoryOptions: [],
     skillOptions: [],
     saved: true,
+    title: "",
+    creator: "",
+    contributors: [],
+    description: "",
+    skillsNeeded: [],
+    categoryNeeded: [],
+    image: "",
+    open: false,
   };
   componentDidMount() {
     console.log(this.props.match.params.id);
@@ -59,73 +68,87 @@ export default class CollabEdit extends Component {
       >
         <button
           className={
-            this.state.saved
-              ? "profile__button saved"
-              : "profile__button unsaved"
+            this.state.saved ? "edit__button saved" : "edit__button unsaved"
           }
         >
           {this.state.saved ? "Saved" : "Save"}
         </button>
-        {this.state.profilePicture && (
+        {this.state.image && (
           <div className="profile__avatarbox">
-            <label htmlFor="profilePicture">
+            <label htmlFor="image">
               <input
                 type="file"
-                name="profilePicture"
-                id="profilePicture"
+                name="image"
+                id="image"
                 className="input--hidden"
               />
-              <img
-                className="profile__picture"
-                src={this.state.profilePicture}
-                alt=""
-              />
+              <img className="profile__picture" src={this.state.image} alt="" />
             </label>
           </div>
         )}
-        <h2 className="profile__name">
+        <h2 className="profile__collabtitle">
           <TextareaAutosize
             type="text"
             name="title"
             id="title"
             value={this.state.title}
-            className="profile__title"
             maxLength={280}
             placeholder="Title"
           />
         </h2>
-        {this.state.userCategory && (
-          <div className="profile__categories">
-            <Autocomplete
-              multiple
-              onChange={this.handleCategoryChange}
-              limitTags={3}
-              id="tags-outlined"
-              options={this.state.categoryOptions}
-              defaultValue={this.state.userCategory}
-              getOptionLabel={(option) => option.name} // specify what property to use
-              filterSelectedOptions
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </div>
-        )}
 
+        <h3 className="profile__heading">Description</h3>
+        <TextareaAutosize
+          type="description"
+          name="description"
+          id="description"
+          value={this.state.description}
+          className="profile__description"
+          placeholder="Description"
+        />
+
+        <div className="profile__collabroles">
+          <h3 className="profile__heading">Roles Needed</h3>
+          <Autocomplete
+            multiple
+            onChange={this.handleCategoryChange}
+            limitTags={5}
+            id="tags-outlined"
+            options={this.state.categoryNeeded}
+            defaultValue={this.state.categoryNeeded}
+            getOptionLabel={(option) => option.name} // specify what property to use
+            filterSelectedOptions
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </div>
+        <div className="profile__skillsneeded">
+          <h3 className="profile__heading">Skills Needed</h3>
+          <Autocomplete
+            multiple
+            limitTags={5}
+            onChange={this.handleSkillChange}
+            id="tags-outlined"
+            options={this.state.skillOptions}
+            defaultValue={this.state.skillsNeeded}
+            getOptionLabel={(option) => option.name} // specify what property to use
+            filterSelectedOptions
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </div>
         <ul className="profile__bullets">
           <li className="profile__bullet">
-            Based in
-            <input
-              type="text"
-              name="location"
-              id="location"
-              value={this.state.location || ""}
-              placeholder="Location"
-            />
+            {this.state.open
+              ? "This project is seeking collaborators."
+              : "This project is not seeking collaborators."}
           </li>
           <li className="profile__bullet">
-            <select id="remote" value={this.state.remote} name="remote">
-              <option value={true}>Open to remote collabs</option>
-              <option value={false}>Not open to remote collabs</option>
-            </select>
+            Created by {this.state.creator.name}
+          </li>
+          <li className="profile__bullet">
+            Contributors:
+            {this.state.contributors.map((contributor) => (
+              <span className="profile__contributor">{contributor.name}, </span>
+            ))}
           </li>
           <li className="profile__bullet">
             Preferred method of contact:{" "}
@@ -138,66 +161,7 @@ export default class CollabEdit extends Component {
             />
           </li>
         </ul>
-        {this.state.userSkills && this.state.skillOptions && (
-          <>
-            <h2 className="profile__heading">Skills</h2>
-            <div className="profile__skills">
-              <Autocomplete
-                multiple
-                limitTags={5}
-                onChange={this.handleSkillChange}
-                id="tags-outlined"
-                options={this.state.skillOptions}
-                defaultValue={this.state.userSkills}
-                getOptionLabel={(option) => option.name} // specify what property to use
-                filterSelectedOptions
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </div>
-          </>
-        )}
-        {this.state.bio && (
-          <>
-            <h2 className="profile__heading">About</h2>
-            <TextareaAutosize
-              type="bio"
-              name="bio"
-              id="bio"
-              value={this.state.bio}
-              className="profile__bio"
-              placeholder="Intro"
-            />
-          </>
-        )}
-        {this.state.portfolio && (
-          <>
-            <h2 className="profile__heading">Portfolio</h2>
-            <div className="profile__portfolio">
-              {this.state.portfolio.map((portfolioItem) => {
-                return (
-                  <div className="profile__portfolioitem">
-                    <img
-                      className="profile__portfolioimage"
-                      src={portfolioItem.image}
-                      alt=""
-                    />
-                    <h3 className="profile__portfoliotitle">
-                      {portfolioItem.title}
-                    </h3>
-                    <div className="profile__portfoliodescription">
-                      {portfolioItem.description}
-                    </div>
-                    {portfolioItem.link && (
-                      <div className="profile__portfoliolink">
-                        <a href={portfolioItem.link}>Link »</a>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
+
         {this.state.userCollab && (
           <div className="profile__collabs">
             <h2 className="profile__heading">Collabs</h2>

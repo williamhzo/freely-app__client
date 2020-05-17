@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
-@import '/variables';
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap");
+@import "/variables";
 
 *,
 *::before,
@@ -71,7 +71,7 @@ img:not([alt]) {
 }
 
 html {
-  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -90,19 +90,6 @@ ul {
   padding-left: 10px;
   padding-right: 10px;
 }
-
-.input--hidden {
-  display: none;
-}
-
-.badge {
-  background: #efefef;
-  border: 1px solid #eee;
-  border-radius: 1em;
-  padding: 5px 15px;
-  margin: 5px;
-}
-
 
 .main {
   margin-top: $NavBar-height;

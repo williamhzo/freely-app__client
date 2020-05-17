@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
-import "../styles/ProfileEdit.scss";
+import "../styles/Display.scss";
 
 const checkLink = (link) => {
   let icon = "🌐";
@@ -126,14 +126,14 @@ export default class Profile extends Component {
             <h2 className="profile__heading">Collabs</h2>
             {this.state.userCollab.map((collab) => {
               return (
-                <div className="profile__collab">
+                <div className="profile__collabcard">
                   <img
                     src={collab.image}
                     alt=""
-                    className="profile__collabimage"
+                    className="profile__collabcardimage"
                   />
-                  <h3 className="profile__collabtitle">{collab.title}</h3>
-                  <p className="profile__collabdescription">
+                  <h3 className="profile__collabcardtitle">{collab.title}</h3>
+                  <p className="profile__collabcarddescription">
                     {collab.description}
                   </p>
                 </div>
