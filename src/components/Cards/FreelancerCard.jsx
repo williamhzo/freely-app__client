@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 // import FreelancerSkill from './FreelancerSkill';
 
 const FreelancerCard = ({ freelancer }) => {
@@ -7,7 +9,7 @@ const FreelancerCard = ({ freelancer }) => {
   };
 
   return (
-    <div className="card">
+    <Link className="card" to="/:username">
       <div style={styleProfilePic} className="card__aside"></div>
       <div className="card__body">
         <h3 className="card__title">
@@ -28,7 +30,7 @@ const FreelancerCard = ({ freelancer }) => {
             : 'I prefer working on site.'}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

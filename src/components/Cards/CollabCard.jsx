@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CollabCard = ({ collab }) => {
   const styleCollabPic = {
     backgroundImage: `url('${collab.image}')`,
   };
   return (
-    <div className="card">
+    <Link className="card" to="/collab/:id">
       <div style={styleCollabPic} className="card__aside"></div>
       <div className="card__body">
         <h3 className="card__title">{collab.title}</h3>
@@ -16,7 +17,7 @@ const CollabCard = ({ collab }) => {
             : 'This project team is complete.'}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
