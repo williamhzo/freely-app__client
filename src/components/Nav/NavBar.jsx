@@ -35,11 +35,12 @@ const NavBar = (props) => {
             {context.user && (
               <li className="Nav__item">
                 <NavLink className="Nav__link" to="/profile">
-                  {/* <div
+                  <div
                     className="Nav__avatar"
-                    style={`backgroundImage:url("${context.user.profilePicture}")`}
-                  ></div> */}
-                  <img src={context.user.profilePicture} alt="avatar" />
+                    style={{
+                      backgroundImage: `url(${context.user.profilePicture})`,
+                    }}
+                  ></div>
                 </NavLink>
               </li>
             )}
@@ -47,6 +48,10 @@ const NavBar = (props) => {
               <li className="Nav__item">
                 <NavLink className="Nav__link" to="/login">
                   {/* <img src="media/avatar.png" alt="avatar" /> */}
+                  <div
+                    className="Nav__avatar"
+                    style={ `background-image: url(media/avatar.png)` }
+                  ></div>
                 </NavLink>
               </li>
             )}
