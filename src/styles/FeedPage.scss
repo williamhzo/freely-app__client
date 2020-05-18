@@ -71,30 +71,15 @@
   margin: ($Tabs-height + $component-margin) auto $component-margin;
   // padding: ($Tabs-height + $component-margin) 0 0 0;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
 
   &__group {
     padding: 0 24px;
   }
 
-  &__group:nth-child(1) {
-    grid-area: 1 / 1 / 2 / 3;
-  }
-
-  &__group:nth-child(2) {
-    grid-area: 2 / 1 / 3 / 2;
-    padding-right: 12px;
-  }
-
-  &__group:nth-child(3) {
-    grid-area: 2 / 2 / 3 / 3;
-    padding-left: 12px;
-  }
-
   &__input {
-    padding: 10px 25px;
+    padding: 4px 8px;
     margin-top: 4px;
     border: none;
     border-radius: 8px;

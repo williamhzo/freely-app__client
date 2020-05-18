@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Tabs from '../components/Nav/Tabs';
 import FreelancerCard from '../components/Cards/FreelancerCard';
 import FilterFreelance from '../components/Filters/FilterFreelance';
@@ -6,9 +6,10 @@ import apiHandler from '../api/apiHandler';
 
 import '../styles/FeedPage.scss';
 
-class ProfilesFeed extends React.Component {
+class ProfilesFeed extends Component {
   state = {
     freelancers: [],
+    filteredFreelancers: [],
   };
 
   componentDidMount() {
@@ -18,11 +19,15 @@ class ProfilesFeed extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  // updateFreelancers = (filteredArray) => {
+  //   this.setState({ filteredFreelancers: filteredArray });
+  // };
+
   render() {
     return (
       <div className="feed-container">
         <Tabs />
-        
+
         {!this.state.freelancers && (
           <h2>
             Sorry, no freelancers found{' '}
@@ -31,10 +36,22 @@ class ProfilesFeed extends React.Component {
             </span>
           </h2>
         )}
-        <FilterFreelance />
+
+        <FilterFreelance updateFreelancers={this.updateFreelancers} />
+
         {this.state.freelancers.map((freelancer, index) => (
           <FreelancerCard key={index} freelancer={freelancer} />
         ))}
+
+        {/* {this.state.filteredFreelancers &&
+          this.state.filteredFreelancers.map((freelancer, index) => (
+            <FreelancerCard key={index} freelancer={freelancer} />
+          ))}
+
+        {!this.state.filteredFreelancers &&
+          this.state.freelancers.map((freelancer, index) => (
+            <FreelancerCard key={index} freelancer={freelancer} />
+          ))} */}
       </div>
     );
   }
