@@ -42,22 +42,6 @@ export default class ProfileEdit extends Component {
       this.setState({ skillOptions: apiRes });
     });
   }
-  // fr.onload = function () {
-  //   document.getElementById(outImage).src = fr.result;
-  // }
-  // fr.readAsDataURL(files[0]);
-  handleFormChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.setState({ saved: false });
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.setState({ temporaryPicture: reader.result });
-    };
-    reader.readAsDataURL(e.target.files[0]);
-    if (e.target.name === "profilePicture") {
-      this.setState({ profilePicture: e.target.files[0] });
-    }
-  };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
@@ -110,12 +94,57 @@ export default class ProfileEdit extends Component {
   handlePlaceChange = (place) => {
     this.setState({ location: place.place_name, saved: false });
   };
+
+  handleFormChange = (e) => {
+    if (e.target.name === "social") {
+      this.setState({
+        socialLinks: [...document.querySelectorAll(".social--link")].map(
+          (item) => item.value
+        ),
+      });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+      this.setState({ saved: false });
+      if (e.target == "profilePicture") {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.setState({ temporaryPicture: reader.result });
+        };
+        reader.readAsDataURL(e.target.files[0]);
+        if (e.target.name === "profilePicture") {
+          this.setState({ profilePicture: e.target.files[0] });
+        }
+      }
+    }
+  };
+
+  // handleSocial = (e) => {
+  //   document.getElementsByClassName("social--link").map((item) => item.value);
+  // };
+
   handlePortfolio = (index, event) => {
     this.setState({ saved: false });
-    const portfolio = [...this.state.portfolio];
-    portfolio[index][event.target.name] = event.target.value;
-    this.setState({ portfolio: portfolio });
+    if (event.target.name !== "image") {
+      const portfolio = [...this.state.portfolio];
+      portfolio[index][event.target.name] = event.target.value;
+      this.setState({ portfolio: portfolio });
+    }
   };
+
+  handlePortfolioImage = (index, event) => {
+    console.log("Handle image");
+    // let key = "portfolio" + index;
+    this.setState({ ["portfolio" + index]: event.target.files[0] });
+    const portfolio = [...this.state.portfolio];
+    const reader = new FileReader();
+    reader.onload = () => {
+      portfolio[index].temporaryPicture = reader.result;
+      this.setState({ portfolio: portfolio });
+      console.log(portfolio);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
   render() {
     return (
       <>
@@ -136,13 +165,14 @@ export default class ProfileEdit extends Component {
             {this.state.saved ? "Saved" : "Save"}
           </button>
           {this.state.profilePicture && (
-            <div className="profile__avatarbox">
+            <div className="profile__avatarbox edit">
               <label htmlFor="profilePicture">
                 <input
                   type="file"
                   name="profilePicture"
                   id="profilePicture"
                   className="input--hidden"
+                  accept=".png, .jpg, .jpeg"
                 />
                 <img
                   className="profile__picture"
@@ -182,69 +212,100 @@ export default class ProfileEdit extends Component {
             />
           )}
           {this.state.socialLinks && (
-            <div className="profile__sociallinks">
-              {this.state.socialLinks.map((link) => {
+            <div>
+              {this.state.socialLinks.map((link, index) => {
                 return (
-                  <a href={link} className="profile__sociallink">
+                  <label htmlFor={"social" + index}>
                     {checkLink(link)}
-                  </a>
+                    <input
+                      className="social--link"
+                      // onChange={this.handleSocial}
+                      type="text"
+                      name={"social"}
+                      id={"social" + index}
+                      value={link}
+                    />
+                  </label>
                 );
               })}
-              <span className="edit--container">
-                <span className="edit--right">edit</span>
-              </span>
             </div>
           )}
-          <ul className="profile__bullets">
-            <li className="profile__bullet">
-              Username:{" "}
-              <input
-                type="text"
-                name="userName"
-                id="userName"
-                spellcheck="false"
-                onChange={this.handleUsername}
-                value={this.state.userName}
-              />
-              {!this.state.saved &&
-                (this.state.usernameAvailable ? "✅" : "❌")}
-            </li>
-            <li className="profile__bullet">
-              <select
-                id="openToProjects"
-                value={this.state.openToProjects}
-                name="openToProjects"
-              >
-                <option value={true}>Open to collaborations</option>
-                <option value={false}>
-                  Not open to collaborations right now
-                </option>
-              </select>
-            </li>
-            <li className="profile__bullet">
-              Based in
-              <CityAutoComplete
-                onSelect={this.handlePlaceChange}
-                userLocation={this.state.location}
-              />
-            </li>
-            <li className="profile__bullet">
-              <select id="remote" value={this.state.remote} name="remote">
-                <option value={true}>Open to remote collabs</option>
-                <option value={false}>Not open to remote collabs</option>
-              </select>
-            </li>
-            <li className="profile__bullet">
-              Preferred method of contact:{" "}
-              <input
-                type="text"
-                name="preferredContact"
-                id="preferredContact"
-                value={this.state.preferredContact || ""}
-                placeholder="Contact"
-              />
-            </li>
-          </ul>
+          <div className="profile__bullets">
+            <h3>Key Points</h3>
+            <ul>
+              <li className="profile__bullet">
+                <select
+                  id="openToProjects"
+                  value={this.state.openToProjects}
+                  name="openToProjects"
+                >
+                  <option value={true}>Open to collaborations</option>
+                  <option value={false}>
+                    Not open to collaborations right now
+                  </option>
+                </select>
+              </li>
+              <li className="profile__bullet">
+                Based in
+                <CityAutoComplete
+                  onSelect={this.handlePlaceChange}
+                  userLocation={this.state.location}
+                />
+              </li>
+              <li className="profile__bullet">
+                <select id="remote" value={this.state.remote} name="remote">
+                  <option value={true}>Open to remote collabs</option>
+                  <option value={false}>Not open to remote collabs</option>
+                </select>
+              </li>
+              <li className="profile__bullet">
+                Preferred method of contact:{" "}
+                <input
+                  type="text"
+                  name="preferredContact"
+                  id="preferredContact"
+                  value={this.state.preferredContact || ""}
+                  placeholder="Contact"
+                />
+              </li>
+            </ul>
+            <h3>Personal Info</h3>
+            <ul>
+              <li className="profile__bullet">
+                Username:{" "}
+                <input
+                  type="text"
+                  name="userName"
+                  id="userName"
+                  spellcheck="false"
+                  onChange={this.handleUsername}
+                  value={this.state.userName}
+                />
+                {this.state.usernameAvailable ? "✔︎" : "✖︎"}
+              </li>
+              <li className="profile__bullet">
+                Phone Number:{" "}
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  spellcheck="false"
+                  value={this.state.phone}
+                />
+              </li>
+              <li className="profile__bullet">
+                Email:{" "}
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  spellcheck="false"
+                  value={this.state.email}
+                />
+              </li>
+            </ul>
+          </div>
+
           {this.state.userSkills && this.state.skillOptions && (
             <>
               <h2 className="profile__heading">Skills</h2>
@@ -287,11 +348,25 @@ export default class ProfileEdit extends Component {
                     className="profile__portfolioitem"
                     onChange={(event) => this.handlePortfolio(index, event)}
                   >
-                    <img
-                      className="profile__portfolioimage"
-                      src={portfolioItem.image}
-                      alt=""
-                    />
+                    <label htmlFor={"image" + index}>
+                      <input
+                        onChange={(event) =>
+                          this.handlePortfolioImage(index, event)
+                        }
+                        type="file"
+                        name="image"
+                        id={"image" + index}
+                        className="input--hidden"
+                        accept=".png, .jpg, .jpeg"
+                      />
+                      <img
+                        className="profile__portfolioimage"
+                        src={
+                          portfolioItem.temporaryPicture || portfolioItem.image
+                        }
+                        alt=""
+                      />
+                    </label>
                     <h3 className="profile__portfoliotitle">
                       <input
                         type="text"
