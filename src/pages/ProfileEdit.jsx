@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
-import apiHandler from '../api/apiHandler';
-import '../styles/Display.scss';
-import '../styles/Edit.scss';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { TextareaAutosize } from '@material-ui/core';
-import { objectToFormData } from 'object-to-formdata';
-import CityAutoComplete from '../components/CityAutoComplete';
+import React, { Component } from "react";
+import apiHandler from "../api/apiHandler";
+import "../styles/Display.scss";
+import "../styles/Edit.scss";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+import { TextareaAutosize } from "@material-ui/core";
+import { objectToFormData } from "object-to-formdata";
+import CityAutoComplete from "../components/CityAutoComplete";
+import CollabCard from "../components/Cards/CollabCard";
 
 const checkLink = (link) => {
-  let icon = '🌐';
+  let icon = "🌐";
   if (link.match(/facebook.com/)) {
-    icon = '📘';
+    icon = "📘";
   } else if (link.match(/twitter.com/)) {
-    icon = '🐦';
+    icon = "🐦";
   } else if (link.match(/linkedin.com/)) {
-    icon = 'ℹ️';
+    icon = "ℹ️";
   } else if (link.match(/instagram.com/)) {
-    icon = '📷';
+    icon = "📷";
   }
   return icon;
 };
@@ -29,7 +30,7 @@ export default class ProfileEdit extends Component {
   };
   componentDidMount() {
     apiHandler
-      .getUser('userName', this.props.match.params.username)
+      .getUser("userName", this.props.match.params.username)
       .then((apiRes) => {
         this.setState(apiRes[0]);
       });
@@ -45,13 +46,24 @@ export default class ProfileEdit extends Component {
     this.setState({ saved: false });
   };
 
+  // console.log(req.body.portfolio);
+  // console.log(req.body.userCategory);
+  // console.log(req.body.userSkills);
+  // console.log(req.body.userCollab);
+  // console.log(req.body.openToProjects);
+
   handleFormSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
     let user = { ...this.state };
     delete user.saved;
     delete user.skillOptions;
     delete user.categoryOptions;
     delete user._id;
+    user.portfolio = JSON.stringify(user.portfolio);
+    user.userCategory = JSON.stringify(user.userCategory);
+    user.userSkills = JSON.stringify(user.userSkills);
+    user.userCollab = JSON.stringify(user.userCollab);
     const formData = objectToFormData(user);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
@@ -59,14 +71,14 @@ export default class ProfileEdit extends Component {
     });
   };
   handleCategoryChange = (e, value) => {
-    this.setState({ categoryOptions: value });
+    this.setState({ userCategory: value, saved: false });
   };
   handleSkillChange = (e, value) => {
-    this.setState({ skillOptions: value });
+    this.setState({ userSkills: value, saved: false });
   };
 
   handlePlaceChange = (place) => {
-    this.setState({ location: place.place_name });
+    this.setState({ location: place.place_name, saved: false });
     // console.log(this.state.location);
   };
 
@@ -81,10 +93,10 @@ export default class ProfileEdit extends Component {
       >
         <button
           className={
-            this.state.saved ? 'edit__button saved' : 'edit__button unsaved'
+            this.state.saved ? "edit__button saved" : "edit__button unsaved"
           }
         >
-          {this.state.saved ? 'Saved' : 'Save'}
+          {this.state.saved ? "Saved" : "Save"}
         </button>
         {this.state.profilePicture && (
           <div className="profile__avatarbox">
@@ -168,12 +180,12 @@ export default class ProfileEdit extends Component {
             </select>
           </li>
           <li className="profile__bullet">
-            Preferred method of contact:{' '}
+            Preferred method of contact:{" "}
             <input
               type="text"
-              name="contact"
-              id="contact"
-              value={this.state.contact || ''}
+              name="preferredContact"
+              id="preferredContact"
+              value={this.state.preferredContact || ""}
               placeholder="Contact"
             />
           </li>
@@ -239,24 +251,29 @@ export default class ProfileEdit extends Component {
           </>
         )}
         {this.state.userCollab && (
-          <div className="profile__collabs">
-            <h2 className="profile__heading">Collabs</h2>
-            {this.state.userCollab.map((collab) => {
-              return (
-                <div className="profile__collabcard">
-                  <img
-                    src={collab.image}
-                    alt=""
-                    className="profile__collabcardimage"
-                  />
-                  <h3 className="profile__collabcardtitle">{collab.title}</h3>
-                  <p className="profile__collabcarddescription">
-                    {collab.description}
-                  </p>
-                </div>
-              );
+          <div>
+            {this.state.userCollab.map((collab, index) => {
+              return <CollabCard key={index} collab={collab} />;
             })}
           </div>
+          // <div className="profile__collabs">
+          //   <h2 className="profile__heading">Collabs</h2>
+          //   {this.state.userCollab.map((collab) => {
+          //     return (
+          //       <div className="profile__collabcard">
+          //         <img
+          //           src={collab.image}
+          //           alt=""
+          //           className="profile__collabcardimage"
+          //         />
+          //         <h3 className="profile__collabcardtitle">{collab.title}</h3>
+          //         <p className="profile__collabcarddescription">
+          //           {collab.description}
+          //         </p>
+          //       </div>
+          //     );
+          //   })}
+          // </div>
         )}
       </form>
     );
