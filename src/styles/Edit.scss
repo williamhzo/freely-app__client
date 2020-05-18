@@ -13,6 +13,9 @@
 
 .profile,
 .profile__portfolioitem {
+  label {
+    cursor: pointer;
+  }
   & input,
   textarea,
   select {
