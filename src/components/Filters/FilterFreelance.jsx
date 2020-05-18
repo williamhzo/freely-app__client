@@ -10,6 +10,9 @@ class FilterFreelance extends Component {
     filterCategory: [],
     filterSkill: [],
 
+    // array concatenating filter parameters
+    filterArray: [],
+
     // curated database provided for autocomplete
     categoriesUsed: [],
     skillsUsed: [],
@@ -35,14 +38,22 @@ class FilterFreelance extends Component {
 
   handleCityChange = (e, value) => {
     this.setState({ filterCity: [...this.state.filterCity, value] });
+    this.updateFilterArray(this.filterCity);
   };
 
   handleCategoryChange = (e, value) => {
     this.setState({ filterCategory: [...this.state.filterCategory, value] });
+    this.updateFilterArray(this.filterCategory);
   };
 
   handleSkillChange = (e, value) => {
     this.setState({ filterSkill: [...this.state.filterSkill, value] });
+    this.updateFilterArray(this.filterSkill);
+  };
+
+  updateFilterArray = (newFilter) => {
+    this.setState({ filterArray: [...this.state.filterArray, newFilter] });
+    // this.props.updateFreelancers(this.filterArray);
   };
 
   render() {
@@ -72,10 +83,12 @@ class FilterFreelance extends Component {
             className="filter__input"
             name="toto"
             multiple
+            // onSelect={this.props.updateFreelancers}
             onChange={this.handleCategoryChange}
             limitTags={3}
             id="tags-outlined"
             options={this.state.categoriesUsed}
+            // freeSolo=true
             // defaultValue="search"
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions

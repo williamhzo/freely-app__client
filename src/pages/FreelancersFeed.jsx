@@ -19,7 +19,9 @@ class ProfilesFeed extends Component {
       .catch((err) => console.log(err));
   }
 
-  //updateFreelancers(filteredArray){setstate freelancers:}
+  // updateFreelancers = (filteredArray) => {
+  //   this.setState({ filteredFreelancers: filteredArray });
+  // };
 
   render() {
     return (
@@ -35,17 +37,21 @@ class ProfilesFeed extends Component {
           </h2>
         )}
 
-        <FilterFreelance freelancers={this.state.freelancers} />
+        <FilterFreelance updateFreelancers={this.updateFreelancers} />
 
-        {this.state.filteredFreelancers &&
-          this.state.freelancers.map((freelancer, index) => (
+        {this.state.freelancers.map((freelancer, index) => (
+          <FreelancerCard key={index} freelancer={freelancer} />
+        ))}
+
+        {/* {this.state.filteredFreelancers &&
+          this.state.filteredFreelancers.map((freelancer, index) => (
             <FreelancerCard key={index} freelancer={freelancer} />
           ))}
 
         {!this.state.filteredFreelancers &&
-          this.state.filteredFreelancers.map((freelancer, index) => (
+          this.state.freelancers.map((freelancer, index) => (
             <FreelancerCard key={index} freelancer={freelancer} />
-          ))}
+          ))} */}
       </div>
     );
   }
