@@ -7,6 +7,20 @@ import TextField from "@material-ui/core/TextField";
 import { TextareaAutosize } from "@material-ui/core";
 import { objectToFormData } from "object-to-formdata";
 
+/*
+
+Done: 
+- Image (.image)
+- Roles Needed not working (.categoryNeeded)
+
+To Do:
+- Open or closed (.open)
+- Contributor multi-select (.contributors)
+- Preferred method of contact (get from creator)
+- Contributor handling. (Get all users with this collab, remove collab, then add) (.contributors)
+
+*/
+
 export default class CollabEdit extends Component {
   state = {
     categoryOptions: [],
@@ -22,7 +36,6 @@ export default class CollabEdit extends Component {
     open: false,
   };
   componentDidMount() {
-    console.log(this.props.match.params.id);
     apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
       this.setState(apiRes);
     });
@@ -34,9 +47,16 @@ export default class CollabEdit extends Component {
     });
   }
   handleFormChange = (e) => {
-    console.log(this.state);
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ saved: false });
+    if (e.target.name == "image") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.setState({ temporaryPicture: reader.result });
+      };
+      reader.readAsDataURL(e.target.files[0]);
+      this.setState({ image: e.target.files[0] });
+    }
   };
 
   handleFormSubmit = (e) => {
@@ -45,6 +65,7 @@ export default class CollabEdit extends Component {
     delete collab.saved;
     delete collab.skillOptions;
     delete collab.categoryOptions;
+    delete collab.temporaryPicture;
     delete collab._id;
     if (collab.contributors) {
       collab.contributors = JSON.stringify(collab.contributors);
@@ -82,19 +103,23 @@ export default class CollabEdit extends Component {
         >
           {this.state.saved ? "Saved" : "Save"}
         </button>
-        {this.state.image && (
-          <div className="profile__avatarbox">
-            <label htmlFor="image">
-              <input
-                type="file"
-                name="image"
-                id="image"
-                className="input--hidden"
-              />
-              <img className="profile__picture" src={this.state.image} alt="" />
-            </label>
-          </div>
-        )}
+
+        <div className="profile__avatarbox">
+          <label htmlFor="image">
+            <input
+              type="file"
+              name="image"
+              id="image"
+              className="input--hidden"
+            />
+            <img
+              className="profile__picture"
+              src={this.state.temporaryPicture || this.state.image}
+              alt=""
+            />
+          </label>
+        </div>
+
         <h2 className="profile__collabtitle">
           <TextareaAutosize
             type="text"
@@ -123,7 +148,7 @@ export default class CollabEdit extends Component {
             onChange={this.handleCategoryChange}
             limitTags={5}
             id="tags-outlined"
-            options={this.state.categoryNeeded}
+            options={this.state.categoryOptions}
             defaultValue={this.state.categoryNeeded}
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions

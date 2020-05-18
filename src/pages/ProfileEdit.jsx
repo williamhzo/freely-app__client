@@ -110,7 +110,7 @@ export default class ProfileEdit extends Component {
     } else {
       this.setState({ [e.target.name]: e.target.value });
       this.setState({ saved: false });
-      if (e.target == "profilePicture") {
+      if (e.target.name == "profilePicture") {
         const reader = new FileReader();
         reader.onload = () => {
           this.setState({ temporaryPicture: reader.result });
