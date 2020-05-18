@@ -46,6 +46,15 @@ export default class CollabEdit extends Component {
     delete collab.skillOptions;
     delete collab.categoryOptions;
     delete collab._id;
+    if (collab.contributors) {
+      collab.contributors = JSON.stringify(collab.contributors);
+    }
+    if (collab.skillsNeeded) {
+      collab.skillsNeeded = JSON.stringify(collab.skillsNeeded);
+    }
+    if (collab.categoryNeeded) {
+      collab.categoryNeeded = JSON.stringify(collab.categoryNeeded);
+    }
     const formData = objectToFormData(collab);
     apiHandler.patchCollab(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
