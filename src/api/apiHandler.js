@@ -109,7 +109,7 @@ export default {
     return service
       .get('/api/categories')
       .then((res) => res.data.filter((el) => el.currentlyInUse))
-      .catch(errorHandler);
+      .catch((err) => console.log(err));
   },
 
   // get users that have a complete freelancer profile

@@ -43,7 +43,7 @@ class CityAutoComplete extends Component {
           isLoading: false,
         });
       })
-      .catch((err) => console.log('epic fail: ' + err));
+      .catch((err) => console.log(err));
   };
 
   handleItemClicked = (place) => {
