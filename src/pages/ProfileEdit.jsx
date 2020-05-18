@@ -60,10 +60,18 @@ export default class ProfileEdit extends Component {
     delete user.skillOptions;
     delete user.categoryOptions;
     delete user._id;
-    user.portfolio = JSON.stringify(user.portfolio);
-    user.userCategory = JSON.stringify(user.userCategory);
-    user.userSkills = JSON.stringify(user.userSkills);
-    user.userCollab = JSON.stringify(user.userCollab);
+    if (user.portfolio) {
+      user.portfolio = JSON.stringify(user.portfolio);
+    }
+    if (user.userCategory) {
+      user.userCategory = JSON.stringify(user.userCategory);
+    }
+    if (user.userSkills) {
+      user.userSkills = JSON.stringify(user.userSkills);
+    }
+    if (user.userCollab) {
+      user.userCollab = JSON.stringify(user.userCollab);
+    }
     const formData = objectToFormData(user);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
