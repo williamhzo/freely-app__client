@@ -2,23 +2,23 @@
   display: none;
 }
 
-input,
-textarea,
-select {
-  border: none;
-  cursor: pointer;
-  background: unset;
-  border-radius: unset;
-  &:focus {
-    outline: none;
-  }
-  &:hover {
-    border-bottom: 1px solid grey;
-    margin-bottom: -1px;
-  }
-}
-
 .profile {
+  & input,
+  textarea,
+  select {
+    border: none;
+    cursor: pointer;
+    background: unset;
+    border-radius: unset;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      border-bottom: 1px solid grey;
+      margin-bottom: -1px;
+    }
+  }
+
   &__avatarbox:hover:after {
     position: absolute;
     bottom: 15px;
