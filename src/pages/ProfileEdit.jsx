@@ -19,6 +19,8 @@ const checkLink = (link) => {
     icon = "ℹ️";
   } else if (link.match(/instagram.com/)) {
     icon = "📷";
+  } else if (link.match(/^$/)) {
+    icon = "➕";
   }
   return icon;
 };
@@ -28,6 +30,7 @@ export default class ProfileEdit extends Component {
     categoryOptions: [],
     saved: true,
     usernameAvailable: true,
+    newPortfolio: {},
   };
   componentDidMount() {
     apiHandler
@@ -53,6 +56,7 @@ export default class ProfileEdit extends Component {
     delete user.skillOptions;
     delete user.categoryOptions;
     delete user._id;
+    delete user.addSocial;
     if (user.portfolio) {
       user.portfolio = JSON.stringify(user.portfolio);
     }
@@ -66,6 +70,7 @@ export default class ProfileEdit extends Component {
       user.userCollab = JSON.stringify(user.userCollab);
     }
     const formData = objectToFormData(user);
+    console.log(this.state.portfolio);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
       this.setState({ apiRes });
       this.setState({ saved: true });
@@ -118,10 +123,6 @@ export default class ProfileEdit extends Component {
     }
   };
 
-  // handleSocial = (e) => {
-  //   document.getElementsByClassName("social--link").map((item) => item.value);
-  // };
-
   handlePortfolio = (index, event) => {
     this.setState({ saved: false });
     if (event.target.name !== "image") {
@@ -129,6 +130,49 @@ export default class ProfileEdit extends Component {
       portfolio[index][event.target.name] = event.target.value;
       this.setState({ portfolio: portfolio });
     }
+  };
+
+  handleNewPortfolio = (e) => {
+    const newPortfolio = { ...this.state.newPortfolio };
+    if (e.target.name === "image") {
+      console.log("image");
+      newPortfolio.image = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        newPortfolio.temporaryPicture = reader.result;
+        this.setState({ newPortfolio: newPortfolio });
+        console.log(newPortfolio);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      newPortfolio[e.target.name] = e.target.value;
+      this.setState({ newPortfolio: newPortfolio });
+    }
+  };
+
+  handleAddPortfolio = (e) => {
+    e.preventDefault();
+    this.setState({
+      ["portfolio" + this.state.portfolio.length]: this.state.newPortfolio
+        .image,
+    });
+    this.setState({
+      portfolio: this.state.portfolio.concat([this.state.newPortfolio]),
+      saved: false,
+      newPortfolio: {
+        image: "",
+        title: "",
+        description: "",
+        link: "",
+      },
+    });
+  };
+
+  handleRemovePortfolio = (index) => {
+    this.setState({
+      portfolio: this.state.portfolio.filter((item, i) => i !== index && item),
+      saved: false,
+    });
   };
 
   handlePortfolioImage = (index, event) => {
@@ -140,9 +184,26 @@ export default class ProfileEdit extends Component {
     reader.onload = () => {
       portfolio[index].temporaryPicture = reader.result;
       this.setState({ portfolio: portfolio });
-      console.log(portfolio);
     };
     reader.readAsDataURL(event.target.files[0]);
+  };
+
+  handleAddSocial = (e) => {
+    e.preventDefault();
+    this.setState({
+      socialLinks: this.state.socialLinks.concat([this.state.addSocial]),
+      saved: false,
+      addSocial: "",
+    });
+  };
+
+  handleRemoveSocial = (index) => {
+    this.setState({
+      socialLinks: this.state.socialLinks.filter(
+        (item, i) => i !== index && item
+      ),
+      saved: false,
+    });
   };
 
   render() {
@@ -212,22 +273,35 @@ export default class ProfileEdit extends Component {
             />
           )}
           {this.state.socialLinks && (
-            <div>
+            <div className="profile__social--edit">
               {this.state.socialLinks.map((link, index) => {
                 return (
                   <label htmlFor={"social" + index}>
                     {checkLink(link)}
                     <input
                       className="social--link"
-                      // onChange={this.handleSocial}
                       type="text"
                       name={"social"}
                       id={"social" + index}
                       value={link}
                     />
+                    <button onClick={() => this.handleRemoveSocial(index)}>
+                      ❌
+                    </button>
                   </label>
                 );
               })}
+              <label htmlFor={"socialπ"}>
+                {checkLink("")}
+                <input
+                  className="social--link"
+                  type="text"
+                  name="addSocial"
+                  id={"socialπ"}
+                  value={this.state.addSocial}
+                />
+                <button onClick={this.handleAddSocial}>✅</button>
+              </label>
             </div>
           )}
           <div className="profile__bullets">
@@ -390,9 +464,63 @@ export default class ProfileEdit extends Component {
                         value={portfolioItem.link}
                       />
                     </div>
+                    <button onClick={() => this.handleRemovePortfolio(index)}>
+                      ❌
+                    </button>
                   </form>
                 );
               })}
+              {this.state.portfolio.length < 3 && (
+                <form
+                  className="profile__portfolioitem"
+                  onChange={this.handleNewPortfolio}
+                  onSubmit={this.handleAddPortfolio}
+                >
+                  <label htmlFor={"imageπ"}>
+                    <input
+                      type="file"
+                      name="image"
+                      id={"imageπ"}
+                      className="input--hidden"
+                      accept=".png, .jpg, .jpeg"
+                    />
+                    <img
+                      className="profile__portfolioimage"
+                      src={
+                        this.state.newPortfolio.temporaryPicture ||
+                        "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
+                      }
+                      alt=""
+                    />
+                  </label>
+                  <h3 className="profile__portfoliotitle">
+                    <input
+                      type="text"
+                      name={"title"}
+                      id={"title"}
+                      value={this.state.newPortfolio.title}
+                      placeholder="Portfolio Item Title"
+                    />
+                  </h3>
+                  <TextareaAutosize
+                    name="description"
+                    id="description"
+                    value={this.state.newPortfolio.description}
+                    className="profile__portfoliodescription"
+                    placeholder="Describe your project..."
+                  />
+                  <div className="profile__portfoliolink">
+                    <input
+                      type="text"
+                      name={"link"}
+                      id={"link"}
+                      value={this.state.newPortfolio.link}
+                      placeholder="A link to your project"
+                    />
+                  </div>
+                  <button>Add</button>
+                </form>
+              )}
             </div>
           </>
         )}
