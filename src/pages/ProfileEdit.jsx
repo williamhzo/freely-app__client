@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
 import "../styles/Display.scss";
 import "../styles/Edit.scss";
@@ -45,12 +46,6 @@ export default class ProfileEdit extends Component {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ saved: false });
   };
-
-  // console.log(req.body.portfolio);
-  // console.log(req.body.userCategory);
-  // console.log(req.body.userSkills);
-  // console.log(req.body.userCollab);
-  // console.log(req.body.openToProjects);
 
   handleFormSubmit = (e) => {
     e.preventDefault();
@@ -168,6 +163,18 @@ export default class ProfileEdit extends Component {
         )}
         <ul className="profile__bullets">
           <li className="profile__bullet">
+            <select
+              id="openToProjects"
+              value={this.state.openToProjects}
+              name="openToProjects"
+            >
+              <option value={true}>Open to collaborations</option>
+              <option value={false}>
+                Not open to collaborations right now
+              </option>
+            </select>
+          </li>
+          <li className="profile__bullet">
             Based in
             {/* <input
               type="text"
@@ -258,40 +265,38 @@ export default class ProfileEdit extends Component {
             </div>
           </>
         )}
-        {this.state.userCollab && (
-          <div>
-            {this.state.userCollab.map((collab, index) => {
-              return <CollabCard key={index} collab={collab} />;
-            })}
-          </div>
-          // <div className="profile__collabs">
-          //   <h2 className="profile__heading">Collabs</h2>
-          //   {this.state.userCollab.map((collab) => {
-          //     return (
-          //       <div className="profile__collabcard">
-          //         <img
-          //           src={collab.image}
-          //           alt=""
-          //           className="profile__collabcardimage"
-          //         />
-          //         <h3 className="profile__collabcardtitle">{collab.title}</h3>
-          //         <p className="profile__collabcarddescription">
-          //           {collab.description}
-          //         </p>
-          //       </div>
-          //     );
-          //   })}
-          // </div>
-        )}
+        {this.state.userCollab &&
+          this.state.userCollab.map((collab) => {
+            return (
+              <Link className="card" to={`/collab/${collab._id}`}>
+                <div
+                  style={{ backgroundImage: `url(${collab.image})` }}
+                  className="card__aside"
+                ></div>
+                <div className="card__body">
+                  <p className="card__copy">
+                    {this.state.name}{" "}
+                    {this.state._id == collab.creator
+                      ? `created`
+                      : `collaborated on`}
+                    :
+                  </p>
+                  <h3 className="card__title">{collab.title}</h3>
+                  <p className="card__copy">{collab.description}</p>
+                  <p className="card__copy">
+                    {collab.open
+                      ? "Accepting coworkers!"
+                      : "This project team is complete."}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
       </form>
     );
   }
 }
 /*
-
-
-LOOKING FOR PROJECTS?
-PREFERED CONTACT?
 
 IF IS CREATOR OF COLLAB, SAY SO
 
