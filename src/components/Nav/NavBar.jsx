@@ -1,3 +1,4 @@
+// import React, { useState } from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
@@ -5,10 +6,12 @@ import UserContext from '../Auth/UserContext';
 import apiHandler from '../../api/apiHandler';
 
 import HamburgerButton from './HamburgerButton';
+// import SaveEditButton from './SaveEditButton';
 
 import '../../styles/NavBar.scss';
 
 const NavBar = (props) => {
+
   const handleLogout = (removeUserCallBack) => {
     apiHandler
       .logout()
@@ -19,6 +22,7 @@ const NavBar = (props) => {
         console.log(error);
       });
   };
+  // const [isEditing, setEdit] = useState(false);
   return (
     <UserContext.Consumer>
       {(context) => (
@@ -29,7 +33,7 @@ const NavBar = (props) => {
           <ul className="Nav__list">
             <li className="Nav__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
-                <span className='Nav__plus-icon'>+</span>
+                <span className="Nav__plus-icon">+</span>
               </NavLink>
             </li>
             <li className="Nav__item">
@@ -53,6 +57,11 @@ const NavBar = (props) => {
                 context={context}
               />
             </li>
+            {/* {isEditing && (
+              <li className="Nav__item">
+                <SaveEditButton onClick={(e) => handleFormSubmit()} />
+              </li>
+            )} */}
             <li className="Nav__item hamburger__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
                 About
