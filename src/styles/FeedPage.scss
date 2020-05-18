@@ -68,6 +68,7 @@
 
 .filter-group {
   margin: ($Tabs-height + $Component-margin) auto $Component-margin;
+  // padding: ($Tabs-height + $Component-margin) 0 0 0;
 }
 
 .skill-tag {
@@ -77,5 +78,3 @@
   margin: 5px;
   padding: 0 10px;
 }
-
-// .find().select(field) to remove objects (hassPss)
