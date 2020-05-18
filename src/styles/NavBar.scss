@@ -69,7 +69,34 @@
     width: 100%;
     height: 2px;
     background: black;
+    transition: all ease 0.5s;
   }
+
+  // &__line.animate{}
+  &__line.animate:nth-child(1) {
+    transform: rotate(45deg) translateY(8px) translateX(8px);
+  }
+
+  &__line.animate:nth-child(2) {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  &__line.animate:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px) translateX(8px);
+  }
+
+  // .close:nth-child(1) {
+  //   transform: rotate(0) translateY(0);
+  // }
+
+  // .close:nth-child(2) {
+  //   opacity: 1;
+  // }
+
+  // .close:nth-child(3) {
+  //   transform: rotate(0) translateY(0);
+  // }
 }
 
 .hamburger-menu {
@@ -103,7 +130,6 @@
   &__item {
   }
 }
-
 
 .backdrop {
   position: fixed;

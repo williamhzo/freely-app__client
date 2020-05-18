@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import NavBar from "./components/Nav/NavBar";
-import Login from "./pages/Login";
+import NavBar from './components/Nav/NavBar';
+import Login from './pages/Login';
 // import ProtectedRoute from './components/ProtectedRoute';
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
-import CollabEdit from "./pages/CollabEdit";
-import FreelancersFeed from "./pages/FreelancersFeed";
-import CollabsFeed from "./pages/CollabsFeed";
-import Collab from "./pages/Collab";
-import About from "./pages/About";
-import HamburgerMenu from "./components/Nav/HamburgerMenu";
-import Backdrop from "./components/Nav/Backdrop";
+import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
+import CollabEdit from './pages/CollabEdit';
+import FreelancersFeed from './pages/FreelancersFeed';
+import CollabsFeed from './pages/CollabsFeed';
+import Collab from './pages/Collab';
+import About from './pages/About';
+import HamburgerMenu from './components/Nav/HamburgerMenu';
+import Backdrop from './components/Nav/Backdrop';
 
 export default class App extends Component {
   state = {
@@ -31,8 +31,12 @@ export default class App extends Component {
 
   render() {
     return (
+      // <div className="App" onLoad={window.scroll(0, 0)}>
       <div className="App">
-        <NavBar hamburgerClickHandler={this.hamburgerMenuToggleHandler} />
+        <NavBar
+          toggled={this.state.hamburgerMenuOpen}
+          hamburgerClickHandler={this.hamburgerMenuToggleHandler}
+        />
         {this.state.hamburgerMenuOpen ? (
           <Backdrop click={this.backdropClickHandler} />
         ) : null}

@@ -11,7 +11,6 @@ import HamburgerButton from './HamburgerButton';
 import '../../styles/NavBar.scss';
 
 const NavBar = (props) => {
-
   const handleLogout = (removeUserCallBack) => {
     apiHandler
       .logout()
@@ -54,7 +53,8 @@ const NavBar = (props) => {
             <li className="Nav__item">
               <HamburgerButton
                 click={props.hamburgerClickHandler}
-                context={context}
+                hamburgerToggle={props.toggled}
+                // context={context}
               />
             </li>
             {/* {isEditing && (
