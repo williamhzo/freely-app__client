@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -18,35 +18,35 @@ export default {
 
   signup(userInfo) {
     return service
-      .post("/api/auth/signup", userInfo)
+      .post('/api/auth/signup', userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   signin(userInfo) {
     return service
-      .post("/api/auth/signin", userInfo)
+      .post('/api/auth/signin', userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   isLoggedIn() {
     return service
-      .get("/api/auth/isLoggedIn")
+      .get('/api/auth/isLoggedIn')
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   logout() {
     return service
-      .get("/api/auth/logout")
+      .get('/api/auth/logout')
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getUsers() {
     return service
-      .get("/api/users")
+      .get('/api/users')
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -80,21 +80,42 @@ export default {
   },
 
   getCollabs() {
-    return service.get("/api/collabs").then((res) => res.data);
+    return service.get('/api/collabs').then((res) => res.data);
   },
 
   getCategories() {
-    return service.get("/api/categories").then((res) => res.data);
+    return service.get('/api/categories').then((res) => res.data);
   },
 
   getSkills() {
-    return service.get("/api/skills").then((res) => res.data);
+    return service.get('/api/skills').then((res) => res.data);
+  },
+
+  filterUsedCities() {
+    return service
+      .get('/api/cities')
+      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .catch(errorHandler);
+  },
+
+  filterUsedSkills() {
+    return service
+      .get('/api/skills')
+      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .catch(errorHandler);
+  },
+
+  filterUsedCategories() {
+    return service
+      .get('/api/categories')
+      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .catch(errorHandler);
   },
 
   // get users that have a complete freelancer profile
   getFreelancers() {
     return service
-      .get("/api/users")
+      .get('/api/users')
       .then((res) =>
         res.data.filter(
           (el) => el.bio && el.location && el.title && el.userCategory
