@@ -26,7 +26,11 @@ const HamburgerMenu = (props) => {
           <ul className="hamburger-menu__list">
             {!context.user && (
               <li className="hamburger-menu__item">
-                <Link className="hamburger-menu__link" to="/login">
+                <Link
+                  className="hamburger-menu__link"
+                  to="/login"
+                  onClick={props.click}
+                >
                   Join Us
                 </Link>
               </li>
