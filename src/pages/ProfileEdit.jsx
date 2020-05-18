@@ -9,6 +9,7 @@ import { TextareaAutosize } from "@material-ui/core";
 import { objectToFormData } from "object-to-formdata";
 import CityAutoComplete from "../components/CityAutoComplete";
 import CollabCard from "../components/Cards/CollabCard";
+import Axios from "axios";
 
 const checkLink = (link) => {
   let icon = "🌐";
@@ -28,6 +29,7 @@ export default class ProfileEdit extends Component {
   state = {
     categoryOptions: [],
     saved: true,
+    usernameAvailable: true,
   };
   componentDidMount() {
     apiHandler
@@ -49,7 +51,9 @@ export default class ProfileEdit extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    if (!this.state.usernameAvailable) {
+      return;
+    }
     let user = { ...this.state };
     delete user.saved;
     delete user.skillOptions;
@@ -79,15 +83,25 @@ export default class ProfileEdit extends Component {
   handleSkillChange = (e, value) => {
     this.setState({ userSkills: value, saved: false });
   };
+  handleUsername = (e) => {
+    apiHandler.getUser("userName", e.target.value).then((apiRes) => {
+      if (apiRes.length > 0) {
+        if (apiRes[0]._id != this.state._id) {
+          this.setState({ usernameAvailable: false });
+        } else {
+          this.setState({ usernameAvailable: true });
+        }
+      } else {
+        this.setState({ usernameAvailable: true });
+      }
+    });
+  };
 
   handlePlaceChange = (place) => {
     this.setState({ location: place.place_name, saved: false });
-    // console.log(this.state.location);
   };
 
   render() {
-    // console.log(this.props.match.params.username);
-    // console.log(this.state.location);
     return (
       <form
         onChange={this.handleFormChange}
@@ -96,7 +110,11 @@ export default class ProfileEdit extends Component {
       >
         <button
           className={
-            this.state.saved ? "edit__button saved" : "edit__button unsaved"
+            this.state.saved
+              ? "edit__button saved"
+              : this.state.usernameAvailable
+              ? "edit__button unsaved"
+              : "edit__button invalid"
           }
         >
           {this.state.saved ? "Saved" : "Save"}
@@ -163,6 +181,18 @@ export default class ProfileEdit extends Component {
         )}
         <ul className="profile__bullets">
           <li className="profile__bullet">
+            Username:{" "}
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              spellcheck="false"
+              onChange={this.handleUsername}
+              value={this.state.userName}
+            />
+            {!this.state.saved && (this.state.usernameAvailable ? "✅" : "❌")}
+          </li>
+          <li className="profile__bullet">
             <select
               id="openToProjects"
               value={this.state.openToProjects}
@@ -176,13 +206,6 @@ export default class ProfileEdit extends Component {
           </li>
           <li className="profile__bullet">
             Based in
-            {/* <input
-              type="text"
-              name="location"
-              id="location"
-              value={this.state.location || ''}
-              placeholder="Location"
-            /> */}
             <CityAutoComplete
               onSelect={this.handlePlaceChange}
               userLocation={this.state.location}
@@ -296,37 +319,3 @@ export default class ProfileEdit extends Component {
     );
   }
 }
-/*
-
-IF IS CREATOR OF COLLAB, SAY SO
-
-
-  "private": false,
-{
-  "userCollab": [
-    {
-      "contributors": [
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec13",
-        "5ebe6ec22fa92012124eec02"
-      ],
-      "skillsNeeded": [
-        "5ebe6df7ac961e11d7dc4e02",
-        "5ebe6df7ac961e11d7dc4f19",
-        "5ebe6df7ac961e11d7dc4dc0"
-      ],
-      "categoryNeeded": [
-        "5ebe6eb26f5abf1203e7e710"
-      ],
-      "image": "https://images.unsplash.com/photo-1487014679447-9f8336841d58?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=900",
-      "_id": "5ebe763d13e90113badd185a",
-      "title": "Straighten your pope hat",
-      "description": "I'm sorry, guys. I never meant to hurt you. Just to destroy everything you ever believed in.",
-      "open": true,
-      "creator": "5ebe6ec22fa92012124eec13",
-      "__v": 0
-    }
-  ],
-}
-
-*/
