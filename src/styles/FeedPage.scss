@@ -15,7 +15,7 @@
   width: 100%;
   height: 32px;
   z-index: 10;
-  padding: $Component-margin * 1.5; // TO BE REFACTORED
+  padding: $component-margin * 1.5; // TO BE REFACTORED
   background-color: white;
   border-bottom: lightgray 1px solid;
 
@@ -24,7 +24,7 @@
   }
 
   &__item {
-    // padding: $Component-margin;
+    // padding: $component-margin;
   }
 
   .tabs--active {
@@ -35,9 +35,9 @@
 
 .card {
   width: 90%;
-  margin: $Component-margin auto;
+  margin: $component-margin auto;
   display: flex;
-  align-items: center;
+  // align-items: center;
   border: lightgrey 1px solid;
   border-radius: 8px;
   min-height: 150px;
@@ -46,7 +46,7 @@
   &__aside {
     min-width: 33%;
     margin-right: 12px;
-    height: 100%;
+    // height: 100%;
     background-position: center center;
     background-size: cover;
   }
@@ -67,8 +67,8 @@
 }
 
 .filter-group {
-  margin: ($Tabs-height + $Component-margin) auto $Component-margin;
-  // padding: ($Tabs-height + $Component-margin) 0 0 0;
+  margin: ($Tabs-height + $component-margin) auto $component-margin;
+  // padding: ($Tabs-height + $component-margin) 0 0 0;
 }
 
 .skill-tag {

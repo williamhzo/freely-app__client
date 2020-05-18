@@ -24,6 +24,13 @@ const HamburgerMenu = (props) => {
       {(context) => (
         <nav className={hamburgerMenuClass.join(' ')}>
           <ul className="hamburger-menu__list">
+            {!context.user && (
+              <li className="hamburger-menu__item">
+                <Link className="hamburger-menu__link" to="/login">
+                  Join Us
+                </Link>
+              </li>
+            )}
             <li className="hamburger-menu__item">
               <Link
                 className="hamburger-menu__link"

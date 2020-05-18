@@ -55,18 +55,18 @@
 }
 
 .edit {
-  &--container {
+  .edit--container {
     position: relative;
     display: none;
     margin: 0;
   }
-  &--right {
+  .edit--right {
     position: absolute;
   }
 }
 
 :hover > .edit {
-  &--container {
+  .edit--container {
     display: inline;
   }
 }
