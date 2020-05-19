@@ -31,7 +31,11 @@ const NavBar = (props) => {
           </NavLink>
           <ul className="Nav__list">
             <li className="Nav__item">
-              <NavLink className="Nav__link" exact to="/collabs-create">
+              <NavLink
+                className="Nav__link"
+                exact
+                to={context.user ? '/collabs-create' : '/login'}
+              >
                 <span className="Nav__plus-icon">+</span>
               </NavLink>
             </li>
