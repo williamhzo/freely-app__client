@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import Tabs from '../components/Nav/Tabs';
-import FreelancerCard from '../components/Cards/FreelancerCard';
-import FilterFreelance from '../components/Filters/FilterFreelance';
-import apiHandler from '../api/apiHandler';
+import React, { Component } from "react";
+import Tabs from "../components/Nav/Tabs";
+import FreelancerCard from "../components/Cards/FreelancerCard";
+import FilterFreelance from "../components/Filters/FilterFreelance";
+import apiHandler from "../api/apiHandler";
 
-import '../styles/FeedPage.scss';
+import "../styles/FeedPage.scss";
 
 class FreelancersFeed extends Component {
   state = {
     freelancers: [],
-    // filteredFreelancers: [],
+    filteredFreelancers: [],
   };
 
   componentDidMount() {
     apiHandler
       .getFreelancers()
-      .then((apiRes) => this.setState({ freelancers: apiRes }))
+      .then((apiRes) =>
+        this.setState({ freelancers: apiRes, filteredFreelancers: apiRes })
+      )
       .catch((err) => console.log(err));
   }
 
   updateFreelancersFeed = (filteredArray) => {
-    this.setState({ freelancers: filteredArray });
+    this.setState({ filteredFreelancers: filteredArray });
   };
 
   render() {
@@ -30,7 +32,7 @@ class FreelancersFeed extends Component {
 
         {!this.state.freelancers && (
           <h2>
-            Sorry, no freelancers found{' '}
+            Sorry, no freelancers found{" "}
             <span role="img" aria-label="confused-face-emoji">
               😕
             </span>
@@ -42,7 +44,7 @@ class FreelancersFeed extends Component {
           updateFreelancersFeed={this.updateFreelancersFeed}
         />
 
-        {this.state.freelancers.map((freelancer, index) => (
+        {this.state.filteredFreelancers.map((freelancer, index) => (
           <FreelancerCard key={index} freelancer={freelancer} />
         ))}
       </div>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import apiHandler from '../../api/apiHandler';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from "react";
+import apiHandler from "../../api/apiHandler";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
 
 class FilterFreelance extends Component {
   state = {
@@ -34,40 +34,52 @@ class FilterFreelance extends Component {
       .filterUsedCities()
       .then((res) => this.setState({ citiesUsed: res }))
       .catch((err) => console.log(err));
-
-    // this.setState({ freelancers: [...this.props.freelancers] });
   }
 
-  // componentDidUpdate(prevState) {
-  //   if(prevState.)
-  //   this.handleFreelancersUpdate();
-  // }
-
   handleCityChange = (e, value) => {
+    console.log(value);
     this.setState({ filterCity: value });
-    this.handleFreelancersUpdate();
+    this.handleFreelancersUpdate(
+      value,
+      this.state.filterCategory,
+      this.state.filterSkill
+    );
   };
 
   handleCategoryChange = (e, value) => {
+    console.log(value);
     this.setState({ filterCategory: value });
-    this.handleFreelancersUpdate();
+    this.handleFreelancersUpdate(
+      this.state.filterCity,
+      value,
+      this.state.filterSkill
+    );
   };
 
   handleSkillChange = (e, value) => {
+    console.log(value);
     this.setState({ filterSkill: value });
-    this.handleFreelancersUpdate();
+    this.handleFreelancersUpdate(
+      this.state.filterCity,
+      this.state.filterCategory,
+      value
+    );
   };
 
-  handleFreelancersUpdate = () => {
+  handleFreelancersUpdate = (location, categories, skills) => {
+    console.log(location, categories, skills);
+    console.log("update");
     let filteredFreelancers = [...this.props.freelancers];
-    if (this.state.filterCity.length > 0) {
+    if (location) {
       filteredFreelancers = filteredFreelancers.filter((user) =>
-        user.location.includes(this.state.filterCity[0])
+        user.location.includes(location[0])
       );
     }
+    console.log("After location:");
+    console.log(filteredFreelancers);
 
-    if (this.state.filterCategory.length > 0) {
-      this.state.filterCategory.forEach((category) => {
+    if (categories) {
+      categories.forEach((category) => {
         filteredFreelancers = filteredFreelancers.filter(
           // (user) => user.userCategory[0]._id === category._id
           // (user) => user.userCategory.includes(category)
@@ -79,22 +91,26 @@ class FilterFreelance extends Component {
           // }
         );
       });
+      // return filteredFreelancers
+      // this.props.updateFreelancersFeed(filteredFreelancers);
+      // console.log(filteredFreelancers);
     }
 
-    if (this.state.filterSkill.length > 0)
-      this.state.filterSkill.forEach((skill) => {
+    console.log("After categories:");
+    console.log(filteredFreelancers);
+
+    if (skills)
+      skills.forEach((skill) => {
         filteredFreelancers = filteredFreelancers.filter((user) =>
           user.userSkills.includes(skill)
         );
       });
     console.log(filteredFreelancers);
-    return filteredFreelancers;
+    this.props.updateFreelancersFeed(filteredFreelancers);
   };
 
   render() {
-    // console.log('handleFreelancersUpdate() output:', this.handleFreelancersUpdate());
-    this.props.updateFreelancersFeed(this.handleFreelancersUpdate());
-
+    console.log(this.state);
     return (
       <form className="filter" action="">
         <div className="filter__group">
@@ -128,6 +144,7 @@ class FilterFreelance extends Component {
             onChange={this.handleCategoryChange}
             limitTags={3}
             id="tags-outlined"
+            value={this.state.filterCategory}
             options={this.state.categoriesUsed}
             // defaultValue="search"
             getOptionLabel={(option) => option.name} // specify what property to use
@@ -142,6 +159,7 @@ class FilterFreelance extends Component {
             multiple
             // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleSkillChange}
+            value={this.state.filterSkill}
             limitTags={3}
             id="tags-outlined"
             options={this.state.skillsUsed}
