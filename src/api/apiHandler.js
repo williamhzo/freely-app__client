@@ -93,22 +93,33 @@ export default {
 
   filterUsedCities() {
     return service
-      .get('/api/cities')
-      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .get('/api/users')
+      .then((res) =>
+        [...res.data]
+          .filter((el) => el.bio && el.location && el.title && el.userCategory)
+          .map((el) => el.location)
+          .sort((a, b) => a > b)
+          .reduce((a, b) => {
+            // slice(-1)[0] means last item in array without removing it (like .pop())
+            if (a.slice(-1)[0] !== b) a.push(b);
+
+            return a;
+          }, [])
+      )
       .catch(errorHandler);
   },
 
   filterUsedSkills() {
     return service
       .get('/api/skills')
-      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .then((res) => [...res.data].filter((el) => el.currentlyInUse))
       .catch(errorHandler);
   },
 
   filterUsedCategories() {
     return service
       .get('/api/categories')
-      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .then((res) => [...res.data].filter((el) => el.currentlyInUse))
       .catch((err) => console.log(err));
   },
 
