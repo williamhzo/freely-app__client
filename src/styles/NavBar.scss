@@ -97,6 +97,7 @@
   background: $background-color;
   border-bottom-left-radius: $component-margin;
   // box-shadow: $box-shadow;
+  top: $NavBar-height;
   right: 0;
   z-index: 20;
   transform: translateX(130%);
@@ -123,6 +124,16 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   z-index: 20;
+  // second backdrop to cover the navbar
+  &__secondary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: transparent;
+    z-index: 40;
+  }
 }
 
 @media (max-width: 768px) {

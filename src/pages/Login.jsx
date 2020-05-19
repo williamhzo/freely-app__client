@@ -73,10 +73,7 @@ class Login extends Component {
         )}
         {!this.state.accountExists && (
           <h2 className="form-login__title">
-            Hey! Create an account to set up your freelancer profile <br></br>
-            <span role="img" aria-label="arrow-emoji">
-              ⬇️
-            </span>
+            Create an account to set up your freelancer profile
           </h2>
         )}
         <form
