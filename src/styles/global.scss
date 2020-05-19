@@ -72,6 +72,7 @@ img:not([alt]) {
 
 html {
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  background-color: $background-color;
 }
 
 a {
@@ -92,7 +93,9 @@ ul {
 }
 
 .main {
-  margin-top: $NavBar-height;
+  padding-top: $NavBar-height;
+  background-color: $background-color;
+  height: 100vh;
 }
 
 // Getting rid of Safari's mobile 100vh bug (menu overlay)

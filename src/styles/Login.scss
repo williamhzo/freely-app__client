@@ -1,10 +1,17 @@
 @import '/variables';
 
+.login-container {
+  margin: $component-margin * 2;
+  padding: $component-margin;
+  background-color: white;
+  border-radius: 16px;
+}
+
 .form-login {
   min-height: 380px;
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 90%;
   margin: 0 auto;
 
   &__link {
@@ -20,14 +27,15 @@
   }
 
   &__title {
-    height: 100px;
+    height: 80px;
     text-align: center;
     // display: flex;
     // flex-direction: column;
     // justify-content: center;
     font-size: 1.2rem;
     width: 250px;
-    margin: ($component-margin + 56px) auto 0;
+    // margin: ($NavBar-height - $component-margin) auto 0;
+    margin: 0 auto;
   }
 
   &__label {

@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import './variables.scss';
 
 .display {
   padding-top: $component-margin * 2;
@@ -10,6 +10,8 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+
+  background-color: $background-color;
   &__heading {
     margin-top: 30px;
     align-self: flex-start;

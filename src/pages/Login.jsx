@@ -62,7 +62,7 @@ class Login extends Component {
 
   render() {
     return (
-      <>
+      <div className='login-container'>
         {this.state.accountExists && (
           <h2 className="form-login__title">
             Welcome back!{' '}
@@ -162,7 +162,7 @@ class Login extends Component {
             <h3 onClick={this.handleClick}>I already have an account </h3>
           )}
         </div>
-      </>
+      </div>
     );
   }
 }
