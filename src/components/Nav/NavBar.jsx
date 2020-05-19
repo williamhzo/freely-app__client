@@ -49,7 +49,7 @@ const NavBar = (props) => {
                   style={{
                     backgroundImage: context.user
                       ? `url(${context.user.profilePicture})`
-                      : 'url("media/avatar.png")',
+                      : 'url("media/avatar2.png")',
                   }}
                 ></div>
               </NavLink>
