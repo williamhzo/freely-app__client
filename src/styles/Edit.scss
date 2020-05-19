@@ -63,12 +63,24 @@
     // }
   }
   &__bullets[class] {
+    * {
+      transition: all 0.2s;
+    }
     input {
-      // display: inline;
-      margin-left: 4px;
+      flex-grow: 1;
+      margin-left: 1px;
+      padding-left: 2px;
+      border-radius: 4px;
+      &:hover,
+      &:focus {
+        background: white;
+        border: none;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
     }
     select {
-      width: auto;
+      width: calc(100% + 7px);
       background: unset;
       border: none;
       margin-left: -7px;
@@ -76,9 +88,21 @@
         outline: none;
       }
       &:hover {
-        border-bottom: 1px solid grey;
+        // border-bottom: 1px solid grey;
+        background: white;
       }
     }
+  }
+  &__bullet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    svg {
+      margin-left: 10px;
+    }
+  }
+  &__location {
+    position: relative;
   }
   &__editsocial {
     display: flex;
@@ -217,6 +241,8 @@
 
 .CityAutoComplete-results {
   position: absolute;
+  top: 1.5em;
+  left: 65px;
   background-color: white;
   padding: 0;
   margin: 0;

@@ -80,6 +80,6 @@ const checkLink = (link) => {
 
 export default class LinkIcon extends Component {
   render() {
-    return checkLink(this.props.link);
+    return <span className="linkicon">{checkLink(this.props.link)}</span>;
   }
 }

@@ -101,7 +101,7 @@ export default class ProfileEdit extends Component {
   handleFormChange = (e) => {
     if (e.target.name === "social") {
       this.setState({
-        socialLinks: [...document.querySelectorAll(".social--link")].map(
+        socialLinks: [...document.querySelectorAll("[name='social']")].map(
           (item) => item.value
         ),
       });
@@ -300,6 +300,10 @@ export default class ProfileEdit extends Component {
                   name="addSocial"
                   placeholder="Link"
                   id={"socialπ"}
+                  // if user clicks "enter"
+                  onKeyDown={(e) =>
+                    e.keyCode === 13 ? this.handleAddSocial(e) : null
+                  }
                   value={this.state.addSocial}
                 />
                 <FontAwesomeIcon
@@ -324,7 +328,7 @@ export default class ProfileEdit extends Component {
                   </option>
                 </select>
               </li>
-              <li className="display__bullet">
+              <li className="display__bullet display__location">
                 Based in
                 <CityAutoComplete
                   onSelect={this.handlePlaceChange}
@@ -545,7 +549,7 @@ export default class ProfileEdit extends Component {
           </>
         )}
         {this.state.userCollab && (
-          <h2 className="heading container">Collaborations</h2>
+          <h2 className="display__heading container">Collaborations</h2>
         )}
         {this.state.userCollab &&
           this.state.userCollab.map((collab) => {
