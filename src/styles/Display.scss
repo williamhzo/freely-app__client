@@ -94,6 +94,9 @@
         padding-top: 10px;
       }
     }
+    > :last-child {
+      margin-bottom: 0px;
+    }
     ul:last-child > li:last-child {
       margin-bottom: 0px;
     }
