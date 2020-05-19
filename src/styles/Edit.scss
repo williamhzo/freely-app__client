@@ -2,7 +2,7 @@
   display: none;
 }
 
-.profile__portfolioitem {
+.display__portfolioitem {
   input,
   textarea {
     width: 94%;
@@ -11,8 +11,8 @@
   }
 }
 
-.profile,
-.profile__portfolioitem {
+.display,
+.display__portfolioitem {
   label {
     cursor: pointer;
   }
@@ -23,11 +23,12 @@
     cursor: pointer;
     background: unset;
     border-radius: unset;
+    resize: none;
     &:focus {
       outline: none;
     }
     &:hover {
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid lightgrey;
     }
   }
   input:hover {
@@ -35,7 +36,7 @@
   }
 }
 
-.profile {
+.display {
   &__multiselect {
     width: 100%;
   }
@@ -49,6 +50,17 @@
   }
   &__name input {
     text-align: center;
+  }
+  &__categories {
+    .MuiInputBase-root {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__title {
+    // textarea {
+    text-align: center;
+    // }
   }
   &__bullets[class] {
     input {
@@ -68,21 +80,49 @@
       }
     }
   }
-  &__social--edit {
+  &__editsocial {
     display: flex;
     flex-direction: column;
     width: 60%;
-    > * {
-      display: flex;
-      input {
-        flex-grow: 1;
-        margin-left: 10px;
-      }
+    max-width: 300px;
+    margin-top: 30px;
+  }
+  &__editsociallink {
+    padding: 5px;
+    background: #efefef;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    input {
+      flex-grow: 1;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    svg {
+      font-size: 1.2em;
+      margin: 0 7px;
     }
   }
   &__bio {
     textarea {
       width: 100%;
+    }
+  }
+  &__portfolioimage {
+    width: 100%;
+  }
+  &__portfoliolink {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    input {
+      flex-grow: 1;
+    }
+    svg {
+      color: #404040;
+      font-size: 1.2em;
     }
   }
 }
@@ -105,6 +145,8 @@
 }
 
 .edit__button {
+  background: unset;
+  background: #007bff;
   color: white;
   position: absolute;
   text-transform: uppercase;
@@ -114,7 +156,6 @@
   right: 10px;
   padding: 7px 12px;
   border: none;
-  background: unset;
   border-radius: 5px;
   margin-top: 0px;
   transition: all 0.2s;
@@ -128,6 +169,14 @@
   &.unsaved {
     background: #28a745;
     cursor: pointer;
+    &:hover {
+      margin-top: -1px;
+      box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+    }
+  }
+  &.collabbutton {
+    right: 30px;
+    top: 20px;
     &:hover {
       margin-top: -1px;
       box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
@@ -147,12 +196,17 @@
 .MuiInput-underline:after {
   border-bottom: none !important;
 }
-.profile__categories .MuiInputBase-root :nth-child(n + 4) {
+.display__categories .MuiInputBase-root :nth-child(n + 4) {
   color: red;
 }
-.profile__skills .MuiInputBase-root :nth-child(n + 6) {
+.display__skills .MuiInputBase-root :nth-child(n + 6) {
   color: red;
 }
+
+// .MuiInput-input:focus {
+//   display: inline;
+// }
+
 .MuiAutocomplete-option,
 .MuiInputBase-root,
 .MuiChip-root {
