@@ -93,8 +93,12 @@ export default {
 
   filterUsedCities() {
     return service
-      .get('/api/cities')
-      .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .get('/api/users')
+      .then((res) =>
+        res.data
+          .filter((el) => el.bio && el.location && el.title && el.userCategory)
+          .map((el) => el.location)
+      )
       .catch(errorHandler);
   },
 
