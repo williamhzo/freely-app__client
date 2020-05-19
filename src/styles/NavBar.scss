@@ -97,7 +97,8 @@
   width: 36%;
   background: $background-color;
   border-bottom-left-radius: $component-margin;
-  // box-shadow: $box-shadow;
+  box-shadow: 2px 2px 10px 1px rgba(150, 150, 150, 0.1);
+  border: none;
   top: $NavBar-height;
   right: 0;
   z-index: 20;
