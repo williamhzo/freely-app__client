@@ -112,14 +112,14 @@ export default {
   filterUsedSkills() {
     return service
       .get('/api/skills')
-      .then((res) => [...res.data].filter((el) => el.currentlyInUse))
+      .then((res) => res.data.filter((el) => el.currentlyInUse))
       .catch(errorHandler);
   },
 
   filterUsedCategories() {
     return service
       .get('/api/categories')
-      .then((res) => [...res.data].filter((el) => el.currentlyInUse))
+      .then((res) => res.data.filter((el) => el.currentlyInUse))
       .catch((err) => console.log(err));
   },
 

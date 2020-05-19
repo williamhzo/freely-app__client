@@ -6,10 +6,10 @@ import apiHandler from '../api/apiHandler';
 
 import '../styles/FeedPage.scss';
 
-class ProfilesFeed extends Component {
+class FreelancersFeed extends Component {
   state = {
     freelancers: [],
-    filteredFreelancers: [],
+    // filteredFreelancers: [],
   };
 
   componentDidMount() {
@@ -19,9 +19,9 @@ class ProfilesFeed extends Component {
       .catch((err) => console.log(err));
   }
 
-  // updateFreelancers = (filteredArray) => {
-  //   this.setState({ filteredFreelancers: filteredArray });
-  // };
+  updateFreelancersFeed = (filteredArray) => {
+    this.setState({ freelancers: filteredArray });
+  };
 
   render() {
     return (
@@ -37,24 +37,17 @@ class ProfilesFeed extends Component {
           </h2>
         )}
 
-        <FilterFreelance updateFreelancers={this.updateFreelancers} />
+        <FilterFreelance
+          freelancers={this.state.freelancers}
+          updateFreelancersFeed={this.updateFreelancersFeed}
+        />
 
         {this.state.freelancers.map((freelancer, index) => (
           <FreelancerCard key={index} freelancer={freelancer} />
         ))}
-
-        {/* {this.state.filteredFreelancers &&
-          this.state.filteredFreelancers.map((freelancer, index) => (
-            <FreelancerCard key={index} freelancer={freelancer} />
-          ))}
-
-        {!this.state.filteredFreelancers &&
-          this.state.freelancers.map((freelancer, index) => (
-            <FreelancerCard key={index} freelancer={freelancer} />
-          ))} */}
       </div>
     );
   }
 }
 
-export default ProfilesFeed;
+export default FreelancersFeed;

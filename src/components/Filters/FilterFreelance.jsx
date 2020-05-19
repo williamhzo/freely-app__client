@@ -10,13 +10,13 @@ class FilterFreelance extends Component {
     filterCategory: [],
     filterSkill: [],
 
-    // array concatenating filter parameters
-    filterArray: [],
-
     // curated database provided for autocomplete
     categoriesUsed: [],
     skillsUsed: [],
     citiesUsed: [],
+
+    //full list of freelancers
+    filteredFreelancersArray: [],
   };
 
   componentDidMount() {
@@ -34,45 +34,87 @@ class FilterFreelance extends Component {
       .filterUsedCities()
       .then((res) => this.setState({ citiesUsed: res }))
       .catch((err) => console.log(err));
+
+    // this.setState({ freelancers: [...this.props.freelancers] });
   }
 
+  // componentDidUpdate(prevState) {
+  //   if(prevState.)
+  //   this.handleFreelancersUpdate();
+  // }
+
   handleCityChange = (e, value) => {
-    this.setState({ filterCity: [...this.state.filterCity, value] });
-    this.updateFilterArray(this.filterCity);
+    this.setState({ filterCity: value });
+    this.handleFreelancersUpdate();
   };
 
   handleCategoryChange = (e, value) => {
-    this.setState({ filterCategory: [...this.state.filterCategory, value] });
-    this.updateFilterArray(this.filterCategory);
+    this.setState({ filterCategory: value });
+    this.handleFreelancersUpdate();
   };
 
   handleSkillChange = (e, value) => {
-    this.setState({ filterSkill: [...this.state.filterSkill, value] });
-    this.updateFilterArray(this.filterSkill);
+    this.setState({ filterSkill: value });
+    this.handleFreelancersUpdate();
   };
 
-  updateFilterArray = (newFilter) => {
-    this.setState({ filterArray: [...this.state.filterArray, newFilter] });
-    // this.props.updateFreelancers(this.filterArray);
+  handleFreelancersUpdate = () => {
+    let filteredFreelancers = [...this.props.freelancers];
+    if (this.state.filterCity.length > 0) {
+      filteredFreelancers = filteredFreelancers.filter((user) =>
+        user.location.includes(this.state.filterCity[0])
+      );
+    }
+
+    if (this.state.filterCategory.length > 0) {
+      this.state.filterCategory.forEach((category) => {
+        filteredFreelancers = filteredFreelancers.filter(
+          // (user) => user.userCategory[0]._id === category._id
+          // (user) => user.userCategory.includes(category)
+          (user) => {
+            for (let i = 0; i < user.userCategory.length; i++) {
+              return user.userCategory[i]._id === category._id;
+            }
+          }
+          // }
+        );
+      });
+    }
+
+    if (this.state.filterSkill.length > 0)
+      this.state.filterSkill.forEach((skill) => {
+        filteredFreelancers = filteredFreelancers.filter((user) =>
+          user.userSkills.includes(skill)
+        );
+      });
+    console.log(filteredFreelancers);
+    return filteredFreelancers;
   };
 
   render() {
-    // console.log(apiHandler.filterUsedSkills());
-    console.log(this.state.categoriesUsed);
-    // console.log(this.props.freelancers);
+    // console.log('handleFreelancersUpdate() output:', this.handleFreelancersUpdate());
+    this.props.updateFreelancersFeed(this.handleFreelancersUpdate());
+
     return (
       <form className="filter" action="">
         <div className="filter__group">
           <div className="filter__label">Pick a location</div>
           <Autocomplete
             className="filter__input"
-            multiple
+            //remove to make location unique
+            // multiple
+            free
+            solo
+            size="small"
+            // onInputChange={this.handleFreelancersUpdate}
+            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleCityChange}
+            value={this.state.filterCity}
             limitTags={3}
             id="tags-outlined"
             options={this.state.citiesUsed}
             // defaultValue="search"
-            getOptionLabel={(option) => option.name} // specify what property to use
+            getOptionLabel={(option) => option} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
           />
@@ -81,14 +123,12 @@ class FilterFreelance extends Component {
           <div className="filter__label">Category</div>
           <Autocomplete
             className="filter__input"
-            name="toto"
             multiple
-            // onSelect={this.props.updateFreelancers}
+            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleCategoryChange}
             limitTags={3}
             id="tags-outlined"
             options={this.state.categoriesUsed}
-            // freeSolo=true
             // defaultValue="search"
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
@@ -100,6 +140,7 @@ class FilterFreelance extends Component {
           <Autocomplete
             className="filter__input"
             multiple
+            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleSkillChange}
             limitTags={3}
             id="tags-outlined"
