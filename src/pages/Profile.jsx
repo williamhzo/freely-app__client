@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
 import Badges from "../components/Badges";
+import LinkIcon from "../components/LinkIcon";
 import "../styles/Display.scss";
-
-const checkLink = (link) => {
-  let icon = "🌐";
-  if (link.match(/facebook.com/)) {
-    icon = "📘";
-  } else if (link.match(/twitter.com/)) {
-    icon = "🐦";
-  } else if (link.match(/linkedin.com/)) {
-    icon = "ℹ️";
-  } else if (link.match(/instagram.com/)) {
-    icon = "📷";
-  }
-  return icon;
-};
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarkerAlt,
+  faGlobeEurope,
+  faCommentAlt,
+  faUserFriends,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default class Profile extends Component {
   state = {};
@@ -42,11 +36,7 @@ export default class Profile extends Component {
         )}
         <h2 className="display__name">{this.state.name}</h2>
         {this.state.userCategory && (
-          <div className="display__categories">
-            {this.state.userCategory.map((category) => (
-              <li className="display__category badge">{category.name}</li>
-            ))}
-          </div>
+          <Badges data={this.state.userCategory} label={"name"} />
         )}
         {this.state.title && (
           <div className="display__title">{this.state.title}</div>
@@ -56,25 +46,36 @@ export default class Profile extends Component {
             {this.state.socialLinks.map((link) => {
               return (
                 <a href={link} className="display__sociallink">
-                  {checkLink(link)}
+                  <LinkIcon link={link} />
                 </a>
               );
             })}
           </div>
         )}
         <ul className="display__bullets">
+          {this.state.openToProjects && (
+            <li className="display__bullet">
+              <FontAwesomeIcon icon={faUserFriends} />
+              Open to collaborations
+            </li>
+          )}
+          {this.state.remote && this.state.openToProjects && (
+            <li className="display__bullet">
+              <FontAwesomeIcon icon={faGlobeEurope} />
+              Open to remote collabs
+            </li>
+          )}
           {this.state.location && (
             <li className="display__bullet">
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
               Based in {this.state.location || ""}
             </li>
           )}
-          <li className="display__bullet">
-            {this.state.remote
-              ? "Open to remote collabs"
-              : "Not open to remote collabs"}
-          </li>
-          {this.state.contact && (
-            <li className="display__bullet">Preferred method of contact:</li>
+          {this.state.preferredContact && (
+            <li className="display__bullet">
+              <FontAwesomeIcon icon={faCommentAlt} />
+              Preferred contact: {this.state.preferredContact}
+            </li>
           )}
         </ul>
         {this.state.userSkills && (
@@ -103,17 +104,19 @@ export default class Profile extends Component {
                       src={portfolioItem.image}
                       alt=""
                     />
-                    <h3 className="display__portfoliotitle">
-                      {portfolioItem.title}
-                    </h3>
-                    <div className="display__portfoliodescription">
-                      {portfolioItem.description}
-                    </div>
-                    {portfolioItem.link && (
-                      <div className="display__portfoliolink">
-                        <a href={portfolioItem.link}>Link »</a>
+                    <div className="display__portfoliotext">
+                      <h3 className="display__portfoliotitle">
+                        {portfolioItem.title}
+                      </h3>
+                      <div className="display__portfoliodescription">
+                        {portfolioItem.description}
                       </div>
-                    )}
+                      {portfolioItem.link && (
+                        <div className="display__portfoliolink">
+                          <a href={portfolioItem.link}>Link »</a>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 );
               })}

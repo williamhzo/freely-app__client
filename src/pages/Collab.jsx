@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import apiHandler from "../api/apiHandler";
 import "../styles/Display.scss";
 import Badges from "../components/Badges";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserFriends,
+  faUserLock,
+  faPenFancy,
+  faCommentAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default class CollabEdit extends Component {
   state = {
@@ -52,22 +59,31 @@ export default class CollabEdit extends Component {
             Edit
           </button>
           <h2 className="display__collabtitle">{this.state.title}</h2>
-
           <h3 className="display__heading">Description</h3>
           <div className="display__description">{this.state.description}</div>
           <ul className="display__bullets">
             <li className="display__bullet">
-              {this.state.open
-                ? "This project is seeking collaborators"
-                : "This project is not seeking collaborators"}
+              {this.state.open ? (
+                <>
+                  <FontAwesomeIcon icon={faUserFriends} /> This project is
+                  seeking collaborators
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faUserLock} />
+                  This project is not seeking collaborators
+                </>
+              )}
             </li>
             <li className="display__bullet">
+              <FontAwesomeIcon icon={faPenFancy} />
               Created by{" "}
               <a href={"/" + this.state.creator.userName}>
                 {this.state.creator.name}
               </a>
             </li>
             <li className="display__bullet">
+              <FontAwesomeIcon icon={faCommentAlt} />
               Preferred method of contact: {this.state.creator.preferredContact}
             </li>
           </ul>

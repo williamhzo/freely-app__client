@@ -36,8 +36,8 @@
   &__collabbody:not(p) {
     margin-top: -7%;
     background: white;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    // border-top-right-radius: 5px;
+    // border-top-left-radius: 5px;
     padding-top: 1px;
     padding-left: 30px;
     padding-right: 30px;
@@ -73,6 +73,7 @@
     margin-top: 30px;
   }
   &__sociallinks {
+    font-size: 1.6em;
     margin-top: 30px;
     > * {
       margin-left: 10px;
@@ -87,13 +88,13 @@
     padding-left: 35px;
     font-size: 1.1em;
   }
-  &__bullet:before {
-    content: "•";
-    margin-left: -5px;
-    margin-right: 5px;
-  }
+  // &__bullet:before {
+  //   content: "•";
+  //   margin-left: -5px;
+  //   margin-right: 5px;
+  // }
   &__bullet {
-    line-height: 2em;
+    line-height: 2.4em;
   }
   &__fullwidth {
     align-self: flex-start;
@@ -116,25 +117,36 @@
   }
   &__portfolioitem,
   &__collabcard {
-    border: 1px solid grey;
+    border: 1px solid $card-border-color;
     border-radius: 20px;
     overflow: hidden;
-    padding-bottom: 20px;
     margin-top: 20px;
   }
-  &__portfoliodescription,
-  &__portfoliotitle,
-  &__portfoliolink,
-  &__collabcardtitle,
-  &__collabcarddescription {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+  &__portfoliotext {
+    // background: pink;
+    padding: 20px;
   }
+  &__portfoliodescription,
+  &__portfoliolink {
+    padding-top: 15px;
+  }
+
   // collab page
   &__collabroles,
   &__description,
   &__skillsneeded {
     align-self: stretch;
+  }
+  .svg-inline--fa {
+    color: #383838;
+  }
+}
+
+@media (min-width: 768px) {
+  .display {
+    &__collabbody:not(p) {
+      border-top-right-radius: 3px;
+      border-top-left-radius: 3px;
+    }
   }
 }
