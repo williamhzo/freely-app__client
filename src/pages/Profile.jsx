@@ -45,7 +45,7 @@ export default class Profile extends Component {
           <div className="display__sociallinks">
             {this.state.socialLinks.map((link) => {
               return (
-                <a href={link} className="display__sociallink">
+                <a href={link} target="_blank" className="display__sociallink">
                   <LinkIcon link={link} />
                 </a>
               );
@@ -55,25 +55,33 @@ export default class Profile extends Component {
         <ul className="display__bullets">
           {this.state.openToProjects && (
             <li className="display__bullet">
-              <FontAwesomeIcon icon={faUserFriends} />
+              <span className="bulleticon">
+                <FontAwesomeIcon icon={faUserFriends} />
+              </span>
               Open to collaborations
             </li>
           )}
           {this.state.remote && this.state.openToProjects && (
             <li className="display__bullet">
-              <FontAwesomeIcon icon={faGlobeEurope} />
+              <span className="bulleticon">
+                <FontAwesomeIcon icon={faGlobeEurope} />
+              </span>
               Open to remote collabs
             </li>
           )}
           {this.state.location && (
             <li className="display__bullet">
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
+              <span className="bulleticon">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+              </span>
               Based in {this.state.location || ""}
             </li>
           )}
           {this.state.preferredContact && (
             <li className="display__bullet">
-              <FontAwesomeIcon icon={faCommentAlt} />
+              <span className="bulleticon">
+                <FontAwesomeIcon icon={faCommentAlt} />
+              </span>
               Preferred contact: {this.state.preferredContact}
             </li>
           )}
@@ -88,13 +96,13 @@ export default class Profile extends Component {
         )}
         {this.state.bio && (
           <>
-            <h3 className="display__heading">About</h3>
+            <h2 className="display__heading">About</h2>
             <div className="display__bio">{this.state.bio}</div>
           </>
         )}
         {this.state.portfolio && (
           <>
-            <h3 className="display__heading">Portfolio</h3>
+            <h2 className="display__heading">Portfolio</h2>
             <div className="display__portfolio">
               {this.state.portfolio.map((portfolioItem) => {
                 return (
@@ -113,7 +121,9 @@ export default class Profile extends Component {
                       </div>
                       {portfolioItem.link && (
                         <div className="display__portfoliolink">
-                          <a href={portfolioItem.link}>Link »</a>
+                          <a target="_blank" href={portfolioItem.link}>
+                            Link »
+                          </a>
                         </div>
                       )}
                     </div>
@@ -125,7 +135,7 @@ export default class Profile extends Component {
         )}
         {this.state.userCollab && (
           <div className="display__collabs">
-            <h3 className="display__heading">Collabs</h3>
+            <h2 className="display__heading">Collabs</h2>
             {this.state.userCollab.map((collab) => {
               return (
                 <div className="display__collabcard">
