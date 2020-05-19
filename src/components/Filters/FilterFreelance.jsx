@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import apiHandler from "../../api/apiHandler";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
+import React, { Component } from 'react';
+import apiHandler from '../../api/apiHandler';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 class FilterFreelance extends Component {
   state = {
@@ -37,7 +37,6 @@ class FilterFreelance extends Component {
   }
 
   handleCityChange = (e, value) => {
-    console.log(value);
     this.setState({ filterCity: value });
     this.handleFreelancersUpdate(
       value,
@@ -47,7 +46,6 @@ class FilterFreelance extends Component {
   };
 
   handleCategoryChange = (e, value) => {
-    console.log(value);
     this.setState({ filterCategory: value });
     this.handleFreelancersUpdate(
       this.state.filterCity,
@@ -57,7 +55,6 @@ class FilterFreelance extends Component {
   };
 
   handleSkillChange = (e, value) => {
-    console.log(value);
     this.setState({ filterSkill: value });
     this.handleFreelancersUpdate(
       this.state.filterCity,
@@ -67,16 +64,12 @@ class FilterFreelance extends Component {
   };
 
   handleFreelancersUpdate = (location, categories, skills) => {
-    console.log(location, categories, skills);
-    console.log("update");
     let filteredFreelancers = [...this.props.freelancers];
     if (location) {
       filteredFreelancers = filteredFreelancers.filter((user) =>
-        user.location.includes(location[0])
+        user.location.includes(location)
       );
     }
-    console.log("After location:");
-    console.log(filteredFreelancers);
 
     if (categories) {
       categories.forEach((category) => {
@@ -95,35 +88,22 @@ class FilterFreelance extends Component {
       // this.props.updateFreelancersFeed(filteredFreelancers);
       // console.log(filteredFreelancers);
     }
-
-    console.log("After categories:");
-    console.log(filteredFreelancers);
-
     if (skills)
       skills.forEach((skill) => {
         filteredFreelancers = filteredFreelancers.filter((user) =>
           user.userSkills.includes(skill)
         );
       });
-    console.log(filteredFreelancers);
     this.props.updateFreelancersFeed(filteredFreelancers);
   };
 
   render() {
-    console.log(this.state);
     return (
       <form className="filter" action="">
         <div className="filter__group">
           <div className="filter__label">Pick a location</div>
           <Autocomplete
             className="filter__input"
-            //remove to make location unique
-            // multiple
-            free
-            solo
-            size="small"
-            // onInputChange={this.handleFreelancersUpdate}
-            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleCityChange}
             value={this.state.filterCity}
             limitTags={3}
@@ -140,13 +120,11 @@ class FilterFreelance extends Component {
           <Autocomplete
             className="filter__input"
             multiple
-            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleCategoryChange}
             limitTags={3}
             id="tags-outlined"
             value={this.state.filterCategory}
             options={this.state.categoriesUsed}
-            // defaultValue="search"
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
@@ -157,13 +135,11 @@ class FilterFreelance extends Component {
           <Autocomplete
             className="filter__input"
             multiple
-            // onSelect={this.handleFreelancersUpdate}
             onChange={this.handleSkillChange}
             value={this.state.filterSkill}
             limitTags={3}
             id="tags-outlined"
             options={this.state.skillsUsed}
-            // defaultValue="search"
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
