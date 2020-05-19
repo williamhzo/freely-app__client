@@ -2,7 +2,7 @@
   display: none;
 }
 
-.profile__portfolioitem {
+.display__portfolioitem {
   input,
   textarea {
     width: 94%;
@@ -11,8 +11,8 @@
   }
 }
 
-.profile,
-.profile__portfolioitem {
+.display,
+.display__portfolioitem {
   label {
     cursor: pointer;
   }
@@ -23,6 +23,7 @@
     cursor: pointer;
     background: unset;
     border-radius: unset;
+    resize: none;
     &:focus {
       outline: none;
     }
@@ -35,7 +36,7 @@
   }
 }
 
-.profile {
+.display {
   &__multiselect {
     width: 100%;
   }
@@ -105,6 +106,8 @@
 }
 
 .edit__button {
+  background: unset;
+  background: #007bff;
   color: white;
   position: absolute;
   text-transform: uppercase;
@@ -114,7 +117,6 @@
   right: 10px;
   padding: 7px 12px;
   border: none;
-  background: unset;
   border-radius: 5px;
   margin-top: 0px;
   transition: all 0.2s;
@@ -128,6 +130,14 @@
   &.unsaved {
     background: #28a745;
     cursor: pointer;
+    &:hover {
+      margin-top: -1px;
+      box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+    }
+  }
+  &.collabbutton {
+    right: 30px;
+    top: 20px;
     &:hover {
       margin-top: -1px;
       box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
@@ -147,10 +157,10 @@
 .MuiInput-underline:after {
   border-bottom: none !important;
 }
-.profile__categories .MuiInputBase-root :nth-child(n + 4) {
+.display__categories .MuiInputBase-root :nth-child(n + 4) {
   color: red;
 }
-.profile__skills .MuiInputBase-root :nth-child(n + 6) {
+.display__skills .MuiInputBase-root :nth-child(n + 6) {
   color: red;
 }
 .MuiAutocomplete-option,

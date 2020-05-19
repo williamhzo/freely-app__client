@@ -212,7 +212,7 @@ export default class ProfileEdit extends Component {
         <form
           onChange={this.handleFormChange}
           onSubmit={this.handleFormSubmit}
-          className="profile container"
+          className="display container"
         >
           <button
             className={
@@ -226,7 +226,7 @@ export default class ProfileEdit extends Component {
             {this.state.saved ? "Saved" : "Save"}
           </button>
           {this.state.profilePicture && (
-            <div className="profile__avatarbox edit">
+            <div className="display__avatarbox edit">
               <label htmlFor="profilePicture">
                 <input
                   type="file"
@@ -236,18 +236,18 @@ export default class ProfileEdit extends Component {
                   accept=".png, .jpg, .jpeg"
                 />
                 <img
-                  className="profile__picture"
+                  className="display__picture"
                   src={this.state.temporaryPicture || this.state.profilePicture}
                   alt=""
                 />
               </label>
             </div>
           )}
-          <h2 className="profile__name">
+          <h2 className="display__name">
             <input type="text" name="name" id="name" value={this.state.name} />
           </h2>
           {this.state.userCategory && (
-            <div className="profile__categories">
+            <div className="display__categories">
               <Autocomplete
                 multiple
                 onChange={this.handleCategoryChange}
@@ -267,13 +267,13 @@ export default class ProfileEdit extends Component {
               name="title"
               id="title"
               value={this.state.title}
-              className="profile__title"
+              className="display__title"
               maxLength={280}
               placeholder="Intro"
             />
           )}
           {this.state.socialLinks && (
-            <div className="profile__social--edit">
+            <div className="display__social--edit">
               {this.state.socialLinks.map((link, index) => {
                 return (
                   <label htmlFor={"social" + index}>
@@ -304,10 +304,10 @@ export default class ProfileEdit extends Component {
               </label>
             </div>
           )}
-          <div className="profile__bullets">
+          <div className="display__bullets">
             <h3>Key Points</h3>
             <ul>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 <select
                   id="openToProjects"
                   value={this.state.openToProjects}
@@ -319,20 +319,20 @@ export default class ProfileEdit extends Component {
                   </option>
                 </select>
               </li>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 Based in
                 <CityAutoComplete
                   onSelect={this.handlePlaceChange}
                   userLocation={this.state.location}
                 />
               </li>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 <select id="remote" value={this.state.remote} name="remote">
                   <option value={true}>Open to remote collabs</option>
                   <option value={false}>Not open to remote collabs</option>
                 </select>
               </li>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 Preferred method of contact:{" "}
                 <input
                   type="text"
@@ -345,7 +345,7 @@ export default class ProfileEdit extends Component {
             </ul>
             <h3>Personal Info</h3>
             <ul>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 Username:{" "}
                 <input
                   type="text"
@@ -357,7 +357,7 @@ export default class ProfileEdit extends Component {
                 />
                 {this.state.usernameAvailable ? "✔︎" : "✖︎"}
               </li>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 Phone Number:{" "}
                 <input
                   type="text"
@@ -367,7 +367,7 @@ export default class ProfileEdit extends Component {
                   value={this.state.phone}
                 />
               </li>
-              <li className="profile__bullet">
+              <li className="display__bullet">
                 Email:{" "}
                 <input
                   type="text"
@@ -382,8 +382,8 @@ export default class ProfileEdit extends Component {
 
           {this.state.userSkills && this.state.skillOptions && (
             <>
-              <h2 className="profile__heading">Skills</h2>
-              <div className="profile__skills">
+              <h2 className="display__heading">Skills</h2>
+              <div className="display__skills">
                 <Autocomplete
                   multiple
                   limitTags={5}
@@ -400,13 +400,13 @@ export default class ProfileEdit extends Component {
           )}
           {this.state.bio && (
             <>
-              <h2 className="profile__heading">About</h2>
+              <h2 className="display__heading">About</h2>
               <TextareaAutosize
                 type="bio"
                 name="bio"
                 id="bio"
                 value={this.state.bio}
-                className="profile__bio"
+                className="display__bio"
                 placeholder="Intro"
               />
             </>
@@ -414,12 +414,12 @@ export default class ProfileEdit extends Component {
         </form>
         {this.state.portfolio && (
           <>
-            <div className="profile__portfolio container">
-              <h2 className="profile__heading">Portfolio</h2>
+            <div className="display__portfolio container">
+              <h2 className="display__heading">Portfolio</h2>
               {this.state.portfolio.map((portfolioItem, index) => {
                 return (
                   <form
-                    className="profile__portfolioitem"
+                    className="display__portfolioitem"
                     onChange={(event) => this.handlePortfolio(index, event)}
                   >
                     <label htmlFor={"image" + index}>
@@ -434,14 +434,14 @@ export default class ProfileEdit extends Component {
                         accept=".png, .jpg, .jpeg"
                       />
                       <img
-                        className="profile__portfolioimage"
+                        className="display__portfolioimage"
                         src={
                           portfolioItem.temporaryPicture || portfolioItem.image
                         }
                         alt=""
                       />
                     </label>
-                    <h3 className="profile__portfoliotitle">
+                    <h3 className="display__portfoliotitle">
                       <input
                         type="text"
                         name={"title"}
@@ -453,10 +453,10 @@ export default class ProfileEdit extends Component {
                       name="description"
                       id="description"
                       value={portfolioItem.description}
-                      className="profile__portfoliodescription"
+                      className="display__portfoliodescription"
                       placeholder="Intro"
                     />
-                    <div className="profile__portfoliolink">
+                    <div className="display__portfoliolink">
                       <input
                         type="text"
                         name={"link"}
@@ -472,7 +472,7 @@ export default class ProfileEdit extends Component {
               })}
               {this.state.portfolio.length < 3 && (
                 <form
-                  className="profile__portfolioitem"
+                  className="display__portfolioitem"
                   onChange={this.handleNewPortfolio}
                   onSubmit={this.handleAddPortfolio}
                 >
@@ -485,7 +485,7 @@ export default class ProfileEdit extends Component {
                       accept=".png, .jpg, .jpeg"
                     />
                     <img
-                      className="profile__portfolioimage"
+                      className="display__portfolioimage"
                       src={
                         this.state.newPortfolio.temporaryPicture ||
                         "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
@@ -493,7 +493,7 @@ export default class ProfileEdit extends Component {
                       alt=""
                     />
                   </label>
-                  <h3 className="profile__portfoliotitle">
+                  <h3 className="display__portfoliotitle">
                     <input
                       type="text"
                       name={"title"}
@@ -506,10 +506,10 @@ export default class ProfileEdit extends Component {
                     name="description"
                     id="description"
                     value={this.state.newPortfolio.description}
-                    className="profile__portfoliodescription"
+                    className="display__portfoliodescription"
                     placeholder="Describe your project..."
                   />
-                  <div className="profile__portfoliolink">
+                  <div className="display__portfoliolink">
                     <input
                       type="text"
                       name={"link"}
