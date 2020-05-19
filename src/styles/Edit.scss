@@ -36,6 +36,9 @@
 }
 
 .profile {
+  &__multiselect {
+    width: 100%;
+  }
   &__avatarbox.edit:hover:after {
     position: absolute;
     bottom: 15px;

@@ -254,7 +254,7 @@ export default class ProfileEdit extends Component {
                 limitTags={3}
                 id="tags-outlined"
                 options={this.state.categoryOptions}
-                defaultValue={this.state.userCategory}
+                value={this.state.userCategory}
                 getOptionLabel={(option) => option.name} // specify what property to use
                 filterSelectedOptions
                 renderInput={(params) => <TextField {...params} />}
@@ -390,7 +390,7 @@ export default class ProfileEdit extends Component {
                   onChange={this.handleSkillChange}
                   id="tags-outlined"
                   options={this.state.skillOptions}
-                  defaultValue={this.state.userSkills}
+                  value={this.state.userSkills}
                   getOptionLabel={(option) => option.name} // specify what property to use
                   filterSelectedOptions
                   renderInput={(params) => <TextField {...params} />}

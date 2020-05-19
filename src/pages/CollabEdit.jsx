@@ -12,11 +12,11 @@ import { objectToFormData } from "object-to-formdata";
 Done: 
 - Image (.image)
 - Roles Needed not working (.categoryNeeded)
+- Contributor multi-select (.contributors)
+- Open or closed (.open)
+- Preferred method of contact (get from creator)
 
 To Do:
-- Open or closed (.open)
-- Contributor multi-select (.contributors)
-- Preferred method of contact (get from creator)
 - Contributor handling. (Get all users with this collab, remove collab, then add) (.contributors)
 
 */
@@ -29,6 +29,7 @@ export default class CollabEdit extends Component {
     title: "",
     creator: "",
     contributors: [],
+    allUsers: [],
     description: "",
     skillsNeeded: [],
     categoryNeeded: [],
@@ -45,6 +46,9 @@ export default class CollabEdit extends Component {
     apiHandler.getSkills().then((apiRes) => {
       this.setState({ skillOptions: apiRes });
     });
+    apiHandler.getUsers().then((apiRes) => {
+      this.setState({ allUsers: apiRes });
+    });
   }
   handleFormChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -57,6 +61,10 @@ export default class CollabEdit extends Component {
       reader.readAsDataURL(e.target.files[0]);
       this.setState({ image: e.target.files[0] });
     }
+    console.log(this.state.contributors);
+    console.log(this.state.allUsers);
+    console.log(this.state.skillOptions);
+    console.log(this.state.skillsNeeded);
   };
 
   handleFormSubmit = (e) => {
@@ -67,6 +75,7 @@ export default class CollabEdit extends Component {
     delete collab.categoryOptions;
     delete collab.temporaryPicture;
     delete collab._id;
+    delete collab.allUsers;
     if (collab.contributors) {
       collab.contributors = JSON.stringify(collab.contributors);
     }
@@ -83,10 +92,13 @@ export default class CollabEdit extends Component {
     });
   };
   handleCategoryChange = (e, value) => {
-    this.setState({ categoryOptions: value });
+    this.setState({ categoriesNeeded: value, saved: false });
   };
   handleSkillChange = (e, value) => {
-    this.setState({ skillOptions: value });
+    this.setState({ skillsNeeded: value, saved: false });
+  };
+  handleUserChange = (e, value) => {
+    this.setState({ contributors: value, saved: false });
   };
   render() {
     // console.log(this.props.match.params.username);
@@ -141,7 +153,7 @@ export default class CollabEdit extends Component {
           placeholder="Description"
         />
 
-        <div className="profile__collabroles">
+        <div className="profile__multiselect">
           <h3 className="profile__heading">Roles Needed</h3>
           <Autocomplete
             multiple
@@ -149,21 +161,35 @@ export default class CollabEdit extends Component {
             limitTags={5}
             id="tags-outlined"
             options={this.state.categoryOptions}
-            defaultValue={this.state.categoryNeeded}
+            value={this.state.categoryNeeded}
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
           />
         </div>
-        <div className="profile__skillsneeded">
+        <div className="profile__multiselect">
           <h3 className="profile__heading">Skills Needed</h3>
           <Autocomplete
             multiple
-            limitTags={5}
+            // limitTags={5}
             onChange={this.handleSkillChange}
             id="tags-outlined"
             options={this.state.skillOptions}
-            defaultValue={this.state.skillsNeeded}
+            value={this.state.skillsNeeded}
+            getOptionLabel={(option) => option.name} // specify what property to use
+            filterSelectedOptions
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </div>
+        <div className="profile__multiselect">
+          <h3 className="profile__heading">Contributors</h3>
+          <Autocomplete
+            multiple
+            // limitTags={5}
+            onChange={this.handleUserChange}
+            id="tags-outlined"
+            options={this.state.allUsers}
+            value={this.state.contributors}
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
@@ -171,28 +197,17 @@ export default class CollabEdit extends Component {
         </div>
         <ul className="profile__bullets">
           <li className="profile__bullet">
-            {this.state.open
-              ? "This project is seeking collaborators."
-              : "This project is not seeking collaborators."}
+            <select id="open" value={this.state.open} name="open">
+              <option value={true}>Open to collaborators</option>
+              <option value={false}>Not open to collaborators right now</option>
+            </select>
           </li>
           <li className="profile__bullet">
             Created by {this.state.creator.name}
           </li>
           <li className="profile__bullet">
-            Contributors:
-            {this.state.contributors.map((contributor) => (
-              <span className="profile__contributor">{contributor.name}, </span>
-            ))}
-          </li>
-          <li className="profile__bullet">
-            Preferred method of contact:{" "}
-            <input
-              type="text"
-              name="contact"
-              id="contact"
-              value={this.state.contact || ""}
-              placeholder="Contact"
-            />
+            Preferred method of contact for {this.state.creator.name}:{" "}
+            {this.state.creator.preferredContact}
           </li>
         </ul>
 
