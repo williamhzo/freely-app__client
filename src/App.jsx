@@ -68,8 +68,9 @@ export default class App extends Component {
               path="/:username/edit"
               component={ProfileEdit}
             />
-            <Route exact path="/error_404" component={Error_404} />
             <Route exact path="/:username" component={Profile} />
+            {/* if no username */}
+            <Route exact path="/error_404" component={Error_404} />
           </Switch>
         </main>
       </div>
