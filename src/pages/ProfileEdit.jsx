@@ -143,7 +143,11 @@ export default class ProfileEdit extends Component {
   handleNewPortfolio = (e) => {
     const newPortfolio = { ...this.state.newPortfolio };
     if (e.target.name === "image") {
-      console.log("image");
+      if (e.target.files[0].size > 750000) {
+        console.log("Big image");
+        this.setState({ error: "Maximum file size: 750kb" });
+        return;
+      }
       newPortfolio.image = e.target.files[0];
       const reader = new FileReader();
       reader.onload = () => {
@@ -184,7 +188,6 @@ export default class ProfileEdit extends Component {
   };
 
   handlePortfolioImage = (index, event) => {
-    // let key = "portfolio" + index;
     this.setState({ ["portfolio" + index]: event.target.files[0] });
     const portfolio = [...this.state.portfolio];
     const reader = new FileReader();
@@ -197,11 +200,13 @@ export default class ProfileEdit extends Component {
 
   handleAddSocial = (e) => {
     e.preventDefault();
-    this.setState({
-      socialLinks: this.state.socialLinks.concat([this.state.addSocial]),
-      saved: false,
-      addSocial: "",
-    });
+    if (this.state.addSocial) {
+      this.setState({
+        socialLinks: this.state.socialLinks.concat([this.state.addSocial]),
+        saved: false,
+        addSocial: "",
+      });
+    }
   };
 
   handleRemoveSocial = (index) => {
