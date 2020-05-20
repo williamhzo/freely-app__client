@@ -144,7 +144,6 @@ class Login extends Component {
               />
             )}
           </div>
-        </form>
         <div className="form-login__button-group">
           {this.state.accountExists ? (
             <button className="form-login__button">Log in</button>
@@ -152,6 +151,7 @@ class Login extends Component {
             <button className="form-login__button">Create Account</button>
           )}
         </div>
+        </form>
         <div className="form-login__link">
           {this.state.accountExists && (
             <h3 onClick={this.handleClick}>

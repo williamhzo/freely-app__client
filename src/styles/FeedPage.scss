@@ -20,7 +20,8 @@
   z-index: 10;
   padding: $component-margin * 1.5; // TO BE REFACTORED
   background-color: $background-color;
-  border-bottom: lightgray 1px solid;
+  // border-bottom: lightgray 1px solid;
+  box-shadow: $box-shadow;
 
   &__link {
     padding: 10px;

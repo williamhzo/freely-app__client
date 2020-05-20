@@ -55,7 +55,6 @@ class CityAutoComplete extends Component {
   };
 
   render() {
-    console.log(this.state.results);
     return (
       <>
         <input
