@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import apiHandler from '../api/apiHandler';
-import Badges from '../components/Badges';
-import LinkIcon from '../components/LinkIcon';
-import '../styles/Display.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import apiHandler from "../api/apiHandler";
+import Badges from "../components/Badges";
+import LinkIcon from "../components/LinkIcon";
+import "../styles/Display.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
   faGlobeEurope,
   faCommentAlt,
   faUserFriends,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
+import { withUser } from "../components/Auth/withUser";
 
-export default class Profile extends Component {
+class Profile extends Component {
   state = {};
   componentDidMount() {
     apiHandler
-      .getUser('userName', this.props.match.params.username)
+      .getUser("userName", this.props.match.params.username)
       .then((apiRes) => {
         this.setState(apiRes[0]);
       });
   }
 
   render() {
-    // console.log(this.props.match.params.username);
+    console.log(this.props.context);
+    // this.props.history.push("/profile");
     return (
       <div className="display container">
         {this.state.profilePicture && (
@@ -36,7 +38,7 @@ export default class Profile extends Component {
         )}
         <h2 className="display__name">{this.state.name}</h2>
         {this.state.userCategory && (
-          <Badges data={this.state.userCategory} label={'name'} />
+          <Badges data={this.state.userCategory} label={"name"} />
         )}
         {this.state.title && (
           <div className="display__title">{this.state.title}</div>
@@ -80,7 +82,7 @@ export default class Profile extends Component {
               <span className="bulleticon">
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
               </span>
-              Based in {this.state.location || ''}
+              Based in {this.state.location || ""}
             </li>
           )}
           {this.state.preferredContact && (
@@ -94,9 +96,9 @@ export default class Profile extends Component {
         </ul>
         {this.state.userSkills && (
           <Badges
-            heading={'Skills'}
+            heading={"Skills"}
             data={this.state.userSkills}
-            label={'name'}
+            label={"name"}
             className="display__fullwidth"
           />
         )}
@@ -167,3 +169,5 @@ export default class Profile extends Component {
     );
   }
 }
+
+export default withUser(Profile);

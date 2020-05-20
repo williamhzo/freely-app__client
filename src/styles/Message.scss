@@ -1,0 +1,61 @@
+@import "/variables";
+@import "/Edit";
+
+.message {
+  &__thread {
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    min-height: 30vh;
+  }
+  &__onemessage {
+    padding: 15px 20px 15px 20px;
+    margin-top: 15px;
+    border: none;
+    min-width: 80%;
+    border-radius: 10px;
+    &.sent {
+      background: $message-sent;
+      align-self: flex-end;
+    }
+    &.received {
+      background: $message-received;
+      align-self: flex-start;
+    }
+  }
+  &__time {
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+  &__compose {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  &__textcontainer {
+    flex-grow: 1;
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid $card-border-color;
+    background: white;
+    box-shadow: 0px -1px 2px 0px inset rgba(0, 0, 0, 0.1);
+    // padding: 10px;
+    textarea {
+      width: 100%;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  &__sendmessage {
+    border: none;
+    background-color: $button-green;
+  }
+}

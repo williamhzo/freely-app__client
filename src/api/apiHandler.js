@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -18,35 +18,35 @@ export default {
 
   signup(userInfo) {
     return service
-      .post('/api/auth/signup', userInfo)
+      .post("/api/auth/signup", userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   signin(userInfo) {
     return service
-      .post('/api/auth/signin', userInfo)
+      .post("/api/auth/signin", userInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   isLoggedIn() {
     return service
-      .get('/api/auth/isLoggedIn')
+      .get("/api/auth/isLoggedIn")
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   logout() {
     return service
-      .get('/api/auth/logout')
+      .get("/api/auth/logout")
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
   getUsers() {
     return service
-      .get('/api/users')
+      .get("/api/users")
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -80,20 +80,20 @@ export default {
   },
 
   getCollabs() {
-    return service.get('/api/collabs').then((res) => res.data);
+    return service.get("/api/collabs").then((res) => res.data);
   },
 
   getCategories() {
-    return service.get('/api/categories').then((res) => res.data);
+    return service.get("/api/categories").then((res) => res.data);
   },
 
   getSkills() {
-    return service.get('/api/skills').then((res) => res.data);
+    return service.get("/api/skills").then((res) => res.data);
   },
 
   filterUsedCities() {
     return service
-      .get('/api/users')
+      .get("/api/users")
       .then((res) =>
         [...res.data]
           .filter((el) => el.bio && el.location && el.title && el.userCategory)
@@ -111,14 +111,14 @@ export default {
 
   filterUsedSkills() {
     return service
-      .get('/api/skills')
+      .get("/api/skills")
       .then((res) => res.data.filter((el) => el.currentlyInUse))
       .catch(errorHandler);
   },
 
   filterUsedCategories() {
     return service
-      .get('/api/categories')
+      .get("/api/categories")
       .then((res) => res.data.filter((el) => el.currentlyInUse))
       .catch((err) => console.log(err));
   },
@@ -126,12 +126,37 @@ export default {
   // get users that have a complete freelancer profile
   getFreelancers() {
     return service
-      .get('/api/users')
+      .get("/api/users")
       .then((res) =>
         res.data.filter(
           (el) => el.bio && el.location && el.title && el.userCategory
         )
       )
       .catch(errorHandler);
+  },
+  // Messages
+  createMessageThread(id1, id2) {
+    return service
+      .post(`/api/messages/new/${id1}/${id2}`)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+  getOneMessage(id) {
+    return service
+      .get("/api/messages/message/" + id)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+  sendOneMessage(id, message) {
+    return service
+      .post(`/api/messages/message/` + id, message)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+  getAllMessages(id) {
+    return service
+      .get(`/api/messages/user/` + id)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
   },
 };
