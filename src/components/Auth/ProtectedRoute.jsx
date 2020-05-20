@@ -8,7 +8,7 @@ const ProtectedRoute = ({ component: Component, context, ...rest }) => {
   } else if (context.isLoggedIn) {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   } else {
-    //add error message: you must be authentified to access this page
+    //add error message: you must be authenticated to access this page
     return <Redirect to="/login" />;
   }
 };

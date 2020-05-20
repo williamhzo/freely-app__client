@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+// components
 import NavBar from './components/Nav/NavBar';
-import Login from './pages/Login';
+import Backdrop from './components/Nav/Backdrop';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ProtectedEditRoute from './components/Auth/ProtectedEditRoute';
+import HamburgerMenu from './components/Nav/HamburgerMenu';
+
+// pages
 import Profile from './pages/Profile';
+import Login from './pages/Login';
 import ProfileEdit from './pages/ProfileEdit';
 import CollabEdit from './pages/CollabEdit';
 import Messages from './pages/Messages';
@@ -15,8 +20,6 @@ import CollabsFeed from './pages/CollabsFeed';
 import Collab from './pages/Collab';
 import About from './pages/About';
 import Error_404 from './pages/Error_404';
-import HamburgerMenu from './components/Nav/HamburgerMenu';
-import Backdrop from './components/Nav/Backdrop';
 
 export default class App extends Component {
   state = {
@@ -66,6 +69,7 @@ export default class App extends Component {
             <Route exact path="/login" component={Login} />
             <ProtectedEditRoute
               exact
+              // path={`/:${username}/edit`}
               path="/:username/edit"
               component={ProfileEdit}
             />
@@ -78,5 +82,3 @@ export default class App extends Component {
     );
   }
 }
-
-// export default App;
