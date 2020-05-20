@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap");
-@import "/variables";
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import '/variables';
 
 *,
 *::before,
@@ -71,7 +71,8 @@ img:not([alt]) {
 }
 
 html {
-  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  background-color: $background-color;
 }
 
 a {
@@ -92,7 +93,9 @@ ul {
 }
 
 .main {
-  margin-top: $NavBar-height;
+  padding-top: $NavBar-height;
+  background-color: $background-color;
+  height: 100vh;
 }
 
 // Getting rid of Safari's mobile 100vh bug (menu overlay)

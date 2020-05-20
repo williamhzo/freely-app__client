@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import "../styles/Display.scss";
-import "../styles/Edit.scss";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
-import { TextareaAutosize } from "@material-ui/core";
-import { objectToFormData } from "object-to-formdata";
+import React, { Component } from 'react';
+import apiHandler from '../api/apiHandler';
+import '../styles/Display.scss';
+import '../styles/Edit.scss';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { TextareaAutosize } from '@material-ui/core';
+import { objectToFormData } from 'object-to-formdata';
 
 /*
 
@@ -19,14 +19,14 @@ export default class CollabEdit extends Component {
     categoryOptions: [],
     skillOptions: [],
     saved: true,
-    title: "",
-    creator: "",
+    title: '',
+    creator: '',
     contributors: [],
     allUsers: [],
-    description: "",
+    description: '',
     skillsNeeded: [],
     categoryNeeded: [],
-    image: "",
+    image: '',
     open: false,
   };
   componentDidMount() {
@@ -46,7 +46,7 @@ export default class CollabEdit extends Component {
   handleFormChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ saved: false });
-    if (e.target.name == "image") {
+    if (e.target.name === 'image') {
       const reader = new FileReader();
       reader.onload = () => {
         this.setState({ temporaryPicture: reader.result });
@@ -106,9 +106,9 @@ export default class CollabEdit extends Component {
             className="display__collabimagebox"
             style={{
               backgroundImage:
-                "url(" +
+                'url(' +
                 (this.state.temporaryPicture || this.state.image) +
-                ")",
+                ')',
             }}
           >
             <input
@@ -128,11 +128,11 @@ export default class CollabEdit extends Component {
           <button
             className={
               this.state.saved
-                ? "edit__button collabbutton saved"
-                : "edit__button collabbutton unsaved"
+                ? 'edit__button collabbutton saved'
+                : 'edit__button collabbutton unsaved'
             }
           >
-            {this.state.saved ? "Saved" : "Save"}
+            {this.state.saved ? 'Saved' : 'Save'}
           </button>
           <h2 className="display__collabtitle">
             <TextareaAutosize
@@ -210,7 +210,7 @@ export default class CollabEdit extends Component {
               Created by {this.state.creator.name}
             </li>
             <li className="display__bullet">
-              Preferred method of contact for {this.state.creator.name}:{" "}
+              Preferred method of contact for {this.state.creator.name}:{' '}
               {this.state.creator.preferredContact}
             </li>
           </ul>

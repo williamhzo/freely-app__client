@@ -31,7 +31,11 @@ const NavBar = (props) => {
           </NavLink>
           <ul className="Nav__list">
             <li className="Nav__item">
-              <NavLink className="Nav__link" exact to="/collabs-create">
+              <NavLink
+                className="Nav__link"
+                exact
+                to={context.user ? '/collabs-create' : '/login'}
+              >
                 <span className="Nav__plus-icon">+</span>
               </NavLink>
             </li>
@@ -45,7 +49,7 @@ const NavBar = (props) => {
                   style={{
                     backgroundImage: context.user
                       ? `url(${context.user.profilePicture})`
-                      : 'url("media/avatar.png")',
+                      : 'url("media/avatar2.png")',
                   }}
                 ></div>
               </NavLink>

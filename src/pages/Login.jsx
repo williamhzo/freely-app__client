@@ -62,9 +62,9 @@ class Login extends Component {
 
   render() {
     return (
-      <>
+      <div className='login-container'>
         {this.state.accountExists && (
-          <h2 className="form__title">
+          <h2 className="form-login__title">
             Welcome back!{' '}
             <span role="img" aria-label="waving-emoji">
               👋
@@ -72,91 +72,97 @@ class Login extends Component {
           </h2>
         )}
         {!this.state.accountExists && (
-          <h2 className="form__title">
-            Hey! Create an account to set up your freelancer profile <br></br>
-            <span role="img" aria-label="arrow-emoji">
-              ⬇️
-            </span>
+          <h2 className="form-login__title">
+            Create an account to set up your freelancer profile
           </h2>
         )}
         <form
-          className="form"
+          className="form-login"
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         >
           {!this.state.accountExists && (
             <>
-              <label className="form__label" htmlFor="name">
-                Name
-              </label>
-              <br></br>
-              <input
-                className="form__input"
-                type="text"
-                id="name"
-                name="name"
-              />
-              <label className="form__label" htmlFor="userName">
-                Username
-              </label>
-              <br></br>
-              <input
-                className="form__input"
-                type="text"
-                id="userName"
-                name="userName"
-              />
-              <br></br>
+              <div className="form-login__group">
+                <label className="form-login__label" htmlFor="name">
+                  Name
+                </label>
+                <br></br>
+                <input
+                  className="form-login__input"
+                  type="text"
+                  id="name"
+                  name="name"
+                />
+              </div>
+              <div className="form-login__group">
+                <label className="form-login__label" htmlFor="userName">
+                  Username
+                </label>
+                <br></br>
+                <input
+                  className="form-login__input"
+                  type="text"
+                  id="userName"
+                  name="userName"
+                />
+              </div>
             </>
           )}
-          <label className="form__label" htmlFor="email">
-            Email
-          </label>
-          <br></br>
-          <input className="form__input" type="email" id="email" name="email" />
-          <br></br>
-          <label className="form__label" htmlFor="password">
-            Password
-          </label>
-          <br></br>
-          {!this.state.accountExists && (
+          <div className="form-login__group">
+            <label className="form-login__label" htmlFor="email">
+              Email
+            </label>
+            <br></br>
             <input
-              className="form__input"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="5+ characters"
+              className="form-login__input"
+              type="email"
+              id="email"
+              name="email"
             />
-          )}
-          {this.state.accountExists && (
-            <input
-              className="form__input"
-              type="password"
-              id="password"
-              name="password"
-            />
-          )}
-
-          {this.state.accountExists ? (
-            <button className="form__button">Log in</button>
-          ) : (
-            <button className="form__button">Create Account</button>
-          )}
+          </div>
+          <div className="form-login__group">
+            <label className="form-login__label" htmlFor="password">
+              Password
+            </label>
+            <br></br>
+            {!this.state.accountExists && (
+              <input
+                className="form-login__input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="5+ characters"
+              />
+            )}
+            {this.state.accountExists && (
+              <input
+                className="form-login__input"
+                type="password"
+                id="password"
+                name="password"
+              />
+            )}
+          </div>
         </form>
-        {this.state.accountExists && (
-          <h3 className="form__link" onClick={this.handleClick}>
-            <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>
-          </h3>
-        )}
-        {!this.state.accountExists && (
-          <h3 className="form__link" onClick={this.handleClick}>
-            I already have an account{' '}
-            <span role="img" aria-label="rocket-emoji">
-              🚀
-            </span>
-          </h3>
-        )}
-      </>
+        <div className="form-login__button-group">
+          {this.state.accountExists ? (
+            <button className="form-login__button">Log in</button>
+          ) : (
+            <button className="form-login__button">Create Account</button>
+          )}
+        </div>
+        <div className="form-login__link">
+          {this.state.accountExists && (
+            <h3 onClick={this.handleClick}>
+              <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>
+            </h3>
+          )}
+          {!this.state.accountExists && (
+            <h3 onClick={this.handleClick}>I already have an account </h3>
+          )}
+        </div>
+      </div>
     );
   }
 }
