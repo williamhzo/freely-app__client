@@ -45,12 +45,13 @@ class Profile extends Component {
         )}
         {this.state.socialLinks && (
           <div className="display__sociallinks">
-            {this.state.socialLinks.map((link) => {
+            {this.state.socialLinks.map((link, index) => {
               return (
                 <a
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  key={index}
                   className="display__sociallink"
                 >
                   <LinkIcon link={link} />
@@ -111,9 +112,9 @@ class Profile extends Component {
           <>
             <h2 className="display__heading">Portfolio</h2>
             <div className="display__portfolio">
-              {this.state.portfolio.map((portfolioItem) => {
+              {this.state.portfolio.map((portfolioItem, index) => {
                 return (
-                  <div className="display__portfolioitem">
+                  <div key={index} className="display__portfolioitem">
                     <img
                       className="display__portfolioimage"
                       src={portfolioItem.image}
@@ -147,9 +148,9 @@ class Profile extends Component {
         {this.state.userCollab && (
           <div className="display__collabs">
             <h2 className="display__heading">Collabs</h2>
-            {this.state.userCollab.map((collab) => {
+            {this.state.userCollab.map((collab, index) => {
               return (
-                <div className="display__collabcard">
+                <div key={index} className="display__collabcard">
                   <img
                     src={collab.image}
                     alt=""

@@ -1,6 +1,6 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import { withUser } from "../components/Auth/withUser";
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import { withUser } from './withUser';
 
 const ProtectedRoute = ({ component: Component, context, ...rest }) => {
   if (context.isLoading) {
@@ -8,7 +8,7 @@ const ProtectedRoute = ({ component: Component, context, ...rest }) => {
   } else if (context.isLoggedIn) {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   } else {
-    return <Redirect to="/signin" />;
+    return <Redirect to="/login" />;
   }
 };
 

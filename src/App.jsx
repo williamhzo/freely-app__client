@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
+<<<<<<< HEAD
 import NavBar from "./components/Nav/NavBar";
 import Login from "./pages/Login";
 // import ProtectedRoute from './components/ProtectedRoute';
@@ -15,6 +16,21 @@ import Messages from "./pages/Messages";
 import Message from "./pages/Message";
 import HamburgerMenu from "./components/Nav/HamburgerMenu";
 import Backdrop from "./components/Nav/Backdrop";
+=======
+import NavBar from './components/Nav/NavBar';
+import Login from './pages/Login';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
+import CollabEdit from './pages/CollabEdit';
+import FreelancersFeed from './pages/FreelancersFeed';
+import CollabsFeed from './pages/CollabsFeed';
+import Collab from './pages/Collab';
+import About from './pages/About';
+import Error_404 from './pages/Error_404';
+import HamburgerMenu from './components/Nav/HamburgerMenu';
+import Backdrop from './components/Nav/Backdrop';
+>>>>>>> master
 
 export default class App extends Component {
   state = {
@@ -38,6 +54,7 @@ export default class App extends Component {
         <NavBar
           toggled={this.state.hamburgerMenuOpen}
           hamburgerClickHandler={this.hamburgerMenuToggleHandler}
+          click={this.backdropClickHandler}
         />
         {this.state.hamburgerMenuOpen ? (
           <Backdrop click={this.backdropClickHandler} />
@@ -51,6 +68,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={FreelancersFeed} />
             <Route exact path="/collabs" component={CollabsFeed} />
+<<<<<<< HEAD
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
@@ -59,8 +77,24 @@ export default class App extends Component {
             <Route exact path="/collab/:id/edit" component={CollabEdit} />
             <Route exact path="/collab/:id" component={Collab} />
             <Route exact path="/:username/edit" component={ProfileEdit} />
+=======
+            {/* <Route exact path="/profile" component={Profile} /> */}
+            <ProtectedRoute
+              exact
+              path="/collab/:id/edit"
+              component={CollabEdit}
+            />
+            <Route exact path="/collab/:id" component={Collab} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/login" component={Login} />
+            <ProtectedRoute
+              exact
+              path="/:username/edit"
+              component={ProfileEdit}
+            />
+            <Route exact path="/error_404" component={Error_404} />
+>>>>>>> master
             <Route exact path="/:username" component={Profile} />
-            {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
           </Switch>
         </main>
       </div>
