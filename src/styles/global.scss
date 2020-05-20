@@ -98,6 +98,29 @@ ul {
   height: 100vh;
 }
 
+.error-page {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: $component-margin;
+  background-color: white;
+  border-radius: 15px;
+  padding: $component-margin;
+  &__title {
+    margin-top: $component-margin;
+    text-align: center;
+    span {
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  }
+  &__image {
+    height: 70%;
+  }
+}
+
 // Getting rid of Safari's mobile 100vh bug (menu overlay)
 // body {
 //   min-height: 100vh;

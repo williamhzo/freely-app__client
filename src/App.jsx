@@ -11,6 +11,7 @@ import FreelancersFeed from './pages/FreelancersFeed';
 import CollabsFeed from './pages/CollabsFeed';
 import Collab from './pages/Collab';
 import About from './pages/About';
+import Error_404 from './pages/Error_404';
 import HamburgerMenu from './components/Nav/HamburgerMenu';
 import Backdrop from './components/Nav/Backdrop';
 
@@ -64,6 +65,7 @@ export default class App extends Component {
               path="/:username/edit"
               component={ProfileEdit}
             />
+            <Route exact path="/error_404" component={Error_404} />
             <Route exact path="/:username" component={Profile} />
           </Switch>
         </main>
