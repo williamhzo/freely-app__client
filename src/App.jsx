@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import NavBar from './components/Nav/NavBar';
 import Login from './pages/Login';
-// import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import CollabEdit from './pages/CollabEdit';
@@ -50,14 +50,21 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={FreelancersFeed} />
             <Route exact path="/collabs" component={CollabsFeed} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/collab/:id/edit" component={CollabEdit} />
+            {/* <Route exact path="/profile" component={Profile} /> */}
+            <ProtectedRoute
+              exact
+              path="/collab/:id/edit"
+              component={CollabEdit}
+            />
             <Route exact path="/collab/:id" component={Collab} />
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/:username/edit" component={ProfileEdit} />
+            <ProtectedRoute
+              exact
+              path="/:username/edit"
+              component={ProfileEdit}
+            />
             <Route exact path="/:username" component={Profile} />
-            {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
           </Switch>
         </main>
       </div>
