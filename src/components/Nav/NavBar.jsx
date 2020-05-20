@@ -26,7 +26,7 @@ const NavBar = (props) => {
     <UserContext.Consumer>
       {(context) => (
         <nav className="Nav">
-          <NavLink className="Nav__link" exact onClick={props.click} to="/">
+          <NavLink  exact onClick={props.click} to="/">
             <h3 className="Nav__logo">Freely</h3>
           </NavLink>
           <ul className="Nav__list">

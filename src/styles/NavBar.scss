@@ -172,6 +172,7 @@
 
   .Nav__link {
     position: relative;
+    z-index: 100;
   }
 
   .Nav__link::after {
