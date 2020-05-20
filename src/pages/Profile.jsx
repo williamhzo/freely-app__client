@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import Badges from "../components/Badges";
-import LinkIcon from "../components/LinkIcon";
-import "../styles/Display.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import apiHandler from '../api/apiHandler';
+import Badges from '../components/Badges';
+import LinkIcon from '../components/LinkIcon';
+import '../styles/Display.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMapMarkerAlt,
   faGlobeEurope,
   faCommentAlt,
   faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 export default class Profile extends Component {
   state = {};
   componentDidMount() {
     apiHandler
-      .getUser("userName", this.props.match.params.username)
+      .getUser('userName', this.props.match.params.username)
       .then((apiRes) => {
         this.setState(apiRes[0]);
       });
@@ -36,16 +36,22 @@ export default class Profile extends Component {
         )}
         <h2 className="display__name">{this.state.name}</h2>
         {this.state.userCategory && (
-          <Badges data={this.state.userCategory} label={"name"} />
+          <Badges data={this.state.userCategory} label={'name'} />
         )}
         {this.state.title && (
           <div className="display__title">{this.state.title}</div>
         )}
         {this.state.socialLinks && (
           <div className="display__sociallinks">
-            {this.state.socialLinks.map((link) => {
+            {this.state.socialLinks.map((link, index) => {
               return (
-                <a href={link} target="_blank" rel="noopener noreferrer" className="display__sociallink">
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={index}
+                  className="display__sociallink"
+                >
                   <LinkIcon link={link} />
                 </a>
               );
@@ -74,7 +80,7 @@ export default class Profile extends Component {
               <span className="bulleticon">
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
               </span>
-              Based in {this.state.location || ""}
+              Based in {this.state.location || ''}
             </li>
           )}
           {this.state.preferredContact && (
@@ -88,9 +94,9 @@ export default class Profile extends Component {
         </ul>
         {this.state.userSkills && (
           <Badges
-            heading={"Skills"}
+            heading={'Skills'}
             data={this.state.userSkills}
-            label={"name"}
+            label={'name'}
             className="display__fullwidth"
           />
         )}
@@ -104,9 +110,9 @@ export default class Profile extends Component {
           <>
             <h2 className="display__heading">Portfolio</h2>
             <div className="display__portfolio">
-              {this.state.portfolio.map((portfolioItem) => {
+              {this.state.portfolio.map((portfolioItem, index) => {
                 return (
-                  <div className="display__portfolioitem">
+                  <div key={index} className="display__portfolioitem">
                     <img
                       className="display__portfolioimage"
                       src={portfolioItem.image}
@@ -121,7 +127,11 @@ export default class Profile extends Component {
                       </div>
                       {portfolioItem.link && (
                         <div className="display__portfoliolink">
-                          <a target="_blank" rel="noopener noreferrer" href={portfolioItem.link}>
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={portfolioItem.link}
+                          >
                             Link »
                           </a>
                         </div>
@@ -136,9 +146,9 @@ export default class Profile extends Component {
         {this.state.userCollab && (
           <div className="display__collabs">
             <h2 className="display__heading">Collabs</h2>
-            {this.state.userCollab.map((collab) => {
+            {this.state.userCollab.map((collab, index) => {
               return (
-                <div className="display__collabcard">
+                <div key={index} className="display__collabcard">
                   <img
                     src={collab.image}
                     alt=""
