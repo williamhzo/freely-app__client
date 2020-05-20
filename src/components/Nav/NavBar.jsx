@@ -53,14 +53,15 @@ const NavBar = (props) => {
                       : 'url("media/avatar2.png")',
                   }}
                 ></div> */}
-                {context.user && (
+                {/* {context.user && (
                   <div
                     className="Nav__avatar"
                     style={{
                       backgroundImage: `url(${context.user.profilePicture})`,
                     }}
                   ></div>
-                )}
+                )} */}
+                {context.user && <div>{context.user.name}</div>}
                 {!context.user && <div>Profile</div>}
               </NavLink>
             </li>
