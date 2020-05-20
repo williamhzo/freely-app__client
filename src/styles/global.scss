@@ -119,6 +119,10 @@ ul {
   &__image {
     height: 70%;
   }
+  &__body--icon {
+    font-size: 0.8rem;
+    margin-right: 8px;
+  }
   &__body h3 {
     margin-top: $component-margin;
     text-align: center;
