@@ -43,7 +43,7 @@ const NavBar = (props) => {
             <li className="Nav__item">
               <NavLink
                 className="Nav__link"
-                to={context.user ? '/profile' : '/login'}
+                to={context.user ? `/${context.user.userName}` : '/login'}
               >
                 {/* <div
                   className="Nav__avatar"
