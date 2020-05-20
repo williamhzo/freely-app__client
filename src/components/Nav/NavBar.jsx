@@ -26,7 +26,7 @@ const NavBar = (props) => {
     <UserContext.Consumer>
       {(context) => (
         <nav className="Nav">
-          <NavLink className="Nav__link" exact to="/">
+          <NavLink className="Nav__link" exact onClick={props.click} to="/">
             <h3 className="Nav__logo">Freely</h3>
           </NavLink>
           <ul className="Nav__list">
@@ -34,6 +34,7 @@ const NavBar = (props) => {
               <NavLink
                 className="Nav__link"
                 exact
+                onClick={props.click}
                 to={context.user ? '/collabs-create' : '/login'}
               >
                 <span className="Nav__plus-icon">+</span>
@@ -43,6 +44,7 @@ const NavBar = (props) => {
             <li className="Nav__item">
               <NavLink
                 className="Nav__link"
+                onClick={props.click}
                 to={context.user ? `/${context.user.userName}` : '/login'}
               >
                 {/* <div
@@ -72,6 +74,13 @@ const NavBar = (props) => {
                 // context={context}
               />
             </li>
+            {context.user && (
+              <li className="Nav__item hamburger__item">
+                <NavLink className="Nav__link" exact to="/messages">
+                  Messages
+                </NavLink>
+              </li>
+            )}
             <li className="Nav__item hamburger__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
                 About

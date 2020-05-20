@@ -24,6 +24,17 @@ const HamburgerMenu = (props) => {
       {(context) => (
         <nav className={hamburgerMenuClass.join(' ')}>
           <ul className="hamburger-menu__list">
+            {context.user && (
+              <li className="hamburger-menu__item">
+                <Link
+                  className="hamburger-menu__link"
+                  onClick={props.click}
+                  to="/messages"
+                >
+                  Messages
+                </Link>
+              </li>
+            )}
             {!context.user && (
               <li className="hamburger-menu__item">
                 <Link

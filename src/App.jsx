@@ -36,6 +36,7 @@ export default class App extends Component {
         <NavBar
           toggled={this.state.hamburgerMenuOpen}
           hamburgerClickHandler={this.hamburgerMenuToggleHandler}
+          click={this.backdropClickHandler}
         />
         {this.state.hamburgerMenuOpen ? (
           <Backdrop click={this.backdropClickHandler} />
