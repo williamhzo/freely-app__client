@@ -24,7 +24,7 @@
   box-shadow: $box-shadow;
 
   &__link {
-    padding: 10px;
+    padding: 10px 32px;
   }
 
   &__item {
@@ -48,6 +48,11 @@
   min-height: 150px;
   overflow: hidden;
   background-color: $white-background-color;
+  transition: transform 0.3s ease-out;
+
+  &:hover {
+    transform: scale(101%);
+  }
 
   &__aside {
     min-width: 33%;
@@ -95,10 +100,6 @@
 
     &:focus {
       outline: none;
-    }
-
-    &:hover {
-      transform: scale(1.05);
     }
   }
 

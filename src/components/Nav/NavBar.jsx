@@ -101,7 +101,7 @@ const NavBar = (props) => {
             {!context.user && (
               <li className="Nav__item hamburger__item primary-btn">
                 <NavLink className="Nav__link" exact to="/login">
-                  Join Us
+                  Join
                 </NavLink>
               </li>
             )}
