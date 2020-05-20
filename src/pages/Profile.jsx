@@ -10,8 +10,9 @@ import {
   faCommentAlt,
   faUserFriends,
 } from "@fortawesome/free-solid-svg-icons";
+import { withUser } from "../components/Auth/withUser";
 
-export default class Profile extends Component {
+class Profile extends Component {
   state = {};
   componentDidMount() {
     apiHandler
@@ -22,7 +23,8 @@ export default class Profile extends Component {
   }
 
   render() {
-    // console.log(this.props.match.params.username);
+    // console.log(this.props.context);
+    // this.props.history.push("/profile");
     return (
       <div className="display container">
         {this.state.profilePicture && (
@@ -157,3 +159,5 @@ export default class Profile extends Component {
     );
   }
 }
+
+export default withUser(Profile);
