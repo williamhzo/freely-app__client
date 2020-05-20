@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Error_404 = () => {
   return (
@@ -16,7 +18,9 @@ const Error_404 = () => {
       <div className="error-page__body">
         <p>wtf did you type in the URL?!</p>
         <Link to="/">
-          <h3> Back home </h3>
+          <h3>
+            <FontAwesomeIcon icon={faChevronLeft} className='error-page__body--icon' /> Back home
+          </h3>
         </Link>
       </div>
     </div>
