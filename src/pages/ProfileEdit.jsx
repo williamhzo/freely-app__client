@@ -30,7 +30,7 @@ export default class ProfileEdit extends Component {
     saved: true,
     usernameAvailable: true,
     newPortfolio: {},
-    error: "Please don't be a dummy.",
+    error: undefined,
   };
   componentDidMount() {
     apiHandler
