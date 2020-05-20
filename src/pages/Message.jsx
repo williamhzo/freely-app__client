@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { TextareaAutosize } from "@material-ui/core";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
+import OneMessage from "../components/Messages/OneMessage";
+import "../styles/Message.scss";
 
 class Message extends Component {
   state = {
@@ -27,38 +29,44 @@ class Message extends Component {
     apiHandler
       .getOneMessage(this.props.match.params.id)
       .then((apiRes) => this.setState({ messages: apiRes.messages }));
+    apiHandler.isLoggedIn().then((apiRes) => {
+      this.setState({ user: apiRes });
+    });
   };
   render() {
     return (
-      <div className="message">
-        <a href="/messages">Back</a>
+      <div className="message container">
+        <a className="message__back" href="/messages">
+          « Back
+        </a>
         <div className="message__thread">
           {this.state.messages &&
-            this.state.messages.map((message) => {
-              return (
-                <div className="message__onemessage">
-                  <div className="message__time">{message.time}</div>
-                  <div className="message__content">{message.content}</div>
-                </div>
-              );
-            })}
+            this.state.user &&
+            this.state.messages.map(
+              (message, index) =>
+                index > 0 && (
+                  <OneMessage message={message} user={this.state.user} />
+                )
+            )}
         </div>
-        <TextareaAutosize
-          placeholder={"New Message"}
-          value={this.state.newMessage}
-          onChange={(e) => {
-            console.log(this.state);
-            this.setState({ newMessage: e.target.value });
-          }}
-        />
-        <button onClick={this.sendMessage}>Send</button>
-        <p>Message</p>
-        <p>Message</p>
-        <p>Message</p>
-        <p>Message</p>
-        <p>Message</p>
-        <p>Message</p>
-        <p>Message</p>
+        <div className="message__compose">
+          <div className="message__textcontainer">
+            <TextareaAutosize
+              placeholder={"New Message"}
+              value={this.state.newMessage}
+              onChange={(e) => {
+                console.log(this.state);
+                this.setState({ newMessage: e.target.value });
+              }}
+            />
+          </div>
+          <button
+            className="edit__button message__sendmessage"
+            onClick={this.sendMessage}
+          >
+            Send
+          </button>
+        </div>
       </div>
     );
   }

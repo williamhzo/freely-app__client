@@ -2,22 +2,33 @@ import React, { Component } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { withUser } from "../components/Auth/withUser";
+import MessageCard from "../components/Messages/MessageCard";
 import apiHandler from "../api/apiHandler";
+import "../styles/Messages.scss";
 
 class Messages extends Component {
   state = {
     newMessage: undefined,
     messages: [],
     users: [],
+    currentUser: undefined,
   };
 
   componentDidMount() {
+    apiHandler.isLoggedIn().then((apiRes) => {
+      this.setState({ currentUser: apiRes }, () => {
+        apiHandler
+          .getAllMessages(this.state.currentUser._id)
+          .then((apiRes) => {
+            console.log(apiRes);
+            this.setState({ messages: apiRes });
+          })
+          .catch((err) => console.log(err));
+      });
+    });
     apiHandler.getUsers().then((apiRes) => {
       this.setState({ users: apiRes });
     });
-    apiHandler
-      .getAllMessages(this.props.context.user._id)
-      .then((apiRes) => console.log(apiRes));
   }
 
   handleUserChange = (e, value) => {
@@ -25,11 +36,19 @@ class Messages extends Component {
   };
 
   handleCreate = () => {
-    console.log(this.props.context.user);
-    console.log(this.state.newMessage);
+    console.log(this.state.newMessage._id);
+    this.state.messages.forEach((message) => {
+      if (
+        message.recipients[0]._id == this.state.newMessage._id ||
+        message.recipients[1]._id == this.state.newMessage._id
+      ) {
+        this.props.history.push("/messages/" + message._id);
+        return;
+      }
+    });
     apiHandler
       .createMessageThread(
-        this.props.context.user._id,
+        this.state.currentUser._id,
         this.state.newMessage._id
       )
       .then((apiRes) => {
@@ -40,9 +59,9 @@ class Messages extends Component {
 
   render() {
     return (
-      <div className="messages">
+      <div className="messages container">
         <div className="messages__new">
-          To:
+          <p className="messages__to">To:</p>
           <Autocomplete
             onChange={this.handleUserChange}
             id="tags-outlined"
@@ -52,9 +71,29 @@ class Messages extends Component {
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
           />
+          <button
+            className="messages__createbutton edit__button"
+            onClick={this.handleCreate}
+          >
+            New
+          </button>
         </div>
-        <button onClick={this.handleCreate}>Create</button>
-        <div className="messages__list"></div>
+        <div className="messages__list">
+          {this.state.messages ? (
+            this.state.messages.map((message) => {
+              if (message.messages.length > 1) {
+                return (
+                  <MessageCard
+                    message={message}
+                    user={this.state.currentUser}
+                  />
+                );
+              }
+            })
+          ) : (
+            <p>No messages to display</p>
+          )}
+        </div>
       </div>
     );
   }

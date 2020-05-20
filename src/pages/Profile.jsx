@@ -23,7 +23,7 @@ class Profile extends Component {
   }
 
   render() {
-    // console.log(this.props.context);
+    console.log(this.props.context);
     // this.props.history.push("/profile");
     return (
       <div className="display container">
@@ -47,7 +47,12 @@ class Profile extends Component {
           <div className="display__sociallinks">
             {this.state.socialLinks.map((link) => {
               return (
-                <a href={link} target="_blank" rel="noopener noreferrer" className="display__sociallink">
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="display__sociallink"
+                >
                   <LinkIcon link={link} />
                 </a>
               );
@@ -123,7 +128,11 @@ class Profile extends Component {
                       </div>
                       {portfolioItem.link && (
                         <div className="display__portfoliolink">
-                          <a target="_blank" rel="noopener noreferrer" href={portfolioItem.link}>
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={portfolioItem.link}
+                          >
                             Link »
                           </a>
                         </div>

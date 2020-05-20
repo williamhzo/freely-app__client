@@ -1,3 +1,5 @@
+@import "/variables";
+
 .input--hidden {
   display: none;
 }
@@ -168,11 +170,15 @@
   }
 }
 
+.display .edit__button {
+  position: absolute;
+}
+
 .edit__button {
   background: unset;
-  background: #007bff;
+  background: $button-blue;
   color: white;
-  position: absolute;
+  // position: absolute;
   text-transform: uppercase;
   font-size: 0.9em;
   letter-spacing: 0.5px;
@@ -188,10 +194,10 @@
     outline: none;
   }
   &.saved {
-    background: #007bff;
+    background: $button-blue;
   }
   &.unsaved {
-    background: #28a745;
+    background: $button-green;
     cursor: pointer;
     &:hover {
       margin-top: -1px;
@@ -207,7 +213,7 @@
     }
   }
   &.invalid {
-    background: orange;
+    background: $button-orange;
   }
 }
 

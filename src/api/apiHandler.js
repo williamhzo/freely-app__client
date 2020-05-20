@@ -155,10 +155,8 @@ export default {
   },
   getAllMessages(id) {
     return service
-      .post(`/api/messages/user/` + id)
+      .get(`/api/messages/user/` + id)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   },
 };
-
-// /user/id
