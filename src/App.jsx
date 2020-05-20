@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import NavBar from './components/Nav/NavBar';
 import Login from './pages/Login';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import ProtectedEditRoute from './components/Auth/ProtectedEditRoute';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import CollabEdit from './pages/CollabEdit';
@@ -63,14 +64,14 @@ export default class App extends Component {
             <Route exact path="/collab/:id" component={Collab} />
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
-            <ProtectedRoute
+            <ProtectedEditRoute
               exact
               path="/:username/edit"
               component={ProfileEdit}
             />
-            <Route exact path="/:username" component={Profile} />
-            {/* if no username */}
             <Route exact path="/error_404" component={Error_404} />
+            {/* if no username */}
+            <Route exact path="/:username" component={Profile} />
           </Switch>
         </main>
       </div>
