@@ -9,8 +9,9 @@ import {
   faPenFancy,
   faCommentAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { withUser } from "../components/Auth/withUser";
 
-export default class CollabEdit extends Component {
+class Collab extends Component {
   state = {
     categoryOptions: [],
     skillOptions: [],
@@ -25,39 +26,34 @@ export default class CollabEdit extends Component {
     open: false,
   };
   componentDidMount() {
-    console.log(this.props.match.params.id);
     apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
       this.setState(apiRes);
     });
   }
 
   render() {
-    // console.log(this.props.match.params.username);
     return (
-      <div
-        onChange={this.handleFormChange}
-        onSubmit={this.handleFormSubmit}
-        className="display--collab"
-      >
+      <div className="display--collab">
         {this.state.image && (
           <div
             className="display__collabimagebox"
             style={{ backgroundImage: "url(" + this.state.image + ")" }}
-          >
-            {/* <img className="display__picture" src={this.state.image} alt="" /> */}
-          </div>
+          ></div>
         )}
         <div className="container display display__collabbody">
-          <button
-            className={"edit__button collabbutton"}
-            onClick={() => {
-              this.props.history.push(
-                "/collab/" + this.props.match.params.id + "/edit"
-              );
-            }}
-          >
-            Edit
-          </button>
+          {this.props.context.user &&
+            this.props.context.user._id === this.state.creator._id && (
+              <button
+                className={"edit__button collabbutton"}
+                onClick={() => {
+                  this.props.history.push(
+                    "/collab/" + this.props.match.params.id + "/edit"
+                  );
+                }}
+              >
+                Edit
+              </button>
+            )}
           <h2 className="display__collabtitle">{this.state.title}</h2>
           <h3 className="display__heading">Description</h3>
           <div className="display__description">{this.state.description}</div>
@@ -111,3 +107,5 @@ export default class CollabEdit extends Component {
     );
   }
 }
+
+export default withUser(Collab);

@@ -21,12 +21,28 @@ class Profile extends Component {
         this.setState(apiRes[0]);
       });
   }
-
+  parselink(link) {
+    let regex = /^http/;
+    if (!link.match(regex)) {
+      return "http://" + link;
+    }
+  }
   render() {
     console.log(this.props.context);
     // this.props.history.push("/profile");
     return (
       <div className="display container">
+        {this.props.context.user &&
+          this.props.context.user._id === this.state._id && (
+            <button
+              className={"edit__button collabbutton"}
+              onClick={() => {
+                this.props.history.push("/" + this.state.userName + "/edit");
+              }}
+            >
+              Edit
+            </button>
+          )}
         {this.state.profilePicture && (
           <div className="display__avatarbox">
             <img
@@ -48,7 +64,7 @@ class Profile extends Component {
             {this.state.socialLinks.map((link, index) => {
               return (
                 <a
-                  href={link}
+                  href={this.parselink(link)}
                   target="_blank"
                   rel="noopener noreferrer"
                   key={index}
@@ -132,7 +148,7 @@ class Profile extends Component {
                           <a
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={portfolioItem.link}
+                            href={this.parselink(portfolioItem.link)}
                           >
                             Link »
                           </a>

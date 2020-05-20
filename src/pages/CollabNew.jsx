@@ -9,14 +9,7 @@ import { objectToFormData } from "object-to-formdata";
 import Error from "../components/Error";
 import { withUser } from "../components/Auth/withUser";
 
-/*
-
-To Do:
-- Remove creator from list of contributors
-
-*/
-
-class CollabEdit extends Component {
+class CollabNew extends Component {
   state = {
     categoryOptions: [],
     skillOptions: [],
@@ -32,11 +25,7 @@ class CollabEdit extends Component {
     open: false,
     error: undefined,
   };
-
   componentDidMount() {
-    apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
-      this.setState(apiRes);
-    });
     apiHandler.getCategories().then((apiRes) => {
       this.setState({ categoryOptions: apiRes });
     });
@@ -69,14 +58,15 @@ class CollabEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.title) {
-      this.setState({ error: "Please enter a title" });
+      this.setState({ error: "Please enter a title." });
       return;
     }
     if (!this.state.description) {
-      this.setState({ error: "Please enter a description" });
+      this.setState({ error: "Please enter a description." });
       return;
     }
     let collab = { ...this.state };
+    collab.creator = this.props.context.user._id;
     delete collab.saved;
     delete collab.skillOptions;
     delete collab.categoryOptions;
@@ -93,7 +83,9 @@ class CollabEdit extends Component {
       collab.categoryNeeded = JSON.stringify(collab.categoryNeeded);
     }
     const formData = objectToFormData(collab);
-    apiHandler.patchCollab(this.state._id, formData).then((apiRes) => {
+    apiHandler.postCollab(formData).then((apiRes) => {
+      // console.log(apiRes);
+      this.props.history.push("/collab/" + apiRes._id);
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
@@ -122,7 +114,8 @@ class CollabEdit extends Component {
               style={{
                 backgroundImage:
                   "url(" +
-                  (this.state.temporaryPicture || this.state.image) +
+                  (this.state.temporaryPicture ||
+                    "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9") +
                   ")",
               }}
             >
@@ -132,11 +125,6 @@ class CollabEdit extends Component {
                 id="image"
                 className="input--hidden"
               />
-              {/* <img
-              className="display__picture"
-              src={this.state.temporaryPicture || this.state.image}
-              alt=""
-            /> */}
             </div>
           </label>
           <div className="container display display__collabbody">
@@ -222,34 +210,15 @@ class CollabEdit extends Component {
                 </select>
               </li>
               <li className="display__bullet">
-                Created by {this.state.creator.name}
-              </li>
-              <li className="display__bullet">
-                Preferred method of contact for {this.state.creator.name}:{" "}
-                {this.state.creator.preferredContact}
+                Preferred method of contact:{" "}
+                <input
+                  type="text"
+                  name="preferredContact"
+                  id="preferredContact"
+                  value={this.state.preferredContact}
+                />
               </li>
             </ul>
-
-            {this.state.userCollab && (
-              <div className="display__collabs">
-                <h2 className="display__heading">Collabs</h2>
-                {this.state.userCollab.map((collab) => {
-                  return (
-                    <div className="display__collab">
-                      <img
-                        src={collab.image}
-                        alt=""
-                        className="display__collabimage"
-                      />
-                      <h3 className="display__collabtitle">{collab.title}</h3>
-                      <p className="display__collabdescription">
-                        {collab.description}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
           </div>
         </form>
         {!!this.state.error && (
@@ -260,4 +229,4 @@ class CollabEdit extends Component {
   }
 }
 
-export default withUser(CollabEdit);
+export default withUser(CollabNew);

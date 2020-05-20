@@ -9,6 +9,8 @@ class Message extends Component {
   state = {
     messages: [],
     newMessage: [],
+    correspondent: undefined,
+    recipients: undefined,
   };
   sendMessage = () => {
     const message = {
@@ -20,34 +22,70 @@ class Message extends Component {
     apiHandler
       .sendOneMessage(this.props.match.params.id, message)
       .then((apiRes) =>
-        this.setState({ messages: apiRes.messages, newMessage: undefined })
+        this.setState({ messages: apiRes.messages, newMessage: "" })
       )
       .catch((err) => console.log(err));
   };
-
   componentDidMount = () => {
-    apiHandler
-      .getOneMessage(this.props.match.params.id)
-      .then((apiRes) => this.setState({ messages: apiRes.messages }));
-    apiHandler.isLoggedIn().then((apiRes) => {
-      this.setState({ user: apiRes });
-    });
+    apiHandler.getOneMessage(this.props.match.params.id).then((apiRes) =>
+      this.setState(
+        {
+          messages: apiRes.messages,
+          recipients: apiRes.recipients,
+        },
+        () => {
+          apiHandler.isLoggedIn().then((apiRes) => {
+            this.setState({ user: apiRes }, () => {
+              if (this.state.recipients && this.state.user) {
+                this.state.recipients[0]._id === this.state.user._id
+                  ? this.setState({ recipient: this.state.recipients[1] })
+                  : this.setState({ recipient: this.state.recipients[0] });
+              }
+            });
+          });
+        }
+      )
+    );
+  };
+  updateScroll() {
+    console.log("scroll");
+    let element = document.querySelector(".message__scrollcontainer");
+    console.log(element);
+    element.scrollTop = element.scrollHeight;
+  }
+  componentDidUpdate = () => {
+    this.updateScroll();
   };
   render() {
     return (
       <div className="message container">
-        <a className="message__back" href="/messages">
-          « Back
-        </a>
-        <div className="message__thread">
-          {this.state.messages &&
-            this.state.user &&
-            this.state.messages.map(
-              (message, index) =>
-                index > 0 && (
-                  <OneMessage message={message} user={this.state.user} />
-                )
+        <div className="message__header">
+          <a className="message__back" href="/messages">
+            « Back
+          </a>
+          <span className="message__recipient">
+            {!!this.state.recipient && (
+              <img
+                className="message__avatar"
+                src={this.state.recipient.profilePicture}
+                alt=""
+              />
             )}
+            {!!this.state.recipient && this.state.recipient.name}
+          </span>
+          <span className="message__back message__hidden">« Back</span>
+        </div>
+        <div className="message__scrollcontainer">
+          <div className="message__thread">
+            {this.state.messages &&
+              this.state.user &&
+              this.state.messages.map(
+                (message, index) =>
+                  index > 0 && (
+                    <OneMessage message={message} user={this.state.user} />
+                  )
+              )}
+          </div>
         </div>
         <div className="message__compose">
           <div className="message__textcontainer">

@@ -79,6 +79,13 @@ export default {
       .catch(errorHandler);
   },
 
+  postCollab(object) {
+    return service
+      .post(`/api/collabs/`, object)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getCollabs() {
     return service.get("/api/collabs").then((res) => res.data);
   },

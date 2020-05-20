@@ -16,11 +16,12 @@ import {
   faCheckCircle,
   faPlusCircle,
   faMinusCircle,
+  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 
 /*
 
-Fix social link edit
+username available?
 
 */
 
@@ -49,6 +50,22 @@ export default class ProfileEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.usernameAvailable) {
+      this.setState({ error: "Username not available." });
+      return;
+    }
+    if (!this.state.name) {
+      this.setState({ error: "Please enter your name." });
+      return;
+    }
+    if (!this.state.usernameAvailable) {
+      this.setState({
+        error:
+          "Username is either invalid or unavailable. Usernames can by 3–10 characters and use letters, numbers, and underscores",
+      });
+      return;
+    }
+    if (!this.state.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,10}$/)) {
+      this.setState({ error: "Please enter a valid address." });
       return;
     }
     let user = { ...this.state };
@@ -72,6 +89,9 @@ export default class ProfileEdit extends Component {
     const formData = objectToFormData(user);
     console.log(this.state.portfolio);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
+      if (apiRes.userName !== this.props.match.params.username) {
+        this.props.history.push("/" + apiRes.userName + "/edit");
+      }
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
@@ -83,6 +103,15 @@ export default class ProfileEdit extends Component {
     this.setState({ userSkills: value, saved: false });
   };
   handleUsername = (e) => {
+    if (
+      !e.target.value.match(/^[a-zA-Z0-9_]{3,10}$/) ||
+      e.target.value.match(
+        /^(about|user|collab|collabs|messages|message|edit|login|signup|freely)$/i
+      )
+    ) {
+      this.setState({ usernameAvailable: false });
+      return;
+    }
     apiHandler.getUser("userName", e.target.value).then((apiRes) => {
       if (apiRes.length > 0) {
         if (apiRes[0]._id !== this.state._id) {
@@ -143,7 +172,11 @@ export default class ProfileEdit extends Component {
   handleNewPortfolio = (e) => {
     const newPortfolio = { ...this.state.newPortfolio };
     if (e.target.name === "image") {
-      console.log("image");
+      if (e.target.files[0].size > 750000) {
+        console.log("Big image");
+        this.setState({ error: "Maximum file size: 750kb" });
+        return;
+      }
       newPortfolio.image = e.target.files[0];
       const reader = new FileReader();
       reader.onload = () => {
@@ -160,6 +193,14 @@ export default class ProfileEdit extends Component {
 
   handleAddPortfolio = (e) => {
     e.preventDefault();
+    if (
+      !{ ...this.state.newPortfolio }.title ||
+      !{ ...this.state.newPortfolio }.description ||
+      !{ ...this.state.newPortfolio }.link
+    ) {
+      this.setState({ error: "Please fill out all fields." });
+      return;
+    }
     this.setState({
       ["portfolio" + this.state.portfolio.length]: this.state.newPortfolio
         .image,
@@ -184,7 +225,6 @@ export default class ProfileEdit extends Component {
   };
 
   handlePortfolioImage = (index, event) => {
-    // let key = "portfolio" + index;
     this.setState({ ["portfolio" + index]: event.target.files[0] });
     const portfolio = [...this.state.portfolio];
     const reader = new FileReader();
@@ -197,11 +237,13 @@ export default class ProfileEdit extends Component {
 
   handleAddSocial = (e) => {
     e.preventDefault();
-    this.setState({
-      socialLinks: this.state.socialLinks.concat([this.state.addSocial]),
-      saved: false,
-      addSocial: "",
-    });
+    if (this.state.addSocial) {
+      this.setState({
+        socialLinks: this.state.socialLinks.concat([this.state.addSocial]),
+        saved: false,
+        addSocial: "",
+      });
+    }
   };
 
   handleRemoveSocial = (index) => {
@@ -232,56 +274,57 @@ export default class ProfileEdit extends Component {
           >
             {this.state.saved ? "Saved" : "Save"}
           </button>
-          {this.state.profilePicture && (
-            <div className="display__avatarbox edit">
-              <label htmlFor="profilePicture">
-                <input
-                  type="file"
-                  name="profilePicture"
-                  id="profilePicture"
-                  className="input--hidden"
-                  accept=".png, .jpg, .jpeg"
-                />
-                <img
-                  className="display__picture"
-                  src={this.state.temporaryPicture || this.state.profilePicture}
-                  alt=""
-                />
-              </label>
-            </div>
-          )}
-          <h2 className="display__name">
-            <input type="text" name="name" id="name" value={this.state.name} />
-          </h2>
-          {this.state.userCategory && (
-            <div className="display__categories">
-              <Autocomplete
-                multiple
-                onChange={this.handleCategoryChange}
-                limitTags={3}
-                id="tags-outlined"
-                options={this.state.categoryOptions}
-                value={this.state.userCategory}
-                getOptionLabel={(option) => option.name} // specify what property to use
-                filterSelectedOptions
-                renderInput={(params) => <TextField {...params} />}
+          <div className="display__avatarbox edit">
+            <label htmlFor="profilePicture">
+              <input
+                type="file"
+                name="profilePicture"
+                id="profilePicture"
+                className="input--hidden"
+                accept=".png, .jpg, .jpeg"
               />
-            </div>
-          )}
-          {this.state.title && (
-            <TextareaAutosize
+              <img
+                className="display__picture"
+                src={this.state.temporaryPicture || this.state.profilePicture}
+                alt=""
+              />
+            </label>
+          </div>
+          <h2 className="display__name">
+            <input
               type="text"
-              name="title"
-              id="title"
-              value={this.state.title}
-              className="display__title"
-              maxLength={280}
-              placeholder="Intro"
+              spellcheck="false"
+              name="name"
+              id="name"
+              placeholder="Name"
+              value={this.state.name}
             />
-          )}
-          {this.state.socialLinks && (
-            <div className="display__editsocial">
-              {this.state.socialLinks.map((link, index) => {
+          </h2>
+          <div className="display__categories">
+            <Autocomplete
+              multiple
+              onChange={this.handleCategoryChange}
+              limitTags={3}
+              id="tags-outlined"
+              options={this.state.categoryOptions}
+              value={this.state.userCategory}
+              getOptionLabel={(option) => option.name} // specify what property to use
+              filterSelectedOptions
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
+          <TextareaAutosize
+            type="text"
+            name="title"
+            id="title"
+            value={this.state.title}
+            className="display__title"
+            maxLength={280}
+            placeholder="Intro"
+          />
+          <div className="display__editsocial">
+            {this.state.socialLinks &&
+              this.state.socialLinks.map((link, index) => {
                 return (
                   <label
                     className="display__editsociallink"
@@ -293,6 +336,7 @@ export default class ProfileEdit extends Component {
                       name={"social"}
                       id={"social" + index}
                       value={link}
+                      spellcheck="false"
                     />
                     <FontAwesomeIcon
                       onClick={() => this.handleRemoveSocial(index)}
@@ -301,27 +345,26 @@ export default class ProfileEdit extends Component {
                   </label>
                 );
               })}
-              <label htmlFor={"socialπ"} className="display__editsociallink">
-                <LinkIcon link={""} />
-                <input
-                  className="social--link"
-                  type="text"
-                  name="addSocial"
-                  placeholder="Link"
-                  id={"socialπ"}
-                  // if user clicks "enter"
-                  onKeyDown={(e) =>
-                    e.keyCode === 13 ? this.handleAddSocial(e) : null
-                  }
-                  value={this.state.addSocial}
-                />
-                <FontAwesomeIcon
-                  onClick={this.handleAddSocial}
-                  icon={faPlusCircle}
-                />
-              </label>
-            </div>
-          )}
+            <label htmlFor={"socialπ"} className="display__editsociallink">
+              <LinkIcon link={""} />
+              <input
+                className="social--link"
+                type="text"
+                name="addSocial"
+                placeholder="Link"
+                id={"socialπ"}
+                // if user clicks "enter"
+                onKeyDown={(e) =>
+                  e.keyCode === 13 ? this.handleAddSocial(e) : null
+                }
+                value={this.state.addSocial}
+              />
+              <FontAwesomeIcon
+                onClick={this.handleAddSocial}
+                icon={faPlusCircle}
+              />
+            </label>
+          </div>
           <div className="display__bullets">
             <h3>Key Points</h3>
             <ul>
@@ -356,6 +399,7 @@ export default class ProfileEdit extends Component {
                   type="text"
                   name="preferredContact"
                   id="preferredContact"
+                  spellcheck="false"
                   value={this.state.preferredContact || ""}
                   placeholder="Contact"
                 />
@@ -376,10 +420,7 @@ export default class ProfileEdit extends Component {
                 {this.state.usernameAvailable ? (
                   <FontAwesomeIcon icon={faCheckCircle} />
                 ) : (
-                  <>
-                    <FontAwesomeIcon icon={faTimesCircle} />
-                    <span>Not Available</span>
-                  </>
+                  <FontAwesomeIcon icon={faTimesCircle} />
                 )}
               </li>
               <li className="display__bullet">
@@ -405,118 +446,55 @@ export default class ProfileEdit extends Component {
             </ul>
           </div>
 
-          {this.state.userSkills && this.state.skillOptions && (
-            <>
-              <h2 className="display__heading">Skills</h2>
-              <Autocomplete
-                multiple
-                limitTags={5}
-                onChange={this.handleSkillChange}
-                id="tags-outlined"
-                options={this.state.skillOptions}
-                value={this.state.userSkills}
-                getOptionLabel={(option) => option.name} // specify what property to use
-                filterSelectedOptions
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </>
+          <h2 className="display__heading">Skills</h2>
+          {this.state.skillOptions && (
+            <Autocomplete
+              multiple
+              limitTags={5}
+              onChange={this.handleSkillChange}
+              id="tags-outlined"
+              options={this.state.skillOptions}
+              value={this.state.userSkills}
+              getOptionLabel={(option) => option.name} // specify what property to use
+              filterSelectedOptions
+              renderInput={(params) => <TextField {...params} />}
+            />
           )}
-          {this.state.bio && (
-            <>
-              <h2 className="display__heading">About</h2>
-              <TextareaAutosize
-                type="bio"
-                name="bio"
-                id="bio"
-                value={this.state.bio}
-                className="display__bio"
-                placeholder="Intro"
-              />
-            </>
-          )}
+          <h2 className="display__heading">About</h2>
+          <TextareaAutosize
+            type="bio"
+            name="bio"
+            id="bio"
+            value={this.state.bio}
+            className="display__bio"
+            placeholder="Tell us about yourself..."
+          />
         </form>
-        {this.state.portfolio && (
-          <>
-            <div className="display__portfolio container">
-              <h2 className="display__heading">Portfolio</h2>
-              {this.state.portfolio.map((portfolioItem, index) => {
-                return (
-                  <form
-                    className="display__portfolioitem"
-                    onChange={(event) => this.handlePortfolio(index, event)}
-                  >
-                    <label htmlFor={"image" + index}>
-                      <input
-                        onChange={(event) =>
-                          this.handlePortfolioImage(index, event)
-                        }
-                        type="file"
-                        name="image"
-                        id={"image" + index}
-                        className="input--hidden"
-                        accept=".png, .jpg, .jpeg"
-                      />
-                      <img
-                        className="display__portfolioimage"
-                        src={
-                          portfolioItem.temporaryPicture ||
-                          portfolioItem.image ||
-                          "https://source.unsplash.com/collection/363/900x500"
-                        }
-                        alt=""
-                      />
-                    </label>
-                    <div className="display__portfoliotext">
-                      <h3 className="display__portfoliotitle">
-                        <input
-                          type="text"
-                          name={"title"}
-                          id={"title"}
-                          value={portfolioItem.title}
-                        />
-                      </h3>
-                      <TextareaAutosize
-                        name="description"
-                        id="description"
-                        value={portfolioItem.description}
-                        className="display__portfoliodescription"
-                        placeholder="Intro"
-                      />
-                      <div className="display__portfoliolink">
-                        <input
-                          type="text"
-                          name={"link"}
-                          id={"link"}
-                          value={portfolioItem.link}
-                        />
-                        <FontAwesomeIcon
-                          onClick={() => this.handleRemovePortfolio(index)}
-                          icon={faMinusCircle}
-                        />
-                      </div>
-                    </div>
-                  </form>
-                );
-              })}
-              {this.state.portfolio.length < 3 && (
+        <div className="display__portfolio container">
+          <h2 className="display__heading">Portfolio</h2>
+
+          {this.state.portfolio &&
+            this.state.portfolio.map((portfolioItem, index) => {
+              return (
                 <form
                   className="display__portfolioitem"
-                  onChange={this.handleNewPortfolio}
-                  onSubmit={this.handleAddPortfolio}
+                  onChange={(event) => this.handlePortfolio(index, event)}
                 >
-                  <label htmlFor={"imageπ"}>
+                  <label htmlFor={"image" + index}>
                     <input
+                      onChange={(event) =>
+                        this.handlePortfolioImage(index, event)
+                      }
                       type="file"
                       name="image"
-                      id={"imageπ"}
+                      id={"image" + index}
                       className="input--hidden"
                       accept=".png, .jpg, .jpeg"
                     />
                     <img
                       className="display__portfolioimage"
                       src={
-                        this.state.newPortfolio.temporaryPicture ||
-                        "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
+                        portfolioItem.temporaryPicture || portfolioItem.image
                       }
                       alt=""
                     />
@@ -527,66 +505,98 @@ export default class ProfileEdit extends Component {
                         type="text"
                         name={"title"}
                         id={"title"}
-                        value={this.state.newPortfolio.title}
-                        placeholder="Portfolio Item Title"
+                        spellcheck="false"
+                        value={portfolioItem.title}
                       />
                     </h3>
                     <TextareaAutosize
                       name="description"
                       id="description"
-                      value={this.state.newPortfolio.description}
+                      value={portfolioItem.description}
                       className="display__portfoliodescription"
-                      placeholder="Describe your project..."
+                      placeholder="Intro"
                     />
                     <div className="display__portfoliolink">
                       <input
                         type="text"
                         name={"link"}
                         id={"link"}
-                        value={this.state.newPortfolio.link}
-                        placeholder="A link to your project"
+                        spellcheck="false"
+                        value={portfolioItem.link}
                       />
+                      {!portfolioItem.temporaryPicture && !portfolioItem.image && (
+                        <label htmlFor={"image" + index}>
+                          <FontAwesomeIcon icon={faCamera} />
+                        </label>
+                      )}
                       <FontAwesomeIcon
-                        icon={faPlusCircle}
-                        onClick={this.handleAddPortfolio}
+                        onClick={() => this.handleRemovePortfolio(index)}
+                        icon={faMinusCircle}
                       />
                     </div>
                   </div>
                 </form>
-              )}
-            </div>
-          </>
-        )}
-        {this.state.userCollab && (
-          <h2 className="display__heading container">Collaborations</h2>
-        )}
-        {this.state.userCollab &&
-          this.state.userCollab.map((collab) => {
-            return (
-              <Link className="card container" to={`/collab/${collab._id}`}>
-                <div
-                  style={{ backgroundImage: `url(${collab.image})` }}
-                  className="card__aside"
-                ></div>
-                <div className="card__body">
-                  <p className="card__copy">
-                    {this.state.name}{" "}
-                    {this.state._id === collab.creator
-                      ? `created`
-                      : `collaborated on`}
-                    :
-                  </p>
-                  <h3 className="card__title">{collab.title}</h3>
-                  <p className="card__copy">{collab.description}</p>
-                  <p className="card__copy">
-                    {collab.open
-                      ? "Accepting coworkers!"
-                      : "This project team is complete."}
-                  </p>
+              );
+            })}
+          {(!this.state.portfolio || this.state.portfolio.length < 3) && (
+            <form
+              className="display__portfolioitem"
+              onChange={this.handleNewPortfolio}
+              onSubmit={this.handleAddPortfolio}
+            >
+              <label htmlFor={"imageπ"}>
+                <input
+                  type="file"
+                  name="image"
+                  id={"imageπ"}
+                  className="input--hidden"
+                  accept=".png, .jpg, .jpeg"
+                />
+                <img
+                  className="display__portfolioimage"
+                  src={
+                    this.state.newPortfolio.temporaryPicture ||
+                    "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
+                  }
+                  alt=""
+                />
+              </label>
+              <div className="display__portfoliotext">
+                <h3 className="display__portfoliotitle">
+                  <input
+                    type="text"
+                    name={"title"}
+                    id={"title"}
+                    spellcheck="false"
+                    value={this.state.newPortfolio.title}
+                    placeholder="Portfolio Item Title"
+                  />
+                </h3>
+                <TextareaAutosize
+                  name="description"
+                  id="description"
+                  value={this.state.newPortfolio.description}
+                  className="display__portfoliodescription"
+                  placeholder="Describe your project..."
+                />
+                <div className="display__portfoliolink">
+                  <input
+                    type="text"
+                    name={"link"}
+                    spellcheck="false"
+                    id={"link"}
+                    value={this.state.newPortfolio.link}
+                    placeholder="A link to your project"
+                  />
+                  <FontAwesomeIcon
+                    icon={faPlusCircle}
+                    onClick={this.handleAddPortfolio}
+                  />
                 </div>
-              </Link>
-            );
-          })}
+              </div>
+            </form>
+          )}
+        </div>
         {!!this.state.error && (
           <Error error={this.state.error} handleError={this.handleError} />
         )}
