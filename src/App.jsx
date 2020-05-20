@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 
 // components
-import NavBar from './components/Nav/NavBar';
-import Backdrop from './components/Nav/Backdrop';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
-import ProtectedEditRoute from './components/Auth/ProtectedEditRoute';
-import HamburgerMenu from './components/Nav/HamburgerMenu';
+import NavBar from "./components/Nav/NavBar";
+import Backdrop from "./components/Nav/Backdrop";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import ProtectedEditRoute from "./components/Auth/ProtectedEditRoute";
+import HamburgerMenu from "./components/Nav/HamburgerMenu";
 
 // pages
-import Profile from './pages/Profile';
-import Login from './pages/Login';
-import ProfileEdit from './pages/ProfileEdit';
-import CollabEdit from './pages/CollabEdit';
-import Messages from './pages/Messages';
-import Message from './pages/Message';
-import FreelancersFeed from './pages/FreelancersFeed';
-import CollabsFeed from './pages/CollabsFeed';
-import Collab from './pages/Collab';
-import About from './pages/About';
-import Error_404 from './pages/Error_404';
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import ProfileEdit from "./pages/ProfileEdit";
+import CollabEdit from "./pages/CollabEdit";
+import CollabNew from "./pages/CollabNew";
+import Messages from "./pages/Messages";
+import Message from "./pages/Message";
+import FreelancersFeed from "./pages/FreelancersFeed";
+import CollabsFeed from "./pages/CollabsFeed";
+import Collab from "./pages/Collab";
+import About from "./pages/About";
+import Error_404 from "./pages/Error_404";
 
 export default class App extends Component {
   state = {
@@ -59,6 +60,7 @@ export default class App extends Component {
             <Route exact path="/collabs" component={CollabsFeed} />
             <ProtectedRoute exact path="/messages" component={Messages} />
             <ProtectedRoute exact path="/messages/:id" component={Message} />
+            <Route exact path="/collab/new" component={CollabNew} />
             <ProtectedRoute
               exact
               path="/collab/:id/edit"

@@ -16,7 +16,7 @@ To Do:
 
 */
 
-export default class CollabEdit extends Component {
+class CollabNew extends Component {
   state = {
     categoryOptions: [],
     skillOptions: [],
@@ -33,9 +33,6 @@ export default class CollabEdit extends Component {
     error: undefined,
   };
   componentDidMount() {
-    apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
-      this.setState(apiRes);
-    });
     apiHandler.getCategories().then((apiRes) => {
       this.setState({ categoryOptions: apiRes });
     });
@@ -68,6 +65,7 @@ export default class CollabEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     let collab = { ...this.state };
+    collab.creator = this.props.context.user._id;
     delete collab.saved;
     delete collab.skillOptions;
     delete collab.categoryOptions;
@@ -84,13 +82,15 @@ export default class CollabEdit extends Component {
       collab.categoryNeeded = JSON.stringify(collab.categoryNeeded);
     }
     const formData = objectToFormData(collab);
-    apiHandler.patchCollab(this.state._id, formData).then((apiRes) => {
+    apiHandler.postCollab(formData).then((apiRes) => {
+      // console.log(apiRes);
+      this.props.history.push("/collab/" + apiRes._id);
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
   };
   handleCategoryChange = (e, value) => {
-    this.setState({ categoriesNeeded: value, saved: false });
+    this.setState({ categoryNeeded: value, saved: false });
   };
   handleSkillChange = (e, value) => {
     this.setState({ skillsNeeded: value, saved: false });
@@ -113,7 +113,8 @@ export default class CollabEdit extends Component {
               style={{
                 backgroundImage:
                   "url(" +
-                  (this.state.temporaryPicture || this.state.image) +
+                  (this.state.temporaryPicture ||
+                    "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9") +
                   ")",
               }}
             >
@@ -123,11 +124,6 @@ export default class CollabEdit extends Component {
                 id="image"
                 className="input--hidden"
               />
-              {/* <img
-              className="display__picture"
-              src={this.state.temporaryPicture || this.state.image}
-              alt=""
-            /> */}
             </div>
           </label>
           <div className="container display display__collabbody">
@@ -213,34 +209,15 @@ export default class CollabEdit extends Component {
                 </select>
               </li>
               <li className="display__bullet">
-                Created by {this.state.creator.name}
-              </li>
-              <li className="display__bullet">
-                Preferred method of contact for {this.state.creator.name}:{" "}
-                {this.state.creator.preferredContact}
+                Preferred method of contact:{" "}
+                <input
+                  type="text"
+                  name="preferredContact"
+                  id="preferredContact"
+                  value={this.state.preferredContact}
+                />
               </li>
             </ul>
-
-            {this.state.userCollab && (
-              <div className="display__collabs">
-                <h2 className="display__heading">Collabs</h2>
-                {this.state.userCollab.map((collab) => {
-                  return (
-                    <div className="display__collab">
-                      <img
-                        src={collab.image}
-                        alt=""
-                        className="display__collabimage"
-                      />
-                      <h3 className="display__collabtitle">{collab.title}</h3>
-                      <p className="display__collabdescription">
-                        {collab.description}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
           </div>
         </form>
         {!!this.state.error && (
@@ -250,3 +227,5 @@ export default class CollabEdit extends Component {
     );
   }
 }
+
+export default withUser(CollabNew);
