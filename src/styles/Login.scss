@@ -8,7 +8,7 @@
 }
 
 .form-login {
-  min-height: 380px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -16,7 +16,7 @@
 
   &__link {
     text-align: center;
-    max-width: 70%;
+    max-width: 100%;
     margin: 0 auto;
     cursor: pointer;
     padding: 10px 0;
@@ -55,7 +55,7 @@
 
   &__button {
     width: 250px;
-    margin: 25px auto;
+    margin: 25px auto 0;
     border-radius: 25px;
     padding: 8px 25px;
     border: none;

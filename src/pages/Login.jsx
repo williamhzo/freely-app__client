@@ -62,7 +62,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='login-container'>
+      <div className="login-container">
         {this.state.accountExists && (
           <h2 className="form-login__title">
             Welcome back!{' '}
@@ -144,19 +144,22 @@ class Login extends Component {
               />
             )}
           </div>
-        <div className="form-login__button-group">
-          {this.state.accountExists ? (
-            <button className="form-login__button">Log in</button>
-          ) : (
-            <button className="form-login__button">Create Account</button>
-          )}
-        </div>
+          <div className="form-login__button-group">
+            {this.state.accountExists ? (
+              <button className="form-login__button">Log in</button>
+            ) : (
+              <button className="form-login__button">Create Account</button>
+            )}
+          </div>
         </form>
         <div className="form-login__link">
           {this.state.accountExists && (
-            <h3 onClick={this.handleClick}>
-              <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>
-            </h3>
+            <>
+              <h3 onClick={this.handleClick}>Don't have an account yet?</h3>
+              <h3 onClick={this.handleClick}>
+                <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>
+              </h3>
+            </>
           )}
           {!this.state.accountExists && (
             <h3 onClick={this.handleClick}>I already have an account </h3>
