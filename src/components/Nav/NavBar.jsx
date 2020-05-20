@@ -37,6 +37,7 @@ const NavBar = (props) => {
                 to={context.user ? '/collabs-create' : '/login'}
               >
                 <span className="Nav__plus-icon">+</span>
+                <p className="Nav__plus-icon-text">Create a bundle</p>
               </NavLink>
             </li>
             <li className="Nav__item">
@@ -44,28 +45,32 @@ const NavBar = (props) => {
                 className="Nav__link"
                 to={context.user ? '/profile' : '/login'}
               >
-                <div
+                {/* <div
                   className="Nav__avatar"
                   style={{
                     backgroundImage: context.user
                       ? `url(${context.user.profilePicture})`
                       : 'url("media/avatar2.png")',
                   }}
-                ></div>
+                ></div> */}
+                {context.user && (
+                  <div
+                    className="Nav__avatar"
+                    style={{
+                      backgroundImage: `url(${context.user.profilePicture})`,
+                    }}
+                  ></div>
+                )}
+                {!context.user && <div>Profile</div>}
               </NavLink>
             </li>
-            <li className="Nav__item">
+            <li className="Nav__item hamburger__button">
               <HamburgerButton
                 click={props.hamburgerClickHandler}
                 hamburgerToggle={props.toggled}
                 // context={context}
               />
             </li>
-            {/* {isEditing && (
-              <li className="Nav__item">
-                <SaveEditButton onClick={(e) => handleFormSubmit()} />
-              </li>
-            )} */}
             <li className="Nav__item hamburger__item">
               <NavLink className="Nav__link" exact to="/collabs-create">
                 About
