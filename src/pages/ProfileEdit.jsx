@@ -16,16 +16,14 @@ import {
   faCheckCircle,
   faPlusCircle,
   faMinusCircle,
+  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 
 /*
 
-Fix social link edit
+username available?
 
 */
-
-// username available?
-//
 
 export default class ProfileEdit extends Component {
   state = {
@@ -52,6 +50,22 @@ export default class ProfileEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.usernameAvailable) {
+      this.setState({ error: "Username not available." });
+      return;
+    }
+    if (!this.state.name) {
+      this.setState({ error: "Please enter your name." });
+      return;
+    }
+    if (!this.state.usernameAvailable) {
+      this.setState({
+        error:
+          "Username is either invalid or unavailable. Usernames can by 3–10 characters and use letters, numbers, and underscores",
+      });
+      return;
+    }
+    if (!this.state.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,10}$/)) {
+      this.setState({ error: "Please enter a valid address." });
       return;
     }
     let user = { ...this.state };
@@ -75,6 +89,9 @@ export default class ProfileEdit extends Component {
     const formData = objectToFormData(user);
     console.log(this.state.portfolio);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
+      if (apiRes.userName !== this.props.match.params.username) {
+        this.props.history.push("/" + apiRes.userName + "/edit");
+      }
       this.setState({ apiRes });
       this.setState({ saved: true });
     });
@@ -86,6 +103,15 @@ export default class ProfileEdit extends Component {
     this.setState({ userSkills: value, saved: false });
   };
   handleUsername = (e) => {
+    if (
+      !e.target.value.match(/^[a-zA-Z0-9_]{3,10}$/) ||
+      e.target.value.match(
+        /^(about|user|collab|collabs|messages|message|edit|login|signup|freely)$/i
+      )
+    ) {
+      this.setState({ usernameAvailable: false });
+      return;
+    }
     apiHandler.getUser("userName", e.target.value).then((apiRes) => {
       if (apiRes.length > 0) {
         if (apiRes[0]._id !== this.state._id) {
@@ -167,6 +193,14 @@ export default class ProfileEdit extends Component {
 
   handleAddPortfolio = (e) => {
     e.preventDefault();
+    if (
+      !{ ...this.state.newPortfolio }.title ||
+      !{ ...this.state.newPortfolio }.description ||
+      !{ ...this.state.newPortfolio }.link
+    ) {
+      this.setState({ error: "Please fill out all fields." });
+      return;
+    }
     this.setState({
       ["portfolio" + this.state.portfolio.length]: this.state.newPortfolio
         .image,
@@ -257,23 +291,28 @@ export default class ProfileEdit extends Component {
             </label>
           </div>
           <h2 className="display__name">
-            <input type="text" name="name" id="name" value={this.state.name} />
+            <input
+              type="text"
+              spellcheck="false"
+              name="name"
+              id="name"
+              placeholder="Name"
+              value={this.state.name}
+            />
           </h2>
-          {this.state.userCategory && (
-            <div className="display__categories">
-              <Autocomplete
-                multiple
-                onChange={this.handleCategoryChange}
-                limitTags={3}
-                id="tags-outlined"
-                options={this.state.categoryOptions}
-                value={this.state.userCategory}
-                getOptionLabel={(option) => option.name} // specify what property to use
-                filterSelectedOptions
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </div>
-          )}
+          <div className="display__categories">
+            <Autocomplete
+              multiple
+              onChange={this.handleCategoryChange}
+              limitTags={3}
+              id="tags-outlined"
+              options={this.state.categoryOptions}
+              value={this.state.userCategory}
+              getOptionLabel={(option) => option.name} // specify what property to use
+              filterSelectedOptions
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
           <TextareaAutosize
             type="text"
             name="title"
@@ -283,9 +322,9 @@ export default class ProfileEdit extends Component {
             maxLength={280}
             placeholder="Intro"
           />
-          {this.state.socialLinks && (
-            <div className="display__editsocial">
-              {this.state.socialLinks.map((link, index) => {
+          <div className="display__editsocial">
+            {this.state.socialLinks &&
+              this.state.socialLinks.map((link, index) => {
                 return (
                   <label
                     className="display__editsociallink"
@@ -297,6 +336,7 @@ export default class ProfileEdit extends Component {
                       name={"social"}
                       id={"social" + index}
                       value={link}
+                      spellcheck="false"
                     />
                     <FontAwesomeIcon
                       onClick={() => this.handleRemoveSocial(index)}
@@ -305,27 +345,26 @@ export default class ProfileEdit extends Component {
                   </label>
                 );
               })}
-              <label htmlFor={"socialπ"} className="display__editsociallink">
-                <LinkIcon link={""} />
-                <input
-                  className="social--link"
-                  type="text"
-                  name="addSocial"
-                  placeholder="Link"
-                  id={"socialπ"}
-                  // if user clicks "enter"
-                  onKeyDown={(e) =>
-                    e.keyCode === 13 ? this.handleAddSocial(e) : null
-                  }
-                  value={this.state.addSocial}
-                />
-                <FontAwesomeIcon
-                  onClick={this.handleAddSocial}
-                  icon={faPlusCircle}
-                />
-              </label>
-            </div>
-          )}
+            <label htmlFor={"socialπ"} className="display__editsociallink">
+              <LinkIcon link={""} />
+              <input
+                className="social--link"
+                type="text"
+                name="addSocial"
+                placeholder="Link"
+                id={"socialπ"}
+                // if user clicks "enter"
+                onKeyDown={(e) =>
+                  e.keyCode === 13 ? this.handleAddSocial(e) : null
+                }
+                value={this.state.addSocial}
+              />
+              <FontAwesomeIcon
+                onClick={this.handleAddSocial}
+                icon={faPlusCircle}
+              />
+            </label>
+          </div>
           <div className="display__bullets">
             <h3>Key Points</h3>
             <ul>
@@ -360,6 +399,7 @@ export default class ProfileEdit extends Component {
                   type="text"
                   name="preferredContact"
                   id="preferredContact"
+                  spellcheck="false"
                   value={this.state.preferredContact || ""}
                   placeholder="Contact"
                 />
@@ -427,7 +467,7 @@ export default class ProfileEdit extends Component {
             id="bio"
             value={this.state.bio}
             className="display__bio"
-            placeholder="Intro"
+            placeholder="Tell us about yourself..."
           />
         </form>
         <div className="display__portfolio container">
@@ -454,9 +494,7 @@ export default class ProfileEdit extends Component {
                     <img
                       className="display__portfolioimage"
                       src={
-                        portfolioItem.temporaryPicture ||
-                        portfolioItem.image ||
-                        "https://source.unsplash.com/collection/363/900x500"
+                        portfolioItem.temporaryPicture || portfolioItem.image
                       }
                       alt=""
                     />
@@ -467,6 +505,7 @@ export default class ProfileEdit extends Component {
                         type="text"
                         name={"title"}
                         id={"title"}
+                        spellcheck="false"
                         value={portfolioItem.title}
                       />
                     </h3>
@@ -482,8 +521,14 @@ export default class ProfileEdit extends Component {
                         type="text"
                         name={"link"}
                         id={"link"}
+                        spellcheck="false"
                         value={portfolioItem.link}
                       />
+                      {!portfolioItem.temporaryPicture && !portfolioItem.image && (
+                        <label htmlFor={"image" + index}>
+                          <FontAwesomeIcon icon={faCamera} />
+                        </label>
+                      )}
                       <FontAwesomeIcon
                         onClick={() => this.handleRemovePortfolio(index)}
                         icon={faMinusCircle}
@@ -522,6 +567,7 @@ export default class ProfileEdit extends Component {
                     type="text"
                     name={"title"}
                     id={"title"}
+                    spellcheck="false"
                     value={this.state.newPortfolio.title}
                     placeholder="Portfolio Item Title"
                   />
@@ -537,6 +583,7 @@ export default class ProfileEdit extends Component {
                   <input
                     type="text"
                     name={"link"}
+                    spellcheck="false"
                     id={"link"}
                     value={this.state.newPortfolio.link}
                     placeholder="A link to your project"

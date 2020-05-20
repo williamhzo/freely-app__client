@@ -16,7 +16,7 @@ To Do:
 
 */
 
-export default class CollabEdit extends Component {
+class CollabEdit extends Component {
   state = {
     categoryOptions: [],
     skillOptions: [],
@@ -32,6 +32,7 @@ export default class CollabEdit extends Component {
     open: false,
     error: undefined,
   };
+
   componentDidMount() {
     apiHandler.getCollab(this.props.match.params.id).then((apiRes) => {
       this.setState(apiRes);
@@ -67,6 +68,14 @@ export default class CollabEdit extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
+    if (!this.state.title) {
+      this.setState({ error: "Please enter a title" });
+      return;
+    }
+    if (!this.state.description) {
+      this.setState({ error: "Please enter a description" });
+      return;
+    }
     let collab = { ...this.state };
     delete collab.saved;
     delete collab.skillOptions;
@@ -90,7 +99,7 @@ export default class CollabEdit extends Component {
     });
   };
   handleCategoryChange = (e, value) => {
-    this.setState({ categoriesNeeded: value, saved: false });
+    this.setState({ categoryNeeded: value, saved: false });
   };
   handleSkillChange = (e, value) => {
     this.setState({ skillsNeeded: value, saved: false });
@@ -250,3 +259,5 @@ export default class CollabEdit extends Component {
     );
   }
 }
+
+export default withUser(CollabEdit);

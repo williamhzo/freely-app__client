@@ -142,13 +142,19 @@
   &__portfoliolink {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     input {
       flex-grow: 1;
+    }
+    label {
+      font-size: 1.1em;
+      margin-bottom: -2px;
     }
     svg {
       color: #404040;
       font-size: 1.2em;
+      margin-left: 25px;
+      cursor: pointer;
     }
   }
 }

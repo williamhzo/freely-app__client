@@ -9,13 +9,6 @@ import { objectToFormData } from "object-to-formdata";
 import Error from "../components/Error";
 import { withUser } from "../components/Auth/withUser";
 
-/*
-
-To Do:
-- Remove creator from list of contributors
-
-*/
-
 class CollabNew extends Component {
   state = {
     categoryOptions: [],
@@ -64,6 +57,14 @@ class CollabNew extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
+    if (!this.state.title) {
+      this.setState({ error: "Please enter a title." });
+      return;
+    }
+    if (!this.state.description) {
+      this.setState({ error: "Please enter a description." });
+      return;
+    }
     let collab = { ...this.state };
     collab.creator = this.props.context.user._id;
     delete collab.saved;
