@@ -53,9 +53,17 @@
     margin: 8px auto $component-margin;
   }
 
+  &__error-msg {
+    text-align: center;
+    color: red;
+    font-weight: $light-font-weight;
+    padding: 0;
+    margin: 0;
+  }
+
   &__button {
     width: 250px;
-    margin: 25px auto 0;
+    margin: 0 auto 0;
     border-radius: 25px;
     padding: 8px 25px;
     border: none;

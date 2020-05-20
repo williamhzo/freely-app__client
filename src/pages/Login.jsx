@@ -13,14 +13,16 @@ class Login extends Component {
 
   state = {
     accountExists: false,
-    email: '',
+    usernameAvailable: false,
     name: '',
     userName: '',
+    email: '',
     password: '',
+    formError: '',
   };
 
   handleClick = () => {
-    this.setState({ accountExists: !this.state.accountExists });
+    this.setState((prevState) => ({ accountExists: !prevState.accountExists }));
   };
 
   handleChange = (event) => {
@@ -28,10 +30,47 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
 
+  handleUsername = (e) => {
+    if (
+      !e.target.value.match(/^[a-zA-Z0-9_]{3,10}$/) ||
+      e.target.value.match(
+        /^(about|user|collab|collabs|messages|message|edit|login|signup|freely)$/i
+      )
+    ) {
+      this.setState({ usernameAvailable: false });
+      return;
+    }
+    apiHandler.getUser('userName', e.target.value).then((apiRes) => {
+      if (apiRes.length > 0) {
+        this.setState({ usernameAvailable: true });
+      } else {
+        this.setState({ usernameAvailable: true });
+      }
+    });
+  };
+
+  isValid = () => {
+    let errorMessage = '';
+    if (!this.state.name) {
+      this.setState({ formError: 'You forgot your name!' });
+    } else if (!this.state.userName) {
+      this.setState({ formError: 'You forgot your username!' });
+    } else if (!this.state.email.includes('@')) {
+      this.setState({ formError: 'Please enter a valid email.' });
+    } else if (errorMessage) {
+      this.setState({ formError: errorMessage });
+      return false;
+    }
+    return true;
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.accountExists) return this.logUser();
-    this.createAccount();
+    console.log(this.state.formError);
+    if (this.isValid()) {
+      if (this.state.accountExists) return this.logUser();
+      this.createAccount();
+    }
   };
 
   logUser = () => {
@@ -105,6 +144,7 @@ class Login extends Component {
                   type="text"
                   id="userName"
                   name="userName"
+                  onChange={this.handleUsername}
                 />
               </div>
             </>
@@ -126,30 +166,19 @@ class Login extends Component {
               Password
             </label>
             <br></br>
-            {!this.state.accountExists && (
-              <input
-                className="form-login__input"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="5+ characters"
-              />
-            )}
-            {this.state.accountExists && (
-              <input
-                className="form-login__input"
-                type="password"
-                id="password"
-                name="password"
-              />
-            )}
+            <input
+              className="form-login__input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder={this.state.accountExists ? null : '5+ characters'}
+            />
           </div>
+          <p className="form-login__error-msg">{this.state.formError}</p>
           <div className="form-login__button-group">
-            {this.state.accountExists ? (
-              <button className="form-login__button">Log in</button>
-            ) : (
-              <button className="form-login__button">Create Account</button>
-            )}
+            <button className="form-login__button">
+              {this.state.accountExists ? 'Log in' : 'Create Account'}
+            </button>
           </div>
         </form>
         <div className="form-login__link">

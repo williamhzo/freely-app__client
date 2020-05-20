@@ -28,9 +28,12 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  // Getting rid of Safari's mobile 100vh bug (menu overlay)
+  min-height: 100vh;
+  //   /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 }
 ul[class],
 ol[class] {
@@ -93,6 +96,7 @@ ul {
 }
 
 .main {
+  position: relative;
   padding-top: $NavBar-height;
   background-color: $background-color;
   height: 100vh;
@@ -133,8 +137,6 @@ ul {
 }
 
 // Getting rid of Safari's mobile 100vh bug (menu overlay)
-// body {
 //   min-height: 100vh;
 //   /* mobile viewport bug fix */
 //   min-height: -webkit-fill-available;
-// }
