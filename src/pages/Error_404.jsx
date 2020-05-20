@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Error_404 = () => {
   return (
@@ -14,7 +15,9 @@ const Error_404 = () => {
       />
       <div className="error-page__body">
         <p>wtf did you type in the URL?!</p>
-        <h3>Back home</h3>
+        <Link to="/">
+          <h3> Back home </h3>
+        </Link>
       </div>
     </div>
   );
