@@ -44,12 +44,19 @@ class Message extends Component {
                   ? this.setState({ recipient: this.state.recipients[1] })
                   : this.setState({ recipient: this.state.recipients[0] });
               }
+              if (
+                this.state.user._id !==
+                this.state.messages[this.state.messages.length - 1].author
+              ) {
+                apiHandler.markAsRead(this.props.match.params.id);
+              }
             });
           });
         }
       )
     );
   };
+
   updateScroll() {
     console.log("scroll");
     let element = document.querySelector(".message__scrollcontainer");

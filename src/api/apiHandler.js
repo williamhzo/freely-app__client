@@ -167,4 +167,16 @@ export default {
       .then((res) => res.data)
       .catch((err) => console.log(err));
   },
+  markAsRead(id) {
+    return service
+      .patch(`/api/messages/unread/` + id)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+  checkNotifications(id) {
+    return service
+      .get(`/api/messages/unread` + id)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
 };
