@@ -21,7 +21,6 @@ class Message extends Component {
       author: this.props.context.user,
       content: this.state.newMessage,
     };
-    console.log(message);
     apiHandler
       .sendOneMessage(this.props.match.params.id, message)
       .then((apiRes) =>
@@ -36,7 +35,6 @@ class Message extends Component {
   // Check messages
 
   checkMessage = () => {
-    console.log("Check messages");
     apiHandler.getOneMessage(this.props.match.params.id).then((apiRes) =>
       this.setState(
         {
@@ -65,9 +63,7 @@ class Message extends Component {
   };
 
   updateScroll() {
-    console.log("scroll");
     let element = document.querySelector(".message__scrollcontainer");
-    console.log(element);
     element.scrollTop = element.scrollHeight;
   }
   componentDidUpdate = () => {
@@ -110,7 +106,6 @@ class Message extends Component {
               placeholder={"New Message"}
               value={this.state.newMessage}
               onChange={(e) => {
-                console.log(this.state);
                 this.setState({ newMessage: e.target.value });
               }}
             />
