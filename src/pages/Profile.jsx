@@ -127,7 +127,7 @@ class Profile extends Component {
         )}
         {this.state.bio && (
           <>
-            <h2 className="display__heading">About</h2>
+            <h2 className="display__heading">About me</h2>
             <div className="display__bio">{this.state.bio}</div>
           </>
         )}
@@ -170,7 +170,7 @@ class Profile extends Component {
         )}
         {this.state.userCollab && (
           <div className="display__collabs">
-            <h2 className="display__heading">Collabs</h2>
+            <h2 className="display__heading">Projects</h2>
             {this.state.userCollab.map((collab, index) => {
               return (
                 <div key={index} className="display__collabcard">

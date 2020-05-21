@@ -15,17 +15,15 @@
 
   background-color: $background-color;
   &__heading {
-    margin-top: $component-margin;
+    margin: $component-margin 0;
     align-self: flex-start;
+    font-size: $title-h3-font-size;
   }
   &__avatarbox {
     position: relative;
-    margin-left: auto;
-    margin-right: auto;
     overflow: hidden;
     border-radius: 20px;
-    width: 240px;
-    height: 240px;
+    width: 40%;
     max-width: 240px;
     cursor: pointer;
   }
@@ -41,8 +39,6 @@
   &__collabbody:not(p) {
     margin-top: -7%;
     background: $background-color;
-    // border-top-right-radius: 5px;
-    // border-top-left-radius: 5px;
     padding-top: 1px;
     padding-left: 30px;
     padding-right: 30px;
@@ -73,21 +69,23 @@
     font-family: inherit;
   }
   &__title {
-    max-width: 60%;
+    max-width: 75%;
     font-size: $title-h2-font-size;
-    margin-top: 30px;
+    margin-top: $component-margin;
   }
   &__sociallinks {
     font-size: 1.6em;
-    margin-top: 30px;
+    margin-top: $component-margin;
     > * {
-      margin-left: 10px;
-      margin-right: 10px;
+      margin: 0 $component-margin;
+    }
+    svg {
+      fill: $primary-font-color;
     }
   }
   &__bullets[class] {
     margin-top: $component-margin;
-    width: 100%;
+    width: 90%;
     background: $box-info-color;
     border-radius: $card-border-radius;
     padding: $component-margin;
@@ -117,16 +115,16 @@
   }
   &__fullwidth {
     align-self: flex-start;
-    width: 100%;
+    width: 90%;
   }
   &__bio {
     align-self: stretch;
   }
   &__badge {
-    background: #efefef;
-    border: 1px solid #eee;
-    border-radius: 1em;
-    padding: 5px 15px;
+    background-color: $btn-primary-background;
+    border-radius: $btn-primary-radius;
+    color: $btn-primary-font-color;
+    padding: 4px 8px;
     margin: 5px;
   }
   &__badgelist {
@@ -139,12 +137,21 @@
     border: 1px solid $card-border-color;
     border-radius: 20px;
     overflow: hidden;
-    margin-top: 20px;
+    margin-bottom: $component-margin;
   }
   &__portfoliotext {
-    // background: pink;
-    padding: 20px;
+    background: $white-background-color;
+    padding: $component-margin;
   }
+
+  &__collabcarddescription {
+    padding: 0 $component-margin $component-margin $component-margin;
+  }
+
+  &__collabcardtitle {
+    padding: $component-margin $component-margin 0 $component-margin;
+  }
+
   &__portfoliodescription,
   &__portfoliolink {
     padding-top: 15px;
