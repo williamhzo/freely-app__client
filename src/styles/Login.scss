@@ -29,12 +29,8 @@
   &__title {
     height: 80px;
     text-align: center;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
     font-size: 1.2rem;
     width: 230px;
-    // margin: ($NavBar-height - $component-margin) auto 0;
     margin: 0 auto;
   }
 
@@ -69,7 +65,7 @@
 
   &__error-msg.credentials {
     position: absolute;
-    top: -18px;
+    top: 56px;
     text-align: center;
     width: 100%;
   }
@@ -79,7 +75,7 @@
     border-radius: 25px;
     padding: 8px 25px;
     border: none;
-    background-color: $secondary-color;
+    background-color: $primary-font-color;
     color: white;
     font-weight: 600;
   }

@@ -12,12 +12,15 @@
   padding: $component-margin;
   height: $NavBar-height;
   z-index: 50;
+  // color: $primary-font-color;
   // box-shadow: $box-shadow;
   // box-shadow: 2px 2px 10px 1px rgba(150, 150, 150, 0.1);
   // border-bottom: $secondary-font-color 1px solid;
 
   &__logo {
     font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 400;
   }
 
   &__list {
@@ -89,7 +92,7 @@
   &__line {
     width: 26px;
     height: 2px;
-    background: black;
+    background: $primary-font-color;
     transition: all ease 0.5s;
   }
 
@@ -136,10 +139,10 @@
 }
 
 .primary-btn {
-  background-color: $primary-font-color;
-  color: $background-color;
-  padding: 16px 24px;
-  border-radius: 5px;
+  background-color: $btn-primary-background;
+  color: $btn-primary-font-color;
+  padding: $btn-primary-padding;
+  border-radius: $btn-primary-radius;
 }
 
 .backdrop {

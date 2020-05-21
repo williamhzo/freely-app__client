@@ -54,6 +54,7 @@ button,
 textarea,
 select {
   font: inherit;
+  outline: none;
 }
 img:not([alt]) {
   filter: blur(10px);
@@ -76,6 +77,7 @@ img:not([alt]) {
 html {
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
   background-color: $background-color;
+  color: $primary-font-color;
 }
 
 a {
