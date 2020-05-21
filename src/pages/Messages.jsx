@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { withUser } from '../components/Auth/withUser';
-import MessageCard from '../components/Messages/MessageCard';
-import apiHandler from '../api/apiHandler';
-import '../styles/Messages.scss';
+import React, { Component } from "react";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+import { withUser } from "../components/Auth/withUser";
+import MessageCard from "../components/Messages/MessageCard";
+import apiHandler from "../api/apiHandler";
+import "../styles/Messages.scss";
 
 class Messages extends Component {
   state = {
@@ -20,7 +20,6 @@ class Messages extends Component {
         apiHandler
           .getAllMessages(this.state.currentUser._id)
           .then((apiRes) => {
-            console.log(apiRes);
             this.setState({ messages: apiRes });
           })
           .catch((err) => console.log(err));
@@ -36,13 +35,15 @@ class Messages extends Component {
   };
 
   handleCreate = () => {
-    console.log(this.state.newMessage._id);
+    if (!this.state.newMessage) {
+      return;
+    }
     this.state.messages.forEach((message) => {
       if (
         message.recipients[0]._id === this.state.newMessage._id ||
         message.recipients[1]._id === this.state.newMessage._id
       ) {
-        this.props.history.push('/messages/' + message._id);
+        this.props.history.push("/messages/" + message._id);
         return;
       }
     });
@@ -52,8 +53,7 @@ class Messages extends Component {
         this.state.newMessage._id
       )
       .then((apiRes) => {
-        console.log(apiRes);
-        this.props.history.push('/messages/' + apiRes._id);
+        this.props.history.push("/messages/" + apiRes._id);
       });
   };
 
@@ -80,8 +80,9 @@ class Messages extends Component {
         </div>
         <div className="messages__list">
           {this.state.messages ? (
-            this.state.messages.map((message) => {
+            this.state.messages.map((message, index) => {
               if (message.messages.length > 1) {
+                console.log(message);
                 return (
                   <MessageCard
                     message={message}

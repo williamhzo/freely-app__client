@@ -13,6 +13,9 @@ class Message extends Component {
     recipients: undefined,
   };
   sendMessage = () => {
+    if (!this.state.newMessage) {
+      return;
+    }
     const message = {
       time: Date.now(),
       author: this.props.context.user,
@@ -27,6 +30,13 @@ class Message extends Component {
       .catch((err) => console.log(err));
   };
   componentDidMount = () => {
+    setInterval(this.checkMessage, 1000);
+  };
+
+  // Check messages
+
+  checkMessage = () => {
+    console.log("Check messages");
     apiHandler.getOneMessage(this.props.match.params.id).then((apiRes) =>
       this.setState(
         {
@@ -41,12 +51,19 @@ class Message extends Component {
                   ? this.setState({ recipient: this.state.recipients[1] })
                   : this.setState({ recipient: this.state.recipients[0] });
               }
+              if (
+                this.state.user._id !==
+                this.state.messages[this.state.messages.length - 1].author
+              ) {
+                apiHandler.markAsRead(this.props.match.params.id);
+              }
             });
           });
         }
       )
     );
   };
+
   updateScroll() {
     console.log("scroll");
     let element = document.querySelector(".message__scrollcontainer");
