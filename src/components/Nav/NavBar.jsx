@@ -1,14 +1,14 @@
 // import React, { useState } from 'react';
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { withUser } from "../Auth/withUser";
-import UserContext from "../Auth/UserContext";
-import apiHandler from "../../api/apiHandler";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { withUser } from '../Auth/withUser';
+import UserContext from '../Auth/UserContext';
+import apiHandler from '../../api/apiHandler';
 
-import HamburgerButton from "./HamburgerButton";
+import HamburgerButton from './HamburgerButton';
 // import SaveEditButton from './SaveEditButton';
 
-import "../../styles/NavBar.scss";
+import '../../styles/NavBar.scss';
 
 class NavBar extends Component {
   state = {
@@ -52,7 +52,7 @@ class NavBar extends Component {
               className="Nav__link"
               exact
               onClick={this.props.click}
-              to={this.props.context.user ? "/collab/new" : "/login"}
+              to={this.props.context.user ? '/collab/new' : '/login'}
             >
               <span className="Nav__plus-icon">+</span>
               <p className="Nav__plus-icon-text">Create a bundle</p>
@@ -65,7 +65,7 @@ class NavBar extends Component {
               to={
                 this.props.context.user
                   ? `/${this.props.context.user.userName}`
-                  : "/login"
+                  : '/login'
               }
             >
               {/* <div
@@ -108,7 +108,7 @@ class NavBar extends Component {
             </li>
           )}
           <li className="Nav__item hamburger__item">
-            <NavLink className="Nav__link" exact to="/collabs-create">
+            <NavLink className="Nav__link" exact to="/about">
               About
             </NavLink>
           </li>
