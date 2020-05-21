@@ -50,11 +50,16 @@
     border-radius: 5px;
     padding: 10px 15px;
     width: 100%;
-    margin: 8px auto $component-margin;
+    margin: 8px auto $component-margin * 2;
+  }
+
+  &__group {
+    position: relative;
   }
 
   &__error-msg {
-    text-align: center;
+    position: absolute;
+    bottom: 6px;
     color: red;
     font-weight: $light-font-weight;
     padding: 0;
@@ -76,5 +81,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-login {
+    &__error-msg {
+      font-size: 0.8rem;
+    }
   }
 }

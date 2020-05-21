@@ -1,13 +1,15 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import "../styles/Display.scss";
-import "../styles/Edit.scss";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
-import { TextareaAutosize } from "@material-ui/core";
-import { objectToFormData } from "object-to-formdata";
-import Error from "../components/Error";
-import { withUser } from "../components/Auth/withUser";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import apiHandler from '../api/apiHandler';
+import UserContext from '../components/Auth/UserContext';
+import '../styles/Display.scss';
+import '../styles/Edit.scss';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { TextareaAutosize } from '@material-ui/core';
+import { objectToFormData } from 'object-to-formdata';
+import Error from '../components/Error';
+import { withUser } from '../components/Auth/withUser';
 
 /*
 
@@ -21,14 +23,14 @@ class CollabEdit extends Component {
     categoryOptions: [],
     skillOptions: [],
     saved: true,
-    title: "",
-    creator: "",
+    title: '',
+    creator: '',
     contributors: [],
     allUsers: [],
-    description: "",
+    description: '',
     skillsNeeded: [],
     categoryNeeded: [],
-    image: "",
+    image: '',
     open: false,
     error: undefined,
   };
@@ -48,9 +50,9 @@ class CollabEdit extends Component {
     });
   }
   handleFormChange = (e) => {
-    if (e.target.name === "image") {
+    if (e.target.name === 'image') {
       if (e.target.files[0].size > 750000) {
-        this.setState({ error: "Maximum file size: 750kb" });
+        this.setState({ error: 'Maximum file size: 750kb' });
         return;
       }
       const reader = new FileReader();
@@ -69,11 +71,11 @@ class CollabEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.title) {
-      this.setState({ error: "Please enter a title" });
+      this.setState({ error: 'Please enter a title' });
       return;
     }
     if (!this.state.description) {
-      this.setState({ error: "Please enter a description" });
+      this.setState({ error: 'Please enter a description' });
       return;
     }
     let collab = { ...this.state };
@@ -107,8 +109,19 @@ class CollabEdit extends Component {
   handleUserChange = (e, value) => {
     this.setState({ contributors: value, saved: false });
   };
+
+  static contextType = UserContext;
+
   render() {
-    // console.log(this.props.match.params.username);
+    console.log(this.props.match.params.id);
+    // console.log(this.context.user.userCollab.map((el) => el._id));
+    console.log(this.context.user.userCollab);
+    if (
+      !this.context.user ||
+      !this.props.match.params.id.includes(this.context.user.userCollab)
+    ) {
+      return <Redirect to="/error_404" />;
+    }
     return (
       <>
         <form
@@ -121,9 +134,9 @@ class CollabEdit extends Component {
               className="display__collabimagebox"
               style={{
                 backgroundImage:
-                  "url(" +
+                  'url(' +
                   (this.state.temporaryPicture || this.state.image) +
-                  ")",
+                  ')',
               }}
             >
               <input
@@ -143,11 +156,11 @@ class CollabEdit extends Component {
             <button
               className={
                 this.state.saved
-                  ? "edit__button collabbutton saved"
-                  : "edit__button collabbutton unsaved"
+                  ? 'edit__button collabbutton saved'
+                  : 'edit__button collabbutton unsaved'
               }
             >
-              {this.state.saved ? "Saved" : "Save"}
+              {this.state.saved ? 'Saved' : 'Save'}
             </button>
             <h2 className="display__collabtitle">
               <TextareaAutosize
@@ -225,7 +238,7 @@ class CollabEdit extends Component {
                 Created by {this.state.creator.name}
               </li>
               <li className="display__bullet">
-                Preferred method of contact for {this.state.creator.name}:{" "}
+                Preferred method of contact for {this.state.creator.name}:{' '}
                 {this.state.creator.preferredContact}
               </li>
             </ul>
