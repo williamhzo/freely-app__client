@@ -152,3 +152,12 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .card__aside {
+    min-width: 20%;
+  }
+  .feed__card-wrapper--collab {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  }
+}
