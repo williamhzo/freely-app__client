@@ -31,6 +31,8 @@ class Profile extends Component {
     console.log(this.props.context);
     // this.props.history.push("/profile");
     return (
+      // if username is found render if not --> 404
+      // if username is found render if not --> username doesn't exist or has been deleted
       <div className="display container">
         {this.props.context.user &&
           this.props.context.user._id === this.state._id && (

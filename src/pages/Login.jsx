@@ -77,6 +77,7 @@ class Login extends Component {
   };
 
   handleUsername = (e) => {
+    // add regex
     apiHandler.getUser('userName', e.target.value).then((apiRes) => {
       apiRes.length > 0
         ? this.setState({ usernameAvailable: false })
