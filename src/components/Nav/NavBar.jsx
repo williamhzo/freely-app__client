@@ -35,7 +35,7 @@ const NavBar = (props) => {
                 className="Nav__link"
                 exact
                 onClick={props.click}
-                to={context.user ? '/collabs-create' : '/login'}
+                to={context.user ? '/collab/new' : '/login'}
               >
                 <span className="Nav__plus-icon">+</span>
                 <p className="Nav__plus-icon-text">Create a bundle</p>
