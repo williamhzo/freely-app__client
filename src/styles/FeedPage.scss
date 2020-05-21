@@ -42,6 +42,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: $component-margin * 2;
+  margin-bottom: $component-margin * 2;
 }
 
 .feed__card-wrapper--collab {
@@ -49,6 +50,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: $component-margin * 2;
+  margin-bottom: $component-margin * 2;
 }
 
 .card {
