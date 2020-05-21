@@ -125,10 +125,6 @@
     }
   }
 
-  &__input:not(:nth-child(2)) {
-    // margin-top: $component-margin;
-  }
-
   .filter__label {
     color: $secondary-font-color;
     font-size: $detail-text-font-size;
