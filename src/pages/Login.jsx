@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import UserContext from '../components/Auth/UserContext';
-import { withRouter } from 'react-router-dom';
-import apiHandler from '../api/apiHandler';
+import React, { Component } from "react";
+import UserContext from "../components/Auth/UserContext";
+import { withRouter } from "react-router-dom";
+import apiHandler from "../api/apiHandler";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
-import '../styles/Login.scss';
+import "../styles/Login.scss";
 
 class Login extends Component {
   static contextType = UserContext;
@@ -14,11 +14,11 @@ class Login extends Component {
   state = {
     accountExists: false,
     usernameAvailable: false,
-    name: '',
-    userName: '',
-    email: '',
-    password: '',
-    formError: '',
+    name: "",
+    userName: "",
+    email: "",
+    password: "",
+    formError: "",
   };
 
   handleClick = () => {
@@ -40,7 +40,7 @@ class Login extends Component {
       this.setState({ usernameAvailable: false });
       return;
     }
-    apiHandler.getUser('userName', e.target.value).then((apiRes) => {
+    apiHandler.getUser("userName", e.target.value).then((apiRes) => {
       if (apiRes.length > 0) {
         this.setState({ usernameAvailable: true });
       } else {
@@ -50,13 +50,13 @@ class Login extends Component {
   };
 
   isValid = () => {
-    let errorMessage = '';
+    let errorMessage = "";
     if (!this.state.name) {
-      this.setState({ formError: 'You forgot your name!' });
+      this.setState({ formError: "You forgot your name!" });
     } else if (!this.state.userName) {
-      this.setState({ formError: 'You forgot your username!' });
-    } else if (!this.state.email.includes('@')) {
-      this.setState({ formError: 'Please enter a valid email.' });
+      this.setState({ formError: "You forgot your username!" });
+    } else if (!this.state.email.includes("@")) {
+      this.setState({ formError: "Please enter a valid email." });
     } else if (errorMessage) {
       this.setState({ formError: errorMessage });
       return false;
@@ -79,7 +79,7 @@ class Login extends Component {
       .signin({ email, password })
       .then((data) => {
         this.context.setUser(data);
-        this.props.history.push('/');
+        this.props.history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -92,7 +92,7 @@ class Login extends Component {
       .signup({ email, password, name, userName })
       .then((data) => {
         this.context.setUser(data);
-        this.props.history.push('/');
+        this.props.history.push("/" + data._id + "/edit");
       })
       .catch((error) => {
         console.log(error);
@@ -104,7 +104,7 @@ class Login extends Component {
       <div className="login-container">
         {this.state.accountExists && (
           <h2 className="form-login__title">
-            Welcome back!{' '}
+            Welcome back!{" "}
             <span role="img" aria-label="waving-emoji">
               👋
             </span>
@@ -171,13 +171,13 @@ class Login extends Component {
               type="password"
               id="password"
               name="password"
-              placeholder={this.state.accountExists ? null : '5+ characters'}
+              placeholder={this.state.accountExists ? null : "5+ characters"}
             />
           </div>
           <p className="form-login__error-msg">{this.state.formError}</p>
           <div className="form-login__button-group">
             <button className="form-login__button">
-              {this.state.accountExists ? 'Log in' : 'Create Account'}
+              {this.state.accountExists ? "Log in" : "Create Account"}
             </button>
           </div>
         </form>
