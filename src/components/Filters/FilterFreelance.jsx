@@ -21,12 +21,12 @@ class FilterFreelance extends Component {
 
   componentDidMount() {
     apiHandler
-      .filterUsedCategories()
+      .filterUsedCategoriesUsers()
       .then((res) => this.setState({ categoriesUsed: res }))
       .catch((err) => console.log(err));
 
     apiHandler
-      .filterUsedSkills()
+      .filterUsedSkillsUsers()
       .then((res) => this.setState({ skillsUsed: res }))
       .catch((err) => console.log(err));
 
