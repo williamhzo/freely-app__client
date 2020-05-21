@@ -33,8 +33,6 @@ class Profile extends Component {
     }
   }
   render() {
-    console.log(this.props.context);
-    console.log(this.props.match.params.username);
     // this.props.history.push("/profile");
     // if(this.props.match.params.username !== )
     return (

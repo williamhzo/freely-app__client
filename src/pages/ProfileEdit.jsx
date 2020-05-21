@@ -65,7 +65,7 @@ export default class ProfileEdit extends Component {
       });
       return;
     }
-    if (!this.state.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,10}$/)) {
+    if (this.state.email && !this.state.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,10}$/)) {
       this.setState({ error: 'Please enter a valid address.' });
       return;
     }
