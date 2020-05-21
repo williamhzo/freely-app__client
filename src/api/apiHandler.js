@@ -175,7 +175,7 @@ export default {
   },
   checkNotifications(id) {
     return service
-      .get(`/api/messages/unread` + id)
+      .get(`/api/messages/unread/` + id)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   },
