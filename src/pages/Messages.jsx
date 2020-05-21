@@ -20,6 +20,7 @@ class Messages extends Component {
         apiHandler
           .getAllMessages(this.state.currentUser._id)
           .then((apiRes) => {
+            console.log(apiRes);
             this.setState({ messages: apiRes });
           })
           .catch((err) => console.log(err));
@@ -80,16 +81,13 @@ class Messages extends Component {
         </div>
         <div className="messages__list">
           {this.state.messages ? (
-            this.state.messages.map((message, index) => {
-              if (message.messages.length > 1) {
-                return (
-                  <MessageCard
-                    message={message}
-                    user={this.state.currentUser}
-                  />
-                );
-              }
-              return null;
+            this.state.messages.map((message) => {
+              // if (message.messages.length > 1) {
+              return (
+                <MessageCard message={message} user={this.state.currentUser} />
+              );
+              // }
+              // return null;
             })
           ) : (
             <p>No messages to display</p>
