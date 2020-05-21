@@ -1,35 +1,42 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import Badges from "../components/Badges";
-import LinkIcon from "../components/LinkIcon";
-import "../styles/Display.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import apiHandler from '../api/apiHandler';
+import Badges from '../components/Badges';
+import LinkIcon from '../components/LinkIcon';
+import '../styles/Display.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMapMarkerAlt,
   faGlobeEurope,
   faCommentAlt,
   faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
-import { withUser } from "../components/Auth/withUser";
+} from '@fortawesome/free-solid-svg-icons';
+import { withUser } from '../components/Auth/withUser';
 
 class Profile extends Component {
   state = {};
   componentDidMount() {
     apiHandler
-      .getUser("userName", this.props.match.params.username)
+      .getUser('userName', this.props.match.params.username)
       .then((apiRes) => {
-        this.setState(apiRes[0]);
-      });
+        if (apiRes.length > 0) {
+          this.setState(apiRes[0]);
+        } else {
+          this.props.history.push('/error_404');
+        }
+      })
+      .catch((err) => console.log(err));
   }
   parselink(link) {
     let regex = /^http/;
     if (!link.match(regex)) {
-      return "http://" + link;
+      return 'http://' + link;
     }
   }
   render() {
     console.log(this.props.context);
+    console.log(this.props.match.params.username);
     // this.props.history.push("/profile");
+    // if(this.props.match.params.username !== )
     return (
       // if username is found render if not --> 404
       // if username is found render if not --> username doesn't exist or has been deleted
@@ -37,9 +44,9 @@ class Profile extends Component {
         {this.props.context.user &&
           this.props.context.user._id === this.state._id && (
             <button
-              className={"edit__button collabbutton"}
+              className={'edit__button collabbutton'}
               onClick={() => {
-                this.props.history.push("/" + this.state.userName + "/edit");
+                this.props.history.push('/' + this.state.userName + '/edit');
               }}
             >
               Edit
@@ -56,7 +63,7 @@ class Profile extends Component {
         )}
         <h2 className="display__name">{this.state.name}</h2>
         {this.state.userCategory && (
-          <Badges data={this.state.userCategory} label={"name"} />
+          <Badges data={this.state.userCategory} label={'name'} />
         )}
         {this.state.title && (
           <div className="display__title">{this.state.title}</div>
@@ -100,7 +107,7 @@ class Profile extends Component {
               <span className="bulleticon">
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
               </span>
-              Based in {this.state.location || ""}
+              Based in {this.state.location || ''}
             </li>
           )}
           {this.state.preferredContact && (
@@ -114,9 +121,9 @@ class Profile extends Component {
         </ul>
         {this.state.userSkills && (
           <Badges
-            heading={"Skills"}
+            heading={'Skills'}
             data={this.state.userSkills}
-            label={"name"}
+            label={'name'}
             className="display__fullwidth"
           />
         )}

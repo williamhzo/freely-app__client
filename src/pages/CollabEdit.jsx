@@ -113,13 +113,8 @@ class CollabEdit extends Component {
   static contextType = UserContext;
 
   render() {
-    console.log(this.props.match.params.id);
-    // console.log(this.context.user.userCollab.map((el) => el._id));
-    console.log(this.context.user.userCollab);
-    if (
-      !this.context.user ||
-      !this.props.match.params.id.includes(this.context.user.userCollab)
-    ) {
+    // protection on route
+    if (this.state.creator.userName !== this.context.user.username) {
       return <Redirect to="/error_404" />;
     }
     return (
