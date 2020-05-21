@@ -117,17 +117,31 @@ export default {
       .catch(errorHandler);
   },
 
-  filterUsedSkills() {
+  filterUsedSkillsUsers() {
     return service
       .get("/api/skills")
       .then((res) => res.data.filter((el) => el.currentlyInUse))
       .catch(errorHandler);
   },
 
-  filterUsedCategories() {
+  filterUsedCategoriesUsers() {
     return service
       .get("/api/categories")
       .then((res) => res.data.filter((el) => el.currentlyInUse))
+      .catch((err) => console.log(err));
+  },
+
+  filterUsedSkillsCollabs() {
+    return service
+      .get("/api/skills")
+      .then((res) => res.data.filter((el) => el.currentlyInUseOnCollabs))
+      .catch(errorHandler);
+  },
+
+  filterUsedCategoriesCollabs() {
+    return service
+      .get("/api/categories")
+      .then((res) => res.data.filter((el) => el.currentlyInUseOnCollabs))
       .catch((err) => console.log(err));
   },
 
