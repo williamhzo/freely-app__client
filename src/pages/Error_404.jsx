@@ -16,10 +16,14 @@ const Error_404 = () => {
         className="error-page__image"
       />
       <div className="error-page__body">
-        <p>wtf did you type in the URL?!</p>
+        <p>Sorry, this user doesn't exist or has been deleted.</p>
         <Link to="/">
           <h3>
-            <FontAwesomeIcon icon={faChevronLeft} className='error-page__body--icon' /> Back home
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              className="error-page__body--icon"
+            />{' '}
+            Back home
           </h3>
         </Link>
       </div>
