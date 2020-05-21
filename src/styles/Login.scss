@@ -83,3 +83,11 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 768px) {
+  .form-login {
+    &__error-msg {
+      font-size: 0.8rem;
+    }
+  }
+}
