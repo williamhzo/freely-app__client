@@ -1,10 +1,10 @@
-import React from "react";
-import Tabs from "../components/Nav/Tabs";
-import apiHandler from "../api/apiHandler";
-import FilterCollab from "../components/Filters/FilterCollab";
-import CollabCard from "../components/Cards/CollabCard";
+import React from 'react';
+import Tabs from '../components/Nav/Tabs';
+import apiHandler from '../api/apiHandler';
+import FilterCollab from '../components/Filters/FilterCollab';
+import CollabCard from '../components/Cards/CollabCard';
 
-import "../styles/FeedPage.scss";
+import '../styles/FeedPage.scss';
 
 class CollabsFeed extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class CollabsFeed extends React.Component {
 
         {!this.state.collabs && (
           <h2>
-            Sorry, no collaborations found{" "}
+            Sorry, no collaborations found{' '}
             <span role="img" aria-label="confused-face-emoji">
               😕
             </span>
@@ -43,10 +43,11 @@ class CollabsFeed extends React.Component {
           collabs={this.state.collabs}
           updateCollabsFeed={this.updateCollabsFeed}
         />
-
-        {this.state.filteredCollabs.map((collab, index) => (
-          <CollabCard key={index} collab={collab} />
-        ))}
+        <div className="feed__card-wrapper--collab">
+          {this.state.filteredCollabs.map((collab, index) => (
+            <CollabCard key={index} collab={collab} />
+          ))}
+        </div>
       </div>
     );
   }
