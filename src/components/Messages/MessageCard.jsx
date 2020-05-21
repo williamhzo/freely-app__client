@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class MessageCard extends Component {
   componentDidMount() {
@@ -6,7 +6,7 @@ export default class MessageCard extends Component {
   }
   truncateMessage(message, length) {
     if (message.length > length) {
-      return message.substring(0, length) + "...";
+      return message.substring(0, length) + '...';
     } else return message;
   }
   render() {
@@ -16,7 +16,7 @@ export default class MessageCard extends Component {
     const correspondent =
       recipients[0]._id === user._id ? recipients[1] : recipients[0];
     return (
-      <a href={"/messages/" + _id} className="messages__onemessage">
+      <a href={'/messages/' + _id} className="messages__onemessage">
         <img
           src={correspondent.profilePicture}
           className="messages__avatar"
@@ -27,9 +27,9 @@ export default class MessageCard extends Component {
           {!!lastMessage && (
             <div className="messages__lastmessage">
               {console.log(lastMessage.author)}
-              {lastMessage.author == user._id
-                ? "You: "
-                : correspondent.name + ": "}
+              {lastMessage.author === user._id
+                ? 'You: '
+                : correspondent.name + ': '}
               {this.truncateMessage(lastMessage.content, 100)}
             </div>
           )}
