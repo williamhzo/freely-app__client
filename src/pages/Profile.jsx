@@ -29,8 +29,10 @@ class Profile extends Component {
   }
   parselink(link) {
     let regex = /^http/;
-    if (link.match(regex)) {
+    if (!link.match(regex)) {
       return 'http://' + link;
+    } else {
+      return link;
     }
   }
   render() {
