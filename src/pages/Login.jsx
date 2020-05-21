@@ -81,9 +81,8 @@ class Login extends Component {
         default:
           break;
       }
-      this.setState({ [name]: value, formErrors });
-    } else {
     }
+    this.setState({ [name]: value, formErrors });
   };
 
   handleUsername = (e) => {
@@ -125,7 +124,6 @@ class Login extends Component {
           .signup({ email, password, name, userName })
           .then((data) => {
             this.context.setUser(data);
-            console.log(data._id);
             this.props.history.push('/' + data.userName + '/edit');
           })
           .catch((error) => {
