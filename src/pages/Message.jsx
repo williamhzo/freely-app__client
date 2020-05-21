@@ -13,6 +13,9 @@ class Message extends Component {
     recipients: undefined,
   };
   sendMessage = () => {
+    if (!this.state.newMessage) {
+      return;
+    }
     const message = {
       time: Date.now(),
       author: this.props.context.user,
