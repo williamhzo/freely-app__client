@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import apiHandler from '../api/apiHandler';
+import { Link } from 'react-router-dom';
 import Badges from '../components/Badges';
 import LinkIcon from '../components/LinkIcon';
 import '../styles/Display.scss';
@@ -28,16 +29,12 @@ class Profile extends Component {
   }
   parselink(link) {
     let regex = /^http/;
-    if (!link.match(regex)) {
+    if (link.match(regex)) {
       return 'http://' + link;
     }
   }
   render() {
-    // this.props.history.push("/profile");
-    // if(this.props.match.params.username !== )
     return (
-      // if username is found render if not --> 404
-      // if username is found render if not --> username doesn't exist or has been deleted
       <div className="display container">
         {this.props.context.user &&
           this.props.context.user._id === this.state._id && (
