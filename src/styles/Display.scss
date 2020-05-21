@@ -90,9 +90,8 @@
     width: 100%;
     background: $box-info-color;
     border-radius: $card-border-radius;
-    padding: 30px;
-    padding-left: 35px;
-    font-size: 1.1em;
+    padding: $component-margin;
+    font-size: 1rem;
     h3 {
       margin-bottom: 10px;
       &:not(:first-child) {
