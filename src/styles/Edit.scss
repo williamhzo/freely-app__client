@@ -1,4 +1,4 @@
-@import "/variables";
+@import '/variables';
 
 .input--hidden {
   display: none;
@@ -46,7 +46,7 @@
     position: absolute;
     bottom: 15px;
     right: 25px;
-    content: "EDIT";
+    content: 'EDIT';
     color: white;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
   }
@@ -99,9 +99,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    // margin-right: $component-margin/2;
     svg {
-      margin-left: 10px;
+      margin: 0 ($component-margin/2);
     }
+  }
+  &__contributor {
+    margin-left: 4px;
   }
   &__location {
     position: relative;
@@ -151,7 +155,7 @@
       margin-bottom: -2px;
     }
     svg {
-      color: #404040;
+      color: $primary-font-color;
       font-size: 1.2em;
       margin-left: 25px;
       cursor: pointer;
@@ -246,7 +250,7 @@
 .MuiAutocomplete-option,
 .MuiInputBase-root,
 .MuiChip-root {
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
 }
 
 // Mapbox API autocomplete

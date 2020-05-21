@@ -1,9 +1,5 @@
 @import './variables.scss';
 
-.display--collab {
-  margin-top: $component-margin;
-}
-
 .display {
   padding-top: $component-margin * 2;
 
@@ -15,7 +11,7 @@
 
   background-color: $background-color;
   &__heading {
-    margin: $component-margin 0;
+    margin: $component-margin $component-margin $component-margin/2 0;
     align-self: flex-start;
     font-size: $title-h3-font-size;
   }
@@ -29,11 +25,11 @@
   }
   &__collabimagebox {
     width: 100%;
-    height: 0px;
+    height: 250px;
     box-sizing: border-box;
     background-size: cover;
     background-position: center center;
-    padding-top: 30%;
+    // padding-top: 30%;
     overflow: hidden;
   }
   &__collabbody:not(p) {
@@ -85,7 +81,7 @@
   }
   &__bullets[class] {
     margin-top: $component-margin;
-    width: 90%;
+    width: 100%;
     background: $box-info-color;
     border-radius: $card-border-radius;
     padding: $component-margin;
@@ -125,7 +121,7 @@
     border-radius: $btn-primary-radius;
     color: $btn-primary-font-color;
     padding: 4px 8px;
-    margin: 5px;
+    margin: 0 $component-margin/4 $component-margin/2 $component-margin/4;
   }
   &__badgelist {
     display: flex;
@@ -163,9 +159,10 @@
   &__skillsneeded {
     align-self: stretch;
   }
-  .svg-inline--fa {
-    color: #383838;
-  }
+}
+
+.svg-inline--fa {
+  color: $primary-font-color;
 }
 
 @media (min-width: 768px) {
