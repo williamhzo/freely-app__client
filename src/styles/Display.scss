@@ -121,7 +121,7 @@
     border-radius: $btn-primary-radius;
     color: $btn-primary-font-color;
     padding: 4px 8px;
-    margin: 0 $component-margin/4 $component-margin/2 $component-margin/4;
+    margin: 0 $component-margin/2 $component-margin/2 0;
   }
   &__badgelist {
     display: flex;
