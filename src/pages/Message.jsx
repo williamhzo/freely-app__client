@@ -30,6 +30,13 @@ class Message extends Component {
       .catch((err) => console.log(err));
   };
   componentDidMount = () => {
+    setInterval(this.checkMessage, 1000);
+  };
+
+  // Check messages
+
+  checkMessage = () => {
+    console.log("Check messages");
     apiHandler.getOneMessage(this.props.match.params.id).then((apiRes) =>
       this.setState(
         {
