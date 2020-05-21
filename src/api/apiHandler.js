@@ -11,6 +11,7 @@ function errorHandler(error) {
     throw error;
   }
   throw error;
+  // display server error pages here
 }
 
 export default {
