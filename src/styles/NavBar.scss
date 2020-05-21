@@ -1,4 +1,4 @@
-@import '/variables';
+@import "/variables";
 
 .Nav {
   position: fixed;
@@ -47,6 +47,22 @@
     width: 36px;
     // border: 1px solid black;
     // border-radius: 50%;
+  }
+
+  &__messages {
+    position: relative;
+  }
+
+  &__notification {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 15%;
+    right: -4px;
+    border: 1px solid $background-color;
+    z-index: 101;
   }
 
   &__item {
@@ -176,7 +192,7 @@
   }
 
   .Nav__link::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -8px;

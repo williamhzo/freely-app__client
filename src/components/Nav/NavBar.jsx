@@ -1,17 +1,20 @@
 // import React, { useState } from 'react';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { withUser } from '../Auth/withUser';
-import UserContext from '../Auth/UserContext';
-import apiHandler from '../../api/apiHandler';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import { withUser } from "../Auth/withUser";
+import UserContext from "../Auth/UserContext";
+import apiHandler from "../../api/apiHandler";
 
-import HamburgerButton from './HamburgerButton';
+import HamburgerButton from "./HamburgerButton";
 // import SaveEditButton from './SaveEditButton';
 
-import '../../styles/NavBar.scss';
+import "../../styles/NavBar.scss";
 
-const NavBar = (props) => {
-  const handleLogout = (removeUserCallBack) => {
+class NavBar extends Component {
+  state = {
+    notification: false,
+  };
+  handleLogout = (removeUserCallBack) => {
     apiHandler
       .logout()
       .then(() => {
@@ -21,33 +24,54 @@ const NavBar = (props) => {
         console.log(error);
       });
   };
+  checkNotifications = () => {
+    if (this.props.context.user) {
+      apiHandler
+        .checkNotifications(this.props.context.user._id)
+        .then((apiRes) => {
+          console.log(apiRes);
+          if (apiRes) {
+            this.setState({ notification: true });
+          }
+        });
+    }
+  };
+  componentDidMount = () => {
+    console.log("mount");
+    setInterval(this.checkNotifications, 2000);
+  };
+
   // const [isEditing, setEdit] = useState(false);
-  return (
-    <UserContext.Consumer>
-      {(context) => (
-        <nav id="Nav" className="Nav">
-          <NavLink exact onClick={props.click} to="/">
-            <h3 className="Nav__logo">Freely</h3>
-          </NavLink>
-          <ul className="Nav__list">
-            <li className="Nav__item">
-              <NavLink
-                className="Nav__link"
-                exact
-                onClick={props.click}
-                to={context.user ? '/collab/new' : '/login'}
-              >
-                <span className="Nav__plus-icon">+</span>
-                <p className="Nav__plus-icon-text">Create a bundle</p>
-              </NavLink>
-            </li>
-            <li className="Nav__item">
-              <NavLink
-                className="Nav__link"
-                onClick={props.click}
-                to={context.user ? `/${context.user.userName}` : '/login'}
-              >
-                {/* <div
+  render() {
+    return (
+      <nav id="Nav" className="Nav">
+        {console.log(this.state)}
+        <NavLink exact onClick={this.props.click} to="/">
+          <h3 className="Nav__logo">Freely</h3>
+        </NavLink>
+        <ul className="Nav__list">
+          <li className="Nav__item">
+            <NavLink
+              className="Nav__link"
+              exact
+              onClick={this.props.click}
+              to={this.props.context.user ? "/collab/new" : "/login"}
+            >
+              <span className="Nav__plus-icon">+</span>
+              <p className="Nav__plus-icon-text">Create a bundle</p>
+            </NavLink>
+          </li>
+          <li className="Nav__item">
+            <NavLink
+              className="Nav__link"
+              onClick={this.props.click}
+              to={
+                this.props.context.user
+                  ? `/${this.props.context.user.userName}`
+                  : "/login"
+              }
+            >
+              {/* <div
                   className="Nav__avatar"
                   style={{
                     backgroundImage: context.user
@@ -55,7 +79,7 @@ const NavBar = (props) => {
                       : 'url("media/avatar2.png")',
                   }}
                 ></div> */}
-                {/* {context.user && (
+              {/* {context.user && (
                   <div
                     className="Nav__avatar"
                     style={{
@@ -63,53 +87,59 @@ const NavBar = (props) => {
                     }}
                   ></div>
                 )} */}
-                {context.user && <div>{context.user.name}</div>}
-                {!context.user && <div>Profile</div>}
+              {this.props.context.user && (
+                <div>{this.props.context.user.name}</div>
+              )}
+              {!this.props.context.user && <div>Profile</div>}
+            </NavLink>
+          </li>
+          <li className="Nav__item hamburger__button">
+            <HamburgerButton
+              click={this.props.hamburgerClickHandler}
+              hamburgerToggle={this.props.toggled}
+              // context={context}
+            />
+          </li>
+          {this.props.context.user && (
+            <li className="Nav__item hamburger__item  Nav__messages">
+              <NavLink className="Nav__link" exact to="/messages">
+                Messages
               </NavLink>
+              {this.state.notification && (
+                <div className="Nav__notification"></div>
+              )}
             </li>
-            <li className="Nav__item hamburger__button">
-              <HamburgerButton
-                click={props.hamburgerClickHandler}
-                hamburgerToggle={props.toggled}
-                // context={context}
-              />
-            </li>
-            {context.user && (
-              <li className="Nav__item hamburger__item">
-                <NavLink className="Nav__link" exact to="/messages">
-                  Messages
-                </NavLink>
-              </li>
-            )}
+          )}
+          <li className="Nav__item hamburger__item">
+            <NavLink className="Nav__link" exact to="/collabs-create">
+              About
+            </NavLink>
+          </li>
+          {this.props.context.user && (
             <li className="Nav__item hamburger__item">
-              <NavLink className="Nav__link" exact to="/collabs-create">
-                About
+              <NavLink
+                className="Nav__link"
+                exact
+                to="/"
+                onClick={(e) =>
+                  this.handleLogout(this.props.context.removeUser)
+                }
+              >
+                Log Out
               </NavLink>
             </li>
-            {context.user && (
-              <li className="Nav__item hamburger__item">
-                <NavLink
-                  className="Nav__link"
-                  exact
-                  to="/"
-                  onClick={(e) => handleLogout(context.removeUser)}
-                >
-                  Log Out
-                </NavLink>
-              </li>
-            )}
-            {!context.user && (
-              <li className="Nav__item hamburger__item primary-btn">
-                <NavLink className="Nav__link" exact to="/login">
-                  Join
-                </NavLink>
-              </li>
-            )}
-          </ul>
-        </nav>
-      )}
-    </UserContext.Consumer>
-  );
-};
+          )}
+          {!this.props.context.user && (
+            <li className="Nav__item hamburger__item primary-btn">
+              <NavLink className="Nav__link" exact to="/login">
+                Join
+              </NavLink>
+            </li>
+          )}
+        </ul>
+      </nav>
+    );
+  }
+}
 
 export default withUser(NavBar);
