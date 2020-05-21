@@ -54,6 +54,7 @@ button,
 textarea,
 select {
   font: inherit;
+  outline: none;
 }
 img:not([alt]) {
   filter: blur(10px);
