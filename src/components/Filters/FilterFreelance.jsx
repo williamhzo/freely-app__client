@@ -37,65 +37,67 @@ class FilterFreelance extends Component {
   }
 
   handleCityChange = (e, value) => {
-    this.setState({ filterCity: value });
-    this.handleFreelancersUpdate(
-      value,
-      this.state.filterCategory,
-      this.state.filterSkill
-    );
+    this.setState({ filterCity: value }, () => {
+      this.handleFreelancersUpdate(
+        this.state.filterCity,
+        this.state.filterCategory,
+        this.state.filterSkill
+      );
+    });
   };
 
   handleCategoryChange = (e, value) => {
-    this.setState({ filterCategory: value });
-    this.handleFreelancersUpdate(
-      this.state.filterCity,
-      value,
-      this.state.filterSkill
-    );
+    this.setState({ filterCategory: value }, () => {
+      this.handleFreelancersUpdate(
+        this.state.filterCity,
+        this.state.filterCategory,
+        this.state.filterSkill
+      );
+    });
   };
 
   handleSkillChange = (e, value) => {
-    this.setState({ filterSkill: value });
-    this.handleFreelancersUpdate(
-      this.state.filterCity,
-      this.state.filterCategory,
-      value
-    );
+    this.setState({ filterSkill: value }, () => {
+      this.handleFreelancersUpdate(
+        this.state.filterCity,
+        this.state.filterCategory,
+        this.state.filterSkill
+      );
+    });
   };
 
   handleFreelancersUpdate = (location, categories, skills) => {
     let filteredFreelancers = [...this.props.freelancers];
+
     if (location) {
-      filteredFreelancers = filteredFreelancers.filter((user) => {
-        console.log(location);
-        console.log(user.location);
-        user.location.includes(location);
-      });
+      filteredFreelancers = filteredFreelancers.filter((user) =>
+        user.location.includes(location)
+      );
     }
 
     if (categories) {
       categories.forEach((category) => {
-        filteredFreelancers = filteredFreelancers.filter(
-          // (user) => user.userCategory[0]._id === category._id
-          // (user) => user.userCategory.includes(category)
-          (user) => {
-            for (let i = 0; i < user.userCategory.length; i++) {
-              return user.userCategory[i]._id === category._id;
-            }
-          }
-          // }
-        );
+        filteredFreelancers = filteredFreelancers.filter((user) => {
+          return user.userCategory.filter(
+            (userCat) => userCat._id === category._id
+          ).length > 0
+            ? true
+            : false;
+        });
       });
-      // return filteredFreelancers
-      // this.props.updateFreelancersFeed(filteredFreelancers);
-      // console.log(filteredFreelancers);
     }
-    if (skills)
+
+    if (skills) {
       skills.forEach((skill) => {
-        filteredFreelancers = filteredFreelancers.filter((user) =>
-          user.userSkills.includes(skill)
-        );
+        filteredFreelancers = filteredFreelancers.filter((user) => {
+          return user.userSkills.filter((userSk) => userSk._id === skill._id)
+            .length > 0
+            ? true
+            : false;
+        });
       });
+    }
+
     this.props.updateFreelancersFeed(filteredFreelancers);
   };
 
