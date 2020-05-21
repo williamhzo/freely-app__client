@@ -4,9 +4,7 @@ export default class MessageCard extends Component {
   state = {
     unread: null,
   };
-  componentDidMount() {
-    console.log(this.props);
-  }
+  componentDidMount() {}
   truncateMessage(message, length) {
     if (message.length > length) {
       return message.substring(0, length) + "...";
@@ -25,8 +23,6 @@ export default class MessageCard extends Component {
           },
           () => {
             if (this.state.lastMessage.author !== this.state.user._id) {
-              console.log("dont Match");
-              console.log(this.state);
               if (this.state.unread) {
                 this.setState({ unread: true });
               }
@@ -36,7 +32,6 @@ export default class MessageCard extends Component {
           }
         );
       }
-      console.log(this.state);
     });
   };
 
@@ -61,7 +56,6 @@ export default class MessageCard extends Component {
               </div>
               {!!this.state.lastMessage && (
                 <div className="messages__lastmessage">
-                  {console.log(this.state.lastMessage.author)}
                   {this.state.lastMessage.author === this.state.user._id
                     ? "You: "
                     : this.state.correspondent.name + ": "}

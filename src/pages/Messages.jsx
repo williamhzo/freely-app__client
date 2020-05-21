@@ -82,7 +82,6 @@ class Messages extends Component {
           {this.state.messages ? (
             this.state.messages.map((message, index) => {
               if (message.messages.length > 1) {
-                console.log(message);
                 return (
                   <MessageCard
                     message={message}

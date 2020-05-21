@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import apiHandler from '../../api/apiHandler';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from "react";
+import apiHandler from "../../api/apiHandler";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
 
 class FilterFreelance extends Component {
   state = {
@@ -66,9 +66,11 @@ class FilterFreelance extends Component {
   handleFreelancersUpdate = (location, categories, skills) => {
     let filteredFreelancers = [...this.props.freelancers];
     if (location) {
-      filteredFreelancers = filteredFreelancers.filter((user) =>
-        user.location.includes(location)
-      );
+      filteredFreelancers = filteredFreelancers.filter((user) => {
+        console.log(location);
+        console.log(user.location);
+        user.location.includes(location);
+      });
     }
 
     if (categories) {
@@ -108,7 +110,7 @@ class FilterFreelance extends Component {
             value={this.state.filterCity}
             limitTags={3}
             id="tags-outlined"
-            options={this.state.citiesUsed || ''}
+            options={this.state.citiesUsed || ""}
             // defaultValue="search"
             getOptionLabel={(option) => option} // specify what property to use
             filterSelectedOptions
@@ -124,7 +126,7 @@ class FilterFreelance extends Component {
             limitTags={3}
             id="tags-outlined"
             value={this.state.filterCategory}
-            options={this.state.categoriesUsed || ''}
+            options={this.state.categoriesUsed || ""}
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}
@@ -139,7 +141,7 @@ class FilterFreelance extends Component {
             value={this.state.filterSkill}
             limitTags={3}
             id="tags-outlined"
-            options={this.state.skillsUsed || ''}
+            options={this.state.skillsUsed || ""}
             getOptionLabel={(option) => option.name} // specify what property to use
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} />}

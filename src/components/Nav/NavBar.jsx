@@ -29,7 +29,6 @@ class NavBar extends Component {
       apiHandler
         .checkNotifications(this.props.context.user._id)
         .then((apiRes) => {
-          console.log(apiRes);
           if (apiRes) {
             this.setState({ notification: true });
           }
@@ -37,7 +36,6 @@ class NavBar extends Component {
     }
   };
   componentDidMount = () => {
-    console.log("mount");
     setInterval(this.checkNotifications, 2000);
   };
 
@@ -45,7 +43,6 @@ class NavBar extends Component {
   render() {
     return (
       <nav id="Nav" className="Nav">
-        {console.log(this.state)}
         <NavLink exact onClick={this.props.click} to="/">
           <h3 className="Nav__logo">Freely</h3>
         </NavLink>

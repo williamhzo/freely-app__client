@@ -18,7 +18,6 @@ export default class OneMessage extends Component {
       time.getMonth() +
       "/" +
       time.getFullYear();
-    console.log(readableDate);
     return (
       <div className={"message__onemessage " + (own ? "sent" : "received")}>
         <div className="message__time">{readableDate}</div>
