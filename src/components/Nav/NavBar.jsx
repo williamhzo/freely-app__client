@@ -55,7 +55,7 @@ class NavBar extends Component {
               to={this.props.context.user ? '/collab/new' : '/login'}
             >
               <span className="Nav__plus-icon">+</span>
-              <p className="Nav__plus-icon-text">Create a bundle</p>
+              <p className="Nav__plus-icon-text">Create a project</p>
             </NavLink>
           </li>
           <li className="Nav__item">
