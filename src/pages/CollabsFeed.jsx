@@ -3,6 +3,7 @@ import Tabs from '../components/Nav/Tabs';
 import apiHandler from '../api/apiHandler';
 import FilterCollab from '../components/Filters/FilterCollab';
 import CollabCard from '../components/Cards/CollabCard';
+import AboutUsCard from '../components/Cards/AboutUsCard';
 
 import '../styles/FeedPage.scss';
 
@@ -45,7 +46,10 @@ class CollabsFeed extends React.Component {
         />
         <div className="feed__card-wrapper--collab">
           {this.state.filteredCollabs.map((collab, index) => (
-            <CollabCard key={index} collab={collab} />
+            <>
+              {index === 3 && <AboutUsCard />}
+              <CollabCard key={index} collab={collab} />
+            </>
           ))}
         </div>
       </div>

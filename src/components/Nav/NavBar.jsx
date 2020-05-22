@@ -2,11 +2,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
-import UserContext from '../Auth/UserContext';
 import apiHandler from '../../api/apiHandler';
 
 import HamburgerButton from './HamburgerButton';
-// import SaveEditButton from './SaveEditButton';
 
 import '../../styles/NavBar.scss';
 
@@ -44,7 +42,9 @@ class NavBar extends Component {
     return (
       <nav id="Nav" className="Nav">
         <NavLink exact onClick={this.props.click} to="/">
-          <h3 className="Nav__logo">Freely<span className='Nav__logo--colored-dot'>.</span></h3>
+          <h3 className="Nav__logo">
+            Freely<span className="Nav__logo--colored-dot">.</span>
+          </h3>
         </NavLink>
         <ul className="Nav__list">
           <li className="Nav__item">
@@ -55,7 +55,7 @@ class NavBar extends Component {
               to={this.props.context.user ? '/collab/new' : '/login'}
             >
               <span className="Nav__plus-icon">+</span>
-              <p className="Nav__plus-icon-text">Create a project</p>
+              <p className="Nav__plus-icon-text">Create a Project</p>
             </NavLink>
           </li>
           <li className="Nav__item">

@@ -1,5 +1,5 @@
-@import "/variables";
-@import "/Edit";
+@import '/variables';
+@import '/Edit';
 
 .message {
   height: 100%;
@@ -42,7 +42,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 0.8em;
-    font-weight: bold;
+    font-weight: 400;
     text-transform: uppercase;
   }
   &__scrollcontainer {
