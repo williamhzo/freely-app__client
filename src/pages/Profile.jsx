@@ -35,24 +35,55 @@ class Profile extends Component {
       return link;
     }
   }
+  sendMessage = () => {
+    apiHandler.getAllMessages(this.props.context.user._id).then((messages) => {
+      // console.log(messages);
+      let filtered = messages.filter((message) => {
+        let recipients = [message.recipients[0]._id, message.recipients[1]._id];
+        return (
+          recipients.includes(this.state._id) &&
+          recipients.includes(this.props.context.user._id)
+        );
+      });
+      if (filtered.length > 0) {
+        this.props.history.push(`/messages/` + filtered[0]._id);
+      } else {
+        apiHandler
+          .createMessageThread(this.props.context.user._id, this.state._id)
+          .then((apiRes) => {
+            this.props.history.push(`/messages/` + apiRes._id);
+          });
+      }
+    });
+  };
   render() {
     return (
       <div className="display container">
         {this.state.userName && (
           <>
-            {this.props.context.user &&
-              this.props.context.user._id === this.state._id && (
-                <button
-                  className={"edit__button collabbutton"}
-                  onClick={() => {
-                    this.props.history.push(
-                      "/" + this.state.userName + "/edit"
-                    );
-                  }}
-                >
-                  Edit
-                </button>
-              )}
+            {this.props.context.isLoggedIn && (
+              <div className="profile__buttons">
+                {this.props.context.user._id == this.state._id ? (
+                  <button
+                    className={"edit__button collabbutton"}
+                    onClick={() => {
+                      this.props.history.push(
+                        "/" + this.state.userName + "/edit"
+                      );
+                    }}
+                  >
+                    Edit
+                  </button>
+                ) : (
+                  <button
+                    onClick={this.sendMessage}
+                    className="edit__button collabbutton"
+                  >
+                    Message
+                  </button>
+                )}
+              </div>
+            )}
             {this.state.profilePicture && (
               <div className="display__avatarbox">
                 <img
