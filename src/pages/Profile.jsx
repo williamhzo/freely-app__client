@@ -77,7 +77,7 @@ class Profile extends Component {
                 ) : (
                   <button
                     onClick={this.sendMessage}
-                    className="edit__button collabbutton"
+                    className="message__button"
                   >
                     Message
                   </button>
