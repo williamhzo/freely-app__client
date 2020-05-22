@@ -2,11 +2,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
-import UserContext from '../Auth/UserContext';
 import apiHandler from '../../api/apiHandler';
 
 import HamburgerButton from './HamburgerButton';
-// import SaveEditButton from './SaveEditButton';
 
 import '../../styles/NavBar.scss';
 

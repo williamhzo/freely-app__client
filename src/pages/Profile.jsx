@@ -63,7 +63,7 @@ class Profile extends Component {
           <>
             {this.props.context.isLoggedIn && (
               <div className="profile__buttons">
-                {this.props.context.user._id == this.state._id ? (
+                {this.props.context.user._id === this.state._id ? (
                   <button
                     className={'edit__button collabbutton'}
                     onClick={() => {
