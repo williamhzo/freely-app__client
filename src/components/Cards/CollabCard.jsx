@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 const CollabCard = ({ collab }) => {
   return (
-    <Link className="card" to={`/collab/${collab._id}`}>
+    <Link className="card--collab" to={`/collab/${collab._id}`}>
       <div
         style={{ backgroundImage: `url(${collab.image})` }}
-        className="card__aside"
+        className="card--collab__aside--collab"
       ></div>
-      <div className="card__body">
-        <h3 className="card__title">{collab.title}</h3>
-        <p className="card__copy">{collab.description}</p>
-        <p className="card__copy">
+      <div className="card--collab__body--collab">
+        <h3 className="card--collab__title">{collab.title}</h3>
+        <p className="card--collab__copy">{collab.description}</p>
+        <p className="card--collab__copy">
           {collab.open
             ? 'Accepting coworkers!'
             : 'This project team is complete.'}
