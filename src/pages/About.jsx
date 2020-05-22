@@ -1,13 +1,60 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { TextareaAutosize } from '@material-ui/core';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { TextareaAutosize } from "@material-ui/core";
+import axios from "axios";
 
-import '../styles/About.scss';
+import "../styles/About.scss";
+import "../styles/Edit.scss";
 
 class About extends Component {
+  state = {
+    email: "",
+    body: "",
+    sent: false,
+    placeholder: "Your message...",
+  };
+  handleEmailChange = (e) => {
+    this.setState({ email: e.target.value });
+  };
+  handleMessageChange = (e) => {
+    this.setState({ message: e.target.value });
+  };
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.sent) {
+      return;
+    }
+    this.setState({ sent: true });
+    let postUrl = `https://maker.ifttt.com/trigger/contact_form/with/key/csZ-cOLmY_ORGYx5OF5skW5EKdxlI10MI9NcGqZlElJ`;
+    let encodedEmail = encodeURIComponent(this.state.email);
+    let encodedMessage = encodeURIComponent(this.state.message);
+    console.log(encodedEmail);
+    console.log(encodedMessage);
+    let encodedUrl =
+      postUrl + `?value1="` + encodedEmail + `&value2="` + encodedMessage + `"`;
+    axios
+      .post(encodedUrl)
+      .then((res) =>
+        this.setState({
+          email: "",
+          message: "",
+          sent: false,
+          placeholder: "Sent!",
+        })
+      )
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          email: "",
+          message: "",
+          sent: false,
+          placeholder: "Sent!",
+        });
+      });
+  };
   render() {
     return (
-      <div className="about">
+      <div className="about container">
         <h1 className="about__title">
           Freely <span className="about__title--span">is the</span> freelancer
           platform <span className="about__title--span">for</span> freelancers
@@ -24,11 +71,10 @@ class About extends Component {
             share ideas, and team up.
           </p>
           <p className="about__text">How does it work?</p>
-
           <ol className="about__list">
             <li className="about__item">1. Put Yourself Out There</li>
             <p className="about__text">
-              First, create a{' '}
+              First, create a{" "}
               <Link className="about__link-inline" to="/">
                 profile
               </Link>
@@ -37,14 +83,14 @@ class About extends Component {
             </p>
             <li className="about__item">2. Connect With Other Freelancers</li>
             <p className="about__text">
-              Browse{' '}
+              Browse{" "}
               <Link className="about__link-inline" to="/">
                 profiles
-              </Link>{' '}
-              and{' '}
+              </Link>{" "}
+              and{" "}
               <Link className="about__link-inline" to="/collabs">
                 projects
-              </Link>{' '}
+              </Link>{" "}
               to see what other freelancers are working on. If you see someone
               working on something that interests you, send them a message. You
               can offer to collaborate, or just have a conversation.
@@ -63,10 +109,10 @@ class About extends Component {
             Ironhack Full-Stack Web Development Bootcamp in Paris, France. We
             created Freely for our final project. As of May 25, we are both
             looking for positions as web developers. If you’d like to get in
-            touch, you can find us on LinkedIn:{' '}
+            touch, you can find us on LinkedIn:{" "}
             <Link className="about__link-inline" to="/">
               @williamhermozo
-            </Link>{' '}
+            </Link>{" "}
             and
             <Link className="about__link-inline" to="/">
               @samlittlefair
@@ -81,9 +127,26 @@ class About extends Component {
             Notice a bug? Have a suggestion? Want to talk? Send a message with
             the form below:
           </p>
-          <form className="about__form">
-            <input className="about__input" type="text" name="email" />
-            <TextareaAutosize />
+          <form onSubmit={this.handleFormSubmit} className="about__form">
+            <input
+              onChange={this.handleEmailChange}
+              value={this.state.email}
+              className="about__email"
+              type="text"
+              name="email"
+              placeholder="Your email address"
+            />
+            <div className="about__messagecontainer">
+              <TextareaAutosize
+                onChange={this.handleMessageChange}
+                className="about__message"
+                value={this.state.message}
+                placeholder={this.state.placeholder}
+              />
+              <button className="about__send edit__button collabbutton unsaved">
+                Send
+              </button>
+            </div>
           </form>
         </div>
       </div>

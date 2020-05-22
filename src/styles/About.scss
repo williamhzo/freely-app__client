@@ -1,20 +1,21 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .about {
-  width: 90%;
+  // width: 90%;
   margin: $component-margin auto;
   display: flex;
   flex-direction: column;
   padding: $component-margin * 2;
   border-radius: $card-border-radius;
-  background-color: $white-background-color;
+  background-color: $background-color;
   border: none;
 
   &__title {
     margin-bottom: $component-margin;
+    margin: 50px 0px;
   }
   &__title--span {
-    font-family: 'Lora';
+    font-family: "Lora";
     font-style: italic;
   }
   &__subtitle {
@@ -22,7 +23,7 @@
   }
   &__text {
     margin: 0 0 $component-margin 0;
-    font-family: 'Lora';
+    font-family: "Lora";
   }
   &__item {
     font-size: 1.3rem;
@@ -34,7 +35,7 @@
   }
 
   &__link-inline::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -4px;
@@ -49,5 +50,24 @@
   &__link-inline:hover::after {
     transform: scaleX(1);
     color: $success-color;
+  }
+  &__email,
+  &__messagecontainer {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid $card-border-color;
+    border-radius: 3px;
+    margin-top: 15px;
+    // margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    background: white;
+  }
+  &__send {
+    align-self: flex-end;
+  }
+  &__message {
+    flex-grow: 1;
+    border: none;
   }
 }
