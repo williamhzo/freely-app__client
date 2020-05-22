@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import apiHandler from "../api/apiHandler";
-import { Link } from "react-router-dom";
-import Badges from "../components/Badges";
-import LinkIcon from "../components/LinkIcon";
-import "../styles/Display.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import apiHandler from '../api/apiHandler';
+import { Link } from 'react-router-dom';
+import Badges from '../components/Badges';
+import LinkIcon from '../components/LinkIcon';
+import '../styles/Display.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMapMarkerAlt,
   faGlobeEurope,
   faCommentAlt,
   faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
-import { withUser } from "../components/Auth/withUser";
+} from '@fortawesome/free-solid-svg-icons';
+import { withUser } from '../components/Auth/withUser';
 
 class Profile extends Component {
   state = {};
   componentDidMount() {
     apiHandler
-      .getUser("userName", this.props.match.params.username)
+      .getUser('userName', this.props.match.params.username)
       .then((apiRes) => {
         if (apiRes.length > 0) {
           this.setState(apiRes[0]);
         } else {
-          this.props.history.push("/error_404");
+          this.props.history.push('/error_404');
         }
       })
       .catch((err) => console.log(err));
@@ -30,7 +30,7 @@ class Profile extends Component {
   parselink(link) {
     let regex = /^http/;
     if (!link.match(regex)) {
-      return "http://" + link;
+      return 'http://' + link;
     } else {
       return link;
     }
@@ -65,10 +65,10 @@ class Profile extends Component {
               <div className="profile__buttons">
                 {this.props.context.user._id == this.state._id ? (
                   <button
-                    className={"edit__button collabbutton"}
+                    className={'edit__button collabbutton'}
                     onClick={() => {
                       this.props.history.push(
-                        "/" + this.state.userName + "/edit"
+                        '/' + this.state.userName + '/edit'
                       );
                     }}
                   >
@@ -95,7 +95,7 @@ class Profile extends Component {
             )}
             <h2 className="display__name">{this.state.name}</h2>
             {this.state.userCategory && (
-              <Badges data={this.state.userCategory} label={"name"} />
+              <Badges data={this.state.userCategory} label={'name'} />
             )}
             {this.state.title && (
               <div className="display__title">{this.state.title}</div>
@@ -139,7 +139,7 @@ class Profile extends Component {
                   <span className="bulleticon">
                     <FontAwesomeIcon icon={faMapMarkerAlt} />
                   </span>
-                  Based in {this.state.location || ""}
+                  Based in {this.state.location || ''}
                 </li>
               )}
               {this.state.preferredContact && (
@@ -153,9 +153,9 @@ class Profile extends Component {
             </ul>
             {this.state.userSkills.length > 0 && (
               <Badges
-                heading={"Skills"}
+                heading={'Skills'}
                 data={this.state.userSkills}
-                label={"name"}
+                label={'name'}
                 className="display__fullwidth"
               />
             )}
@@ -208,19 +208,21 @@ class Profile extends Component {
                 <h2 className="display__heading">Projects</h2>
                 {this.state.userCollab.map((collab, index) => {
                   return (
-                    <div key={index} className="display__collabcard">
-                      <img
-                        src={collab.image}
-                        alt=""
-                        className="display__collabcardimage"
-                      />
-                      <h3 className="display__collabcardtitle">
-                        {collab.title}
-                      </h3>
-                      <p className="display__collabcarddescription">
-                        {collab.description}
-                      </p>
-                    </div>
+                    <Link className="card--collab" to={`/collab/${collab._id}`}>
+                      <div key={index} className="display__collabcard">
+                        <img
+                          src={collab.image}
+                          alt=""
+                          className="display__collabcardimage"
+                        />
+                        <h3 className="display__collabcardtitle">
+                          {collab.title}
+                        </h3>
+                        <p className="display__collabcarddescription">
+                          {collab.description}
+                        </p>
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
