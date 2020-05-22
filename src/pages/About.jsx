@@ -10,9 +10,10 @@ class About extends Component {
   state = {
     email: "",
     body: "",
+    sent: false,
+    placeholder: "Your message...",
   };
   handleEmailChange = (e) => {
-    console.log(e.target.value);
     this.setState({ email: e.target.value });
   };
   handleMessageChange = (e) => {
@@ -20,6 +21,10 @@ class About extends Component {
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
+    if (this.state.sent) {
+      return;
+    }
+    this.setState({ sent: true });
     let postUrl = `https://maker.ifttt.com/trigger/contact_form/with/key/csZ-cOLmY_ORGYx5OF5skW5EKdxlI10MI9NcGqZlElJ`;
     let encodedEmail = encodeURIComponent(this.state.email);
     let encodedMessage = encodeURIComponent(this.state.message);
@@ -29,8 +34,23 @@ class About extends Component {
       postUrl + `?value1="` + encodedEmail + `&value2="` + encodedMessage + `"`;
     axios
       .post(encodedUrl)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) =>
+        this.setState({
+          email: "",
+          message: "",
+          sent: false,
+          placeholder: "Sent!",
+        })
+      )
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          email: "",
+          message: "",
+          sent: false,
+          placeholder: "Sent!",
+        });
+      });
   };
   render() {
     return (
@@ -121,7 +141,7 @@ class About extends Component {
                 onChange={this.handleMessageChange}
                 className="about__message"
                 value={this.state.message}
-                placeholder="Your message"
+                placeholder={this.state.placeholder}
               />
               <button className="about__send edit__button collabbutton unsaved">
                 Send
