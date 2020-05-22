@@ -55,9 +55,9 @@ class About extends Component {
   render() {
     return (
       <div className="about container">
-        <h1 className="about__title">
-          Freely <span className="about__title--span">is the</span> freelancer
-          platform <span className="about__title--span">for</span> freelancers
+        <h1 className="about__title-main">
+          Freely <span className="about__title-main--span">is the</span> freelancer
+          platform <span className="about__title-main--span">for</span> freelancers
         </h1>
         <div className="about__body">
           <p className="about__text">

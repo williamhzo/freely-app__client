@@ -10,11 +10,11 @@
   background-color: $background-color;
   border: none;
 
-  &__title {
+  &__title-main {
     margin-bottom: $component-margin;
     margin: 50px 0px;
   }
-  &__title--span {
+  &__title-main--span {
     font-family: "Lora";
     font-style: italic;
   }
