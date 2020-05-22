@@ -44,7 +44,7 @@ class NavBar extends Component {
     return (
       <nav id="Nav" className="Nav">
         <NavLink exact onClick={this.props.click} to="/">
-          <h3 className="Nav__logo">Freely</h3>
+          <h3 className="Nav__logo">Freely<span className='Nav__logo--colored-dot'>.</span></h3>
         </NavLink>
         <ul className="Nav__list">
           <li className="Nav__item">
