@@ -130,6 +130,34 @@
   }
 }
 
+.card-about {
+  padding: $component-margin * 2;
+  flex-direction: column;
+}
+
+.card-about__chevron {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.card-about-span {
+  font-weight: 400;
+}
+
+.body-about {
+  text-align: center;
+}
+
+.card-about__title {
+  margin-bottom: $component-margin;
+  font-size: 1.3rem;
+}
+
+.card-about__link {
+  font-family: 'Lora';
+}
+
 .filter {
   margin: ($Tabs-height + $component-margin) auto $component-margin;
   // padding: ($Tabs-height + $component-margin) 0 0 0;

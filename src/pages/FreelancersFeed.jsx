@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tabs from '../components/Nav/Tabs';
 import FreelancerCard from '../components/Cards/FreelancerCard';
+import AboutUsCard from '../components/Cards/AboutUsCard';
 import FilterFreelance from '../components/Filters/FilterFreelance';
 import apiHandler from '../api/apiHandler';
 
@@ -43,7 +44,10 @@ class FreelancersFeed extends Component {
         />
         <div className="feed__card-wrapper">
           {this.state.filteredFreelancers.map((freelancer, index) => (
-            <FreelancerCard key={index} freelancer={freelancer} />
+            <>
+              {index === 3 && <AboutUsCard />}
+              <FreelancerCard key={index} freelancer={freelancer} />
+            </>
           ))}
         </div>
       </div>
