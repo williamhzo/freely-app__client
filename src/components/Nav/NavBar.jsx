@@ -68,31 +68,19 @@ class NavBar extends Component {
                   : '/login'
               }
             >
-              {/* <div
-                  className="Nav__avatar"
-                  style={{
-                    backgroundImage: context.user
-                      ? `url(${context.user.profilePicture})`
-                      : 'url("media/avatar2.png")',
-                  }}
-                ></div> */}
-              {/* {context.user && (
-                  <div
-                    className="Nav__avatar"
-                    style={{
-                      backgroundImage: `url(${context.user.profilePicture})`,
-                    }}
-                  ></div>
-                )} */}
               {this.props.context.user && (
                 <>
+                  {/* {this.props.context.user.profilePicture !== "https://image.flaticon.com/icons/png/512/1738/1738760.png" && ( */}
                   <div
                     className="Nav__user-avatar"
                     style={{
                       backgroundImage: `url(${this.props.context.user.profilePicture})`,
                     }}
                   ></div>
-                  <div className="Nav__user-username">{this.props.context.user.name}</div>
+                  {/* ) */}
+                  <div className="Nav__user-username">
+                    {this.props.context.user.name}
+                  </div>
                 </>
               )}
               {!this.props.context.user && <div>Profile</div>}
