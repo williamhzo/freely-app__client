@@ -85,7 +85,15 @@ class NavBar extends Component {
                   ></div>
                 )} */}
               {this.props.context.user && (
-                <div>{this.props.context.user.name}</div>
+                <>
+                  <div
+                    className="Nav__user-avatar"
+                    style={{
+                      backgroundImage: `url(${this.props.context.user.profilePicture})`,
+                    }}
+                  ></div>
+                  <div className="Nav__user-username">{this.props.context.user.name}</div>
+                </>
               )}
               {!this.props.context.user && <div>Profile</div>}
             </NavLink>

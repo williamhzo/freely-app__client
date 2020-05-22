@@ -55,6 +55,15 @@
     // border-radius: 50%;
   }
 
+  &__user-avatar {
+    background-position: center center;
+    background-size: cover;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    // margin-right: 8px;
+  }
+
   &__messages {
     position: relative;
   }
@@ -176,10 +185,18 @@
   .Nav__plus-icon-text {
     display: none;
   }
+
+  .Nav__user-username {
+    display: none;
+  }
 }
 
 @media (min-width: 769px) {
   .hamburger__button {
+    display: none;
+  }
+
+  .Nav__user-avatar {
     display: none;
   }
 
