@@ -11,7 +11,7 @@ const Tabs = () => {
       </div>
       <div className="tabs__item">
         <NavLink exact activeClassName="tabs--active" className='tabs__link' to="/collabs">
-          Collaborations
+          Projects
         </NavLink>
       </div>
     </div>

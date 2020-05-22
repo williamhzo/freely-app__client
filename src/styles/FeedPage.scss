@@ -38,14 +38,17 @@
 }
 
 .feed__card-wrapper {
-  width: 100%;
+  margin: $component-margin * 2;
+  width: 95%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: $component-margin * 2;
+  // margin-bottom: $component-margin * 2;
 }
 
 .feed__card-wrapper--collab {
-  width: 100%;
+  margin: $component-margin * 2;
+  width: 95%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: $component-margin * 2;
@@ -150,10 +153,28 @@
 }
 
 @media (max-width: 768px) {
-  .card__aside {
-    min-width: 20%;
-  }
   .feed__card-wrapper--collab {
     grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  }
+}
+
+
+@media (max-width: 375px) {
+  .card {
+    flex-direction: column;
+    height: 250px;
+    &__body {
+      padding: $component-margin/2;
+      justify-content: space-around;
+      margin-left: $component-margin;
+    }
+
+    &__aside {
+      width: 100%;
+      margin-right: 12px;
+      height: 40%;
+      background-position: center center;
+      background-size: cover;
+    }
   }
 }
