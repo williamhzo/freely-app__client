@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap');
-@import '/variables';
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap");
+@import "/variables";
 
 *,
 *::before,
@@ -56,6 +56,9 @@ select {
   font: inherit;
   outline: none;
 }
+textarea {
+  resize: none;
+}
 img:not([alt]) {
   filter: blur(10px);
 }
@@ -75,7 +78,7 @@ img:not([alt]) {
 }
 
 html {
-  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
   background-color: $background-color;
   color: $primary-font-color;
 }
