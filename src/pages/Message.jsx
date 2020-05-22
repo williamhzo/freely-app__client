@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { TextareaAutosize } from "@material-ui/core";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
@@ -76,16 +77,21 @@ class Message extends Component {
           <a className="message__back" href="/messages">
             « Back
           </a>
-          <span className="message__recipient">
-            {!!this.state.recipient && (
-              <img
-                className="message__avatar"
-                src={this.state.recipient.profilePicture}
-                alt=""
-              />
-            )}
-            {!!this.state.recipient && this.state.recipient.name}
-          </span>
+          {this.state.recipient && (
+            <Link
+              className="message__recipient"
+              to={"/" + this.state.recipient.userName}
+            >
+              {!!this.state.recipient && (
+                <img
+                  className="message__avatar"
+                  src={this.state.recipient.profilePicture}
+                  alt=""
+                />
+              )}
+              {!!this.state.recipient && this.state.recipient.name}
+            </Link>
+          )}
           <span className="message__back message__hidden">« Back</span>
         </div>
         <div className="message__scrollcontainer">

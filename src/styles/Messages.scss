@@ -34,6 +34,9 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
+    &:empty {
+      display: none;
+    }
   }
   &__avatar {
     width: 100px;
