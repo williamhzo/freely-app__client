@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .display {
   padding-top: $component-margin * 2;
@@ -165,17 +165,9 @@
   }
 }
 
-.message__button {
+.profile__buttons {
   position: absolute;
   right: $component-margin;
-  background-color: $success-color;
-  color: $background-color;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  letter-spacing: 0.5px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
 }
 
 .svg-inline--fa {
