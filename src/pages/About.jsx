@@ -115,7 +115,7 @@ class About extends Component {
               @williamhermozo
             </Link>{' '}
             and
-            <Link className="about__link-inline" to="/sam">
+            <Link className="about__link-inline" to="/Sam">
               @samlittlefair
             </Link>
             , or send a message via the contact form below.
