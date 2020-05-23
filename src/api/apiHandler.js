@@ -151,7 +151,8 @@ export default {
       .get("/api/users")
       .then((res) =>
         res.data.filter(
-          (el) => el.bio && el.location && el.title && el.userCategory
+          // (el) => el.bio && el.location && el.title && el.userCategory
+          (el) => el.location && el.userCategory
         )
       )
       .catch(errorHandler);
