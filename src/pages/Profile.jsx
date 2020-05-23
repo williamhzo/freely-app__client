@@ -124,7 +124,7 @@ class Profile extends Component {
                   <span className="bulleticon">
                     <FontAwesomeIcon icon={faUserFriends} />
                   </span>
-                  Open to collaborations
+                  Open to projects
                 </li>
               )}
               {this.state.remote && this.state.openToProjects && (
@@ -132,7 +132,7 @@ class Profile extends Component {
                   <span className="bulleticon">
                     <FontAwesomeIcon icon={faGlobeEurope} />
                   </span>
-                  Open to remote collabs
+                  Open to remote projects
                 </li>
               )}
               {this.state.location && (
