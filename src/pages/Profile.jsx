@@ -208,7 +208,7 @@ class Profile extends Component {
                 <h2 className="display__heading">Projects</h2>
                 {this.state.userCollab.map((collab, index) => {
                   return (
-                    <Link className="card--collab" to={`/collab/${collab._id}`}>
+                    <Link to={`/collab/${collab._id}`}>
                       <div key={index} className="display__collabcard">
                         <img
                           src={collab.image}
