@@ -56,7 +56,7 @@ class About extends Component {
     return (
       <div className="about container">
         <h1 className="about__title-main">
-          Freely <span className="about__title-main--span">is the</span>{' '}
+          Freely is <span className="about__title-main--span">the</span>{' '}
           freelancer platform{' '}
           <span className="about__title-main--span">for</span> freelancers
         </h1>
@@ -110,11 +110,11 @@ class About extends Component {
             Ironhack Full-Stack Web Development Bootcamp in Paris, France. We
             created Freely for our final project. As of May 25, we are both
             looking for positions as web developers. If you’d like to get in
-            touch, you can find us on LinkedIn:{' '}
+            touch, you can find us on our profiles:{' '}
             <Link className="about__link-inline" to="/william">
               @williamhermozo
             </Link>{' '}
-            and
+            and{' '}
             <Link className="about__link-inline" to="/Sam">
               @samlittlefair
             </Link>
@@ -125,8 +125,8 @@ class About extends Component {
           </p>
           <h2 className="about__subtitle">Contact Us</h2>
           <p className="about__text">
-            Notice a bug? Have a suggestion? Want to talk? Send a message with
-            the form below:
+            Notice a bug? Have a suggestion? Want to talk? Send a message via
+            the form below, we'll get back to you as soon as possible:
           </p>
           <form onSubmit={this.handleFormSubmit} className="about__form">
             <input
