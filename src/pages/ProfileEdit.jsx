@@ -89,6 +89,7 @@ export default class ProfileEdit extends Component {
     // console.log(this.state.portfolio);
     apiHandler.patchUser(this.state._id, formData).then((apiRes) => {
       if (apiRes.userName !== this.props.match.params.username) {
+        this.context.updateContext();
         this.props.history.push("/" + apiRes.userName + "/edit");
       }
       this.setState({ apiRes });
@@ -103,7 +104,7 @@ export default class ProfileEdit extends Component {
   };
   handleUsername = (e) => {
     if (
-      !e.target.value.match(/^[a-zA-Z0-9_]{3,10}$/) ||
+      !e.target.value.match(/^[a-zA-Z0-9_]{3,15}$/) ||
       e.target.value.match(
         /^(about|user|collab|collabs|messages|message|edit|login|signup|freely)$/i
       )

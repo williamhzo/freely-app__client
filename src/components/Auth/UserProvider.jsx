@@ -21,6 +21,19 @@ class UserProvider extends Component {
       });
   }
 
+  updateContext = () => {
+    this.setState({ isLoading: true });
+    apiHandler
+      .isLoggedIn()
+      .then((data) => {
+        this.setState({ user: data, isLoggedIn: true, isLoading: false });
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({ user: null, isLoggedIn: false, isLoading: false });
+      });
+  };
+
   setUser = (user) => {
     this.setState({ user, isLoggedIn: true });
   };
@@ -38,6 +51,7 @@ class UserProvider extends Component {
       removeUser: this.removeUser,
       isLoggedIn: this.state.isLoggedIn,
       isLoading: this.state.isLoading,
+      updateContext: this.updateContext,
     };
 
     return (
