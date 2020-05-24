@@ -44,16 +44,20 @@ class Collab extends Component {
         <div className="container display display__collabbody">
           {this.props.context.user &&
             this.props.context.user._id === this.state.creator._id && (
-              <button
-                className={"edit__button collabbutton"}
-                onClick={() => {
-                  this.props.history.push(
-                    "/collab/" + this.props.match.params.id + "/edit"
-                  );
-                }}
-              >
-                Edit
-              </button>
+              <div className="collab__buttons">
+                <span className="collab__buttonmargin">
+                  <button
+                    className="btn btn__standard btn__blue btn__hover"
+                    onClick={() => {
+                      this.props.history.push(
+                        "/collab/" + this.props.match.params.id + "/edit"
+                      );
+                    }}
+                  >
+                    Edit
+                  </button>
+                </span>
+              </div>
             )}
           <h2 className="display__collabtitle">{this.state.title}</h2>
           <h3 className="display__heading">Description</h3>

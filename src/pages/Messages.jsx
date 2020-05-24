@@ -73,7 +73,7 @@ class Messages extends Component {
             renderInput={(params) => <TextField {...params} />}
           />
           <button
-            className="messages__createbutton edit__button"
+            className="btn btn__standard btn__green btn__hover"
             onClick={this.handleCreate}
           >
             New

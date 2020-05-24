@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import apiHandler from '../api/apiHandler';
-import UserContext from '../components/Auth/UserContext';
-import '../styles/Display.scss';
-import '../styles/Edit.scss';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import { TextareaAutosize } from '@material-ui/core';
-import { objectToFormData } from 'object-to-formdata';
-import Error from '../components/Error';
-import { withUser } from '../components/Auth/withUser';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import apiHandler from "../api/apiHandler";
+import UserContext from "../components/Auth/UserContext";
+import "../styles/Display.scss";
+import "../styles/Edit.scss";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+import { TextareaAutosize } from "@material-ui/core";
+import { objectToFormData } from "object-to-formdata";
+import Error from "../components/Error";
+import { withUser } from "../components/Auth/withUser";
 
 /*
 
@@ -23,14 +23,14 @@ class CollabEdit extends Component {
     categoryOptions: [],
     skillOptions: [],
     saved: true,
-    title: '',
-    creator: '',
+    title: "",
+    creator: "",
     contributors: [],
     allUsers: [],
-    description: '',
+    description: "",
     skillsNeeded: [],
     categoryNeeded: [],
-    image: '',
+    image: "",
     open: false,
     error: undefined,
   };
@@ -50,9 +50,9 @@ class CollabEdit extends Component {
     });
   }
   handleFormChange = (e) => {
-    if (e.target.name === 'image') {
+    if (e.target.name === "image") {
       if (e.target.files[0].size > 750000) {
-        this.setState({ error: 'Maximum file size: 750kb' });
+        this.setState({ error: "Maximum file size: 750kb" });
         return;
       }
       const reader = new FileReader();
@@ -71,11 +71,11 @@ class CollabEdit extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.title) {
-      this.setState({ error: 'Please enter a title' });
+      this.setState({ error: "Please enter a title" });
       return;
     }
     if (!this.state.description) {
-      this.setState({ error: 'Please enter a description' });
+      this.setState({ error: "Please enter a description" });
       return;
     }
     let collab = { ...this.state };
@@ -109,6 +109,13 @@ class CollabEdit extends Component {
   handleUserChange = (e, value) => {
     this.setState({ contributors: value, saved: false });
   };
+  handleView = (e) => {
+    e.preventDefault();
+    if (!this.state.saved) {
+      return;
+    }
+    this.props.history.push("/collab/" + this.props.match.params.id);
+  };
 
   static contextType = UserContext;
 
@@ -133,9 +140,9 @@ class CollabEdit extends Component {
               className="display__collabimagebox"
               style={{
                 backgroundImage:
-                  'url(' +
+                  "url(" +
                   (this.state.temporaryPicture || this.state.image) +
-                  ')',
+                  ")",
               }}
             >
               <input
@@ -152,15 +159,33 @@ class CollabEdit extends Component {
             </div>
           </label>
           <div className="container display display__collabbody">
-            <button
-              className={
-                this.state.saved
-                  ? 'edit__button collabbutton saved'
-                  : 'edit__button collabbutton unsaved'
-              }
-            >
-              {this.state.saved ? 'Saved' : 'Save'}
-            </button>
+            <div className="collab__buttons">
+              <span>
+                <button
+                  className={
+                    this.state.saved
+                      ? "btn btn__standard btn__blue btn__inactive"
+                      : this.state.title && this.state.description
+                      ? "btn btn__standard btn__green btn__hover"
+                      : "btn btn__standard btn__orange btn__inactive"
+                  }
+                >
+                  {this.state.saved ? "Saved" : "Save"}
+                </button>
+              </span>
+              <span>
+                <button
+                  onClick={this.handleView}
+                  className={
+                    this.state.saved
+                      ? "btn btn__standard btn__light btn__hover"
+                      : "btn btn__standard btn__faded btn__inactive"
+                  }
+                >
+                  View
+                </button>
+              </span>
+            </div>
             <h2 className="display__collabtitle">
               <TextareaAutosize
                 type="text"
@@ -237,7 +262,7 @@ class CollabEdit extends Component {
                 Created by {this.state.creator.name}
               </li>
               <li className="display__bullet">
-                Preferred method of contact for {this.state.creator.name}:{' '}
+                Preferred method of contact for {this.state.creator.name}:{" "}
                 {this.state.creator.preferredContact}
               </li>
             </ul>
