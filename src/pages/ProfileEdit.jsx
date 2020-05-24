@@ -415,7 +415,7 @@ export default class ProfileEdit extends Component {
                   <option value={false}>Not open to remote collabs</option>
                 </select>
               </li>
-              <li className="display__bullet">
+              {/* <li className="display__bullet">
                 Preferred method of contact:{' '}
                 <input
                   type="text"
@@ -425,7 +425,7 @@ export default class ProfileEdit extends Component {
                   value={this.state.preferredContact || ''}
                   placeholder="Contact"
                 />
-              </li>
+              </li> */}
             </ul>
             <h3>Personal Info</h3>
             <ul>
