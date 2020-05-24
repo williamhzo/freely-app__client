@@ -136,13 +136,18 @@
     font-size: 0.9rem;
     font-weight: 300;
   }
+  &__copy--location {
+    font-size: 0.9rem;
+    font-weight: 300;
+    font-style: italic;
+  }
 }
 
 .card-about {
   padding: $component-margin $component-margin * 2;
   flex-direction: column;
   background-color: $primary-font-color;
-  color: $background-color;
+  color: $background-color
 }
 
 .card-about__chevron {
@@ -155,6 +160,7 @@
   font-weight: 400;
   font-family: 'Lora';
   font-style: italic;
+  color: $success-color;
 }
 
 .body-about {
@@ -168,6 +174,7 @@
 
 .card-about__link {
   font-family: 'Lora';
+  color: $success-color;
 }
 
 .filter {

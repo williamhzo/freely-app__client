@@ -107,6 +107,7 @@ class NavBar extends Component {
               className="Nav__link"
               activeClassName="Nav__active"
               onClick={this.props.click}
+              accountExists={true}
               to={
                 this.props.context.user
                   ? `/${this.props.context.user.userName}`
@@ -116,7 +117,7 @@ class NavBar extends Component {
               {this.props.context.user && (
                 <div>{this.props.context.user.name}</div>
               )}
-              {!this.props.context.user && <div>Profile</div>}
+              {!this.props.context.user && <div>Log In</div>}
             </NavLink>
           </li>
           {this.props.context.user && (

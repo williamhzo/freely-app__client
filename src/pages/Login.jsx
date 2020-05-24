@@ -135,6 +135,7 @@ class Login extends Component {
 
   render() {
     const { formErrors } = this.state;
+    console.log(this.params);
     return (
       <div className="login-container">
         {this.state.accountExists && (
