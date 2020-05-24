@@ -11,11 +11,12 @@ export default class OneMessage extends Component {
       time.getHours() +
       ":" +
       // (time.getMinutes() < 10 ? "0" : "") +
-      time.getMinutes().padState(2, "0") +
+      (time.getMinutes() + "").padStart(2, "0") +
+      // time.getMinutes() +
       " " +
-      time.getDay() +
+      time.getDate() +
       "/" +
-      time.getMonth() +
+      (+time.getMonth() + 1) +
       "/" +
       time.getFullYear();
     return (
