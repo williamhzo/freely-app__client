@@ -55,7 +55,12 @@ class NavBar extends Component {
                 if (!match) {
                   return false;
                 }
-                return match.url === location.pathname;
+                const eventID = parseInt(match.params.eventID);
+                return this.props.context.user
+                  ? match.url === location.pathname
+                  : match.url === location.pathname &&
+                      !isNaN(eventID) &&
+                      eventID % 2 === 1;
               }}
               exact
               onClick={this.props.click}
