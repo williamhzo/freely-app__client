@@ -78,16 +78,6 @@
     // width: 36px;
     // position: relative;
   }
-
-  &__active::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    background-color: $success-color;
-    bottom: 0;
-    left: 0;
-  }
 }
 
 .hamburger-btn {
@@ -158,7 +148,6 @@
   color: $btn-primary-font-color;
   padding: 8px 24px;
   border-radius: $btn-primary-radius;
-  // height: 16px;
 }
 
 .backdrop {
@@ -169,16 +158,6 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   z-index: 30;
-  // second backdrop to cover the navbar
-  // &__secondary {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 70px;
-  //   background: transparent;
-  //   z-index: 50;
-  // }
 }
 
 @media (max-width: 768px) {
@@ -221,6 +200,17 @@
     transform-origin: left;
     transform: scaleX(0);
     transition: transform 0.3s ease-in;
+  }
+
+  .Nav__active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 100%;
+    height: 2px;
+    background-color: $success-color;
+    transform: scaleX(1);
   }
 
   .Nav__link:hover::after {

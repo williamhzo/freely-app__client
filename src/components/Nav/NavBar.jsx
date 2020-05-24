@@ -51,6 +51,12 @@ class NavBar extends Component {
             <NavLink
               className="Nav__link"
               activeClassName="Nav__active"
+              isActive={(match, location) => {
+                if (!match) {
+                  return false;
+                }
+                return match.url === location.pathname;
+              }}
               exact
               onClick={this.props.click}
               to={this.props.context.user ? '/collab/new' : '/login'}
@@ -117,9 +123,6 @@ class NavBar extends Component {
           <li className="Nav__item hamburger__item">
             <NavLink
               className="Nav__link"
-              activeStyle={{
-                color: 'green',
-              }}
               activeClassName="Nav__active"
               exact
               to="/about"
@@ -131,7 +134,6 @@ class NavBar extends Component {
             <li className="Nav__item hamburger__item">
               <NavLink
                 className="Nav__link"
-                activeClassName="Nav__active"
                 exact
                 to="/"
                 onClick={(e) =>
