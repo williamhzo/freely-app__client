@@ -116,7 +116,7 @@ class NavBar extends Component {
               {this.props.context.user && (
                 <div>{this.props.context.user.name}</div>
               )}
-              {!this.props.context.user && <div>Profile</div>}
+              {!this.props.context.user && <div>Log In</div>}
             </NavLink>
           </li>
           {this.props.context.user && (

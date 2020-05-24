@@ -22,7 +22,7 @@ const FreelancerCard = ({ freelancer }) => {
           ))}
         </div> */}
         <h2 className="card__subtitle">{freelancer.name}</h2>
-        <p className="card__copy">{freelancer.location}</p>
+        <p className="card__copy--location">{freelancer.location}</p>
         <p className="card__copy">
           {freelancer.remote
             ? "I don't mind working remotely."
