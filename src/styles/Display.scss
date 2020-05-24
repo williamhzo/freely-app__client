@@ -31,6 +31,9 @@
     height: 250px;
     box-sizing: border-box;
     overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
   &__collabbody:not(p) {
     margin-top: -7%;
