@@ -12,12 +12,13 @@ class About extends Component {
     body: "",
     sent: false,
     placeholder: "Your message...",
+    buttonText: "Send",
   };
   handleEmailChange = (e) => {
     this.setState({ email: e.target.value });
   };
   handleMessageChange = (e) => {
-    this.setState({ message: e.target.value });
+    this.setState({ message: e.target.value, buttonText: "Send" });
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ class About extends Component {
           email: "",
           message: "",
           sent: false,
-          placeholder: "Sent!",
+          buttonText: "Sent!",
         })
       )
       .catch((err) => {
@@ -48,7 +49,7 @@ class About extends Component {
           email: "",
           message: "",
           sent: false,
-          placeholder: "Sent!",
+          buttonText: "Sent!",
         });
       });
   };
@@ -145,7 +146,7 @@ class About extends Component {
                 placeholder={this.state.placeholder}
               />
               <button className="btn btn__standard btn__green btn__hover">
-                Send
+                {this.state.buttonText}
               </button>
             </div>
           </form>
