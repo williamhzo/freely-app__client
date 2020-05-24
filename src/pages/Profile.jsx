@@ -226,11 +226,17 @@ class Profile extends Component {
                   return (
                     <Link to={`/collab/${collab._id}`}>
                       <div key={index} className="display__collabcard">
-                        <img
+                        <div
+                          className="display__collabcardimage display__imagediv"
+                          style={{
+                            backgroundImage: `url("${collab.image}")`,
+                          }}
+                        ></div>
+                        {/* <img
                           src={collab.image}
                           alt=""
                           className="display__collabcardimage"
-                        />
+                        /> */}
                         <h3 className="display__collabcardtitle">
                           {collab.title}
                         </h3>

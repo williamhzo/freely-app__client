@@ -135,6 +135,9 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+  &__collabs {
+    width: 100%;
+  }
   &__portfolioitem,
   &__collabcard {
     border: 1px solid $card-border-color;
@@ -143,7 +146,8 @@
     margin-bottom: $component-margin;
     background: $white-background-color;
   }
-  &__portfolioimage {
+  &__portfolioimage,
+  &__collabcardimage {
     width: 100%;
     padding-top: 50%;
   }
