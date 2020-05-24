@@ -33,7 +33,7 @@
 
   .tabs--active {
     padding-bottom: 10px;
-    border-bottom: black 2px solid;
+    border-bottom: 2px solid $success-color;
   }
 }
 
@@ -147,6 +147,8 @@
 
 .card-about-span {
   font-weight: 400;
+  font-family: 'Lora';
+  font-style: italic;
 }
 
 .body-about {
