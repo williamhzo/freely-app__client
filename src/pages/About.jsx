@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { TextareaAutosize } from "@material-ui/core";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { TextareaAutosize } from '@material-ui/core';
+import axios from 'axios';
 
-import "../styles/About.scss";
-import "../styles/Edit.scss";
+import '../styles/About.scss';
+import '../styles/Edit.scss';
 
 class About extends Component {
   state = {
-    email: "",
-    body: "",
+    email: '',
+    body: '',
     sent: false,
-    placeholder: "Your message...",
-    buttonText: "Send",
+    placeholder: 'Your message...',
+    buttonText: 'Send',
   };
   handleEmailChange = (e) => {
     this.setState({ email: e.target.value });
   };
   handleMessageChange = (e) => {
-    this.setState({ message: e.target.value, buttonText: "Send" });
+    this.setState({ message: e.target.value, buttonText: 'Send' });
   };
   handleFormSubmit = (e) => {
     e.preventDefault();
@@ -37,19 +37,19 @@ class About extends Component {
       .post(encodedUrl)
       .then((res) =>
         this.setState({
-          email: "",
-          message: "",
+          email: '',
+          message: '',
           sent: false,
-          buttonText: "Sent!",
+          buttonText: 'Sent!',
         })
       )
       .catch((err) => {
         console.log(err);
         this.setState({
-          email: "",
-          message: "",
+          email: '',
+          message: '',
           sent: false,
-          buttonText: "Sent!",
+          buttonText: 'Sent!',
         });
       });
   };
@@ -57,8 +57,8 @@ class About extends Component {
     return (
       <div className="about container">
         <h1 className="about__title-main">
-          Freely is <span className="about__title-main--span">the</span>{" "}
-          freelancer platform{" "}
+          Freely is <span className="about__title-main--span">the</span>{' '}
+          freelancer platform{' '}
           <span className="about__title-main--span">for</span> freelancers
         </h1>
         <div className="about__body">
@@ -72,11 +72,11 @@ class About extends Component {
             That’s why we made Freely. It’s a place where freelancers can meet,
             share ideas, and team up.
           </p>
-          <p className="about__text">How does it work?</p>
+          <h2 className="about__subtitle">How does it work?</h2>
           <ol className="about__list">
             <li className="about__item">1. Put Yourself Out There</li>
             <p className="about__text">
-              First, create a{" "}
+              First, create a{' '}
               <Link className="about__link-inline" to="/">
                 profile
               </Link>
@@ -85,14 +85,14 @@ class About extends Component {
             </p>
             <li className="about__item">2. Connect With Other Freelancers</li>
             <p className="about__text">
-              Browse{" "}
+              Browse{' '}
               <Link className="about__link-inline" to="/">
                 profiles
-              </Link>{" "}
-              and{" "}
+              </Link>{' '}
+              and{' '}
               <Link className="about__link-inline" to="/collabs">
                 projects
-              </Link>{" "}
+              </Link>{' '}
               to see what other freelancers are working on. If you see someone
               working on something that interests you, send them a message. You
               can offer to collaborate, or just have a conversation.
@@ -111,11 +111,11 @@ class About extends Component {
             Ironhack Full-Stack Web Development Bootcamp in Paris, France. We
             created Freely for our final project. As of May 25, we are both
             looking for positions as web developers. If you’d like to get in
-            touch, you can find us on our profiles:{" "}
+            touch, you can find us on our profiles:{' '}
             <Link className="about__link-inline" to="/william">
               @williamhermozo
-            </Link>{" "}
-            and{" "}
+            </Link>{' '}
+            and{' '}
             <Link className="about__link-inline" to="/Sam">
               @samlittlefair
             </Link>
@@ -144,6 +144,7 @@ class About extends Component {
                 className="about__message"
                 value={this.state.message}
                 placeholder={this.state.placeholder}
+                rowsMin={3}
               />
               <button className="btn btn__standard btn__green btn__hover">
                 {this.state.buttonText}
