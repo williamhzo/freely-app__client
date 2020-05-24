@@ -50,6 +50,7 @@ class NavBar extends Component {
           <li className="Nav__item">
             <NavLink
               className="Nav__link"
+              activeClassName="Nav__active"
               exact
               onClick={this.props.click}
               to={this.props.context.user ? '/collab/new' : '/login'}
@@ -61,6 +62,7 @@ class NavBar extends Component {
           <li className="Nav__item">
             <NavLink
               className="Nav__link"
+              activeClassName="Nav__active"
               onClick={this.props.click}
               to={
                 this.props.context.user
@@ -99,7 +101,12 @@ class NavBar extends Component {
           </li>
           {this.props.context.user && (
             <li className="Nav__item hamburger__item  Nav__messages">
-              <NavLink className="Nav__link" exact to="/messages">
+              <NavLink
+                className="Nav__link"
+                activeClassName="Nav__active"
+                exact
+                to="/messages"
+              >
                 Messages
               </NavLink>
               {this.state.notification && (
@@ -108,7 +115,15 @@ class NavBar extends Component {
             </li>
           )}
           <li className="Nav__item hamburger__item">
-            <NavLink className="Nav__link" exact to="/about">
+            <NavLink
+              className="Nav__link"
+              activeStyle={{
+                color: 'green',
+              }}
+              activeClassName="Nav__active"
+              exact
+              to="/about"
+            >
               About
             </NavLink>
           </li>
@@ -116,6 +131,7 @@ class NavBar extends Component {
             <li className="Nav__item hamburger__item">
               <NavLink
                 className="Nav__link"
+                activeClassName="Nav__active"
                 exact
                 to="/"
                 onClick={(e) =>
@@ -127,8 +143,12 @@ class NavBar extends Component {
             </li>
           )}
           {!this.props.context.user && (
-            <li className="Nav__item hamburger__item primary-btn">
-              <NavLink className="Nav__link" exact to="/login">
+            <li className="Nav__item">
+              <NavLink
+                className=" hamburger__item primary-btn"
+                exact
+                to="/login"
+              >
                 Join
               </NavLink>
             </li>
