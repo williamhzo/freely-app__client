@@ -85,8 +85,8 @@
     }
   }
   &__bullets[class] {
-    margin-top: $component-margin;
-    width: 100%;
+    margin: $component-margin 0 0 0;
+    width: 105%;
     background: $box-info-color;
     border-radius: $card-border-radius;
     padding: $component-margin;
