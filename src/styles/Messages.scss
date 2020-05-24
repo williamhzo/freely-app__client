@@ -1,5 +1,5 @@
-@import "/variables";
-@import "/Edit";
+@import '/variables';
+@import '/Edit';
 
 .messages {
   margin-top: 50px;
@@ -40,14 +40,18 @@
   }
   &__avatar {
     width: 100px;
-    border-radius: 10px;
-    margin-right: 10px;
+    height: 100px;
+    border-radius: 8px;
+    // margin-right: 16px;
+    background-position: center center;
+    background-size: cover;
   }
   &__correspondent {
     font-weight: bold;
   }
   &__info {
     width: 100%;
+    margin-left: 16px;
   }
   &__header {
     display: flex;
