@@ -13,7 +13,8 @@ class Message extends Component {
     correspondent: undefined,
     recipients: undefined,
   };
-  sendMessage = () => {
+  sendMessage = (e) => {
+    e.preventDefault();
     if (!this.state.newMessage) {
       return;
     }
@@ -111,6 +112,7 @@ class Message extends Component {
             <TextareaAutosize
               placeholder={"New Message"}
               value={this.state.newMessage}
+              onKeyDown={(e) => (e.keyCode === 13 ? this.sendMessage(e) : null)}
               onChange={(e) => {
                 this.setState({ newMessage: e.target.value });
               }}
