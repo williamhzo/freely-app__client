@@ -128,17 +128,21 @@ class CollabNew extends Component {
             </div>
           </label>
           <div className="container display display__collabbody">
-            <button
-              className={
-                this.state.saved
-                  ? "btn btn__standard btn__blue btn__inactive"
-                  : this.state.title && this.state.description
-                  ? "btn btn__standard btn__green btn__hover"
-                  : "btn btn__standard btn__orange btn__inactive"
-              }
-            >
-              {this.state.saved ? "Saved" : "Save"}
-            </button>
+            <div className="collab__buttons">
+              <span className="collab__buttonmargin">
+                <button
+                  className={
+                    this.state.saved
+                      ? "btn btn__standard btn__blue btn__inactive"
+                      : this.state.title && this.state.description
+                      ? "btn btn__standard btn__green btn__hover"
+                      : "btn btn__standard btn__orange btn__inactive"
+                  }
+                >
+                  {this.state.saved ? "Saved" : "Save"}
+                </button>
+              </span>
+            </div>
             <h2 className="display__collabtitle">
               <TextareaAutosize
                 type="text"

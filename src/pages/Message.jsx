@@ -117,7 +117,7 @@ class Message extends Component {
             />
           </div>
           <button
-            className="edit__button message__sendmessage"
+            className="btn btn__standard btn__green btn__hover"
             onClick={this.sendMessage}
           >
             Send
