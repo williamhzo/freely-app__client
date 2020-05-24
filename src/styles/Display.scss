@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import './variables.scss';
 
 .display {
   padding-top: $component-margin * 2;
@@ -35,6 +35,7 @@
     background-position: center center;
     background-repeat: no-repeat;
   }
+
   &__collabbody:not(p) {
     margin-top: -7%;
     background: $background-color;
@@ -200,8 +201,8 @@
 @media (min-width: 768px) {
   .display {
     &__collabbody:not(p) {
-      border-top-right-radius: 3px;
-      border-top-left-radius: 3px;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
     }
   }
 }
