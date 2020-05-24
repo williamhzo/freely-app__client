@@ -20,7 +20,6 @@ class FilterCollab extends Component {
     apiHandler
       .filterUsedCategoriesCollabs()
       .then((res) => {
-        console.log(res);
         this.setState({ categoriesUsed: res });
       })
       .catch((err) => console.log(err));
