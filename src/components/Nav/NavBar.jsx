@@ -107,6 +107,7 @@ class NavBar extends Component {
               className="Nav__link"
               activeClassName="Nav__active"
               onClick={this.props.click}
+              accountExists={true}
               to={
                 this.props.context.user
                   ? `/${this.props.context.user.userName}`
