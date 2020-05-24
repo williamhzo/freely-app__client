@@ -42,14 +42,6 @@
   &__multiselect {
     width: 100%;
   }
-  &__avatarbox.edit:hover:after {
-    position: absolute;
-    bottom: 15px;
-    right: 25px;
-    content: "EDIT";
-    color: white;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
-  }
   &__name input {
     text-align: center;
   }
@@ -175,6 +167,28 @@
   }
   .edit--right {
     position: absolute;
+  }
+  &__imageinput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__imageedit {
+    position: relative;
+    svg {
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      font-size: 1.5em;
+      bottom: 20px;
+      right: 20px;
+      color: rgb(39, 39, 39);
+      -webkit-filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.5));
+      filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.5));
+    }
+    &:hover svg {
+      display: inline;
+    }
   }
 }
 

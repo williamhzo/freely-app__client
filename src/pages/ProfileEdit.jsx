@@ -286,8 +286,15 @@ export default class ProfileEdit extends Component {
               {this.state.saved ? "Saved" : "Save"}
             </button>
           </div>
-          <div className="display__avatarbox edit">
-            <label htmlFor="profilePicture">
+          <label htmlFor="profilePicture" className="edit__imageinput">
+            <div
+              className="display__imagediv display__avatarbox edit__imageedit"
+              style={{
+                backgroundImage: `url("${
+                  this.state.temporaryPicture || this.state.profilePicture
+                }")`,
+              }}
+            >
               <input
                 type="file"
                 name="profilePicture"
@@ -295,13 +302,9 @@ export default class ProfileEdit extends Component {
                 className="input--hidden"
                 accept=".png, .jpg, .jpeg"
               />
-              <img
-                className="display__picture"
-                src={this.state.temporaryPicture || this.state.profilePicture}
-                alt=""
-              />
-            </label>
-          </div>
+              <FontAwesomeIcon icon={faCamera} />
+            </div>
+          </label>
           <h2 className="display__name">
             <input
               type="text"
@@ -497,7 +500,7 @@ export default class ProfileEdit extends Component {
                   className="display__portfolioitem"
                   onChange={(event) => this.handlePortfolio(index, event)}
                 >
-                  <label htmlFor={"image" + index}>
+                  <label htmlFor={"image" + index} className="edit__imageinput">
                     <input
                       onChange={(event) =>
                         this.handlePortfolioImage(index, event)
@@ -508,13 +511,16 @@ export default class ProfileEdit extends Component {
                       className="input--hidden"
                       accept=".png, .jpg, .jpeg"
                     />
-                    <img
-                      className="display__portfolioimage"
-                      src={
-                        portfolioItem.temporaryPicture || portfolioItem.image
-                      }
-                      alt=""
-                    />
+                    <div
+                      className="display__portfolioimage display__imagediv edit__imageedit"
+                      style={{
+                        backgroundImage: `url("${
+                          portfolioItem.temporaryPicture || portfolioItem.image
+                        }")`,
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faCamera} />
+                    </div>
                   </label>
                   <div className="display__portfoliotext">
                     <h3 className="display__portfoliotitle">
@@ -569,14 +575,25 @@ export default class ProfileEdit extends Component {
                   className="input--hidden"
                   accept=".png, .jpg, .jpeg"
                 />
-                <img
-                  className="display__portfolioimage"
-                  src={
-                    this.state.newPortfolio.temporaryPicture ||
-                    "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
-                  }
-                  alt=""
-                />
+                <div
+                  className="display__portfolioimage display__imagediv edit__imageedit"
+                  style={{
+                    backgroundImage: `url("${
+                      this.state.newPortfolio.temporaryPicture ||
+                      "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
+                    }")`,
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCamera} />
+                </div>
+                {/* // <img
+                //   className="display__portfolioimage"
+                //   src={
+                //     this.state.newPortfolio.temporaryPicture ||
+                //     "https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
+                //   }
+                //   alt=""
+                // /> */}
               </label>
               <div className="display__portfoliotext">
                 <h3 className="display__portfoliotitle">
