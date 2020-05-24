@@ -101,13 +101,12 @@ class Profile extends Component {
               </div>
             )}
             {this.state.profilePicture && (
-              <div className="display__avatarbox">
-                <img
-                  className="display__picture"
-                  src={this.state.profilePicture}
-                  alt=""
-                />
-              </div>
+              <div
+                className="display__imagediv display__avatarbox"
+                style={{
+                  backgroundImage: `url("${this.state.profilePicture}")`,
+                }}
+              ></div>
             )}
             <h2 className="display__name">{this.state.name}</h2>
             {this.state.userCategory && (
@@ -188,11 +187,12 @@ class Profile extends Component {
                   {this.state.portfolio.map((portfolioItem, index) => {
                     return (
                       <div key={index} className="display__portfolioitem">
-                        <img
-                          className="display__portfolioimage"
-                          src={portfolioItem.image}
-                          alt=""
-                        />
+                        <div
+                          className="display__portfolioimage display__imagediv"
+                          style={{
+                            backgroundImage: `url("${portfolioItem.image}")`,
+                          }}
+                        ></div>
                         <div className="display__portfoliotext">
                           <h3 className="display__portfoliotitle">
                             {portfolioItem.title}

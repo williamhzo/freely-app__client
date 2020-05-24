@@ -15,13 +15,16 @@
     align-self: flex-start;
     font-size: $title-h3-font-size;
   }
+  &__imagediv {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
   &__avatarbox {
-    position: relative;
-    overflow: hidden;
     border-radius: 20px;
     width: 40%;
-    max-width: 240px;
-    cursor: pointer;
+    padding-top: 40%;
   }
   &__collabimagebox {
     width: 100%;
@@ -39,9 +42,6 @@
     padding-left: 30px;
     padding-right: 30px;
     position: relative;
-  }
-  &__picture {
-    width: 100%;
   }
   &__name {
     margin-top: $component-margin;
@@ -142,6 +142,10 @@
     overflow: hidden;
     margin-bottom: $component-margin;
     background: $white-background-color;
+  }
+  &__portfolioimage {
+    width: 100%;
+    padding-top: 50%;
   }
   &__portfoliotext {
     background: $white-background-color;
