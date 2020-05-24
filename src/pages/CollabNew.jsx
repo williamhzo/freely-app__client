@@ -131,8 +131,10 @@ class CollabNew extends Component {
             <button
               className={
                 this.state.saved
-                  ? "edit__button collabbutton saved"
-                  : "edit__button collabbutton unsaved"
+                  ? "btn btn__standard btn__blue btn__inactive"
+                  : this.state.title && this.state.description
+                  ? "btn btn__standard btn__green btn__hover"
+                  : "btn btn__standard btn__orange btn__inactive"
               }
             >
               {this.state.saved ? "Saved" : "Save"}

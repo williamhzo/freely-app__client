@@ -36,6 +36,21 @@ class Profile extends Component {
       return link;
     }
   }
+  componentDidUpdate() {
+    // when you navigate from one profile to another, reset state
+    if (this.props.match.params.username !== this.state.userName) {
+      apiHandler
+        .getUser("userName", this.props.match.params.username)
+        .then((apiRes) => {
+          if (apiRes.length > 0) {
+            this.setState(apiRes[0]);
+          } else {
+            this.props.history.push("/error_404");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
   sendMessage = () => {
     apiHandler.getAllMessages(this.props.context.user._id).then((messages) => {
       // console.log(messages);
