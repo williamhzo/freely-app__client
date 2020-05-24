@@ -8,6 +8,8 @@ import { TextareaAutosize } from "@material-ui/core";
 import { objectToFormData } from "object-to-formdata";
 import Error from "../components/Error";
 import { withUser } from "../components/Auth/withUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 class CollabNew extends Component {
   state = {
@@ -110,7 +112,7 @@ class CollabNew extends Component {
         >
           <label htmlFor="image">
             <div
-              className="display__collabimagebox"
+              className="display__collabimagebox display__imagediv edit__imageedit"
               style={{
                 backgroundImage:
                   "url(" +
@@ -125,6 +127,7 @@ class CollabNew extends Component {
                 id="image"
                 className="input--hidden"
               />
+              <FontAwesomeIcon icon={faCamera} />
             </div>
           </label>
           <div className="container display display__collabbody">

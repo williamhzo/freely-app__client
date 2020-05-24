@@ -10,6 +10,8 @@ import { TextareaAutosize } from "@material-ui/core";
 import { objectToFormData } from "object-to-formdata";
 import Error from "../components/Error";
 import { withUser } from "../components/Auth/withUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 /*
 
@@ -137,6 +139,23 @@ class CollabEdit extends Component {
         >
           <label htmlFor="image">
             <div
+              className="display__collabimagebox display__imagediv edit__imageedit"
+              style={{
+                backgroundImage:
+                  "url(" +
+                  (this.state.temporaryPicture || this.state.image) +
+                  ")",
+              }}
+            >
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className="input--hidden"
+              />
+              <FontAwesomeIcon icon={faCamera} />
+            </div>
+            {/* <div
               className="display__collabimagebox"
               style={{
                 backgroundImage:
@@ -151,12 +170,7 @@ class CollabEdit extends Component {
                 id="image"
                 className="input--hidden"
               />
-              {/* <img
-              className="display__picture"
-              src={this.state.temporaryPicture || this.state.image}
-              alt=""
-            /> */}
-            </div>
+            </div> */}
           </label>
           <div className="container display display__collabbody">
             <div className="collab__buttons">
