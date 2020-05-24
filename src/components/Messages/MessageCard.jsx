@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class MessageCard extends Component {
   state = {
@@ -7,7 +7,7 @@ export default class MessageCard extends Component {
   componentDidMount() {}
   truncateMessage(message, length) {
     if (message.length > length) {
-      return message.substring(0, length) + "...";
+      return message.substring(0, length) + '...';
     } else return message;
   }
   componentDidMount = () => {
@@ -37,14 +37,20 @@ export default class MessageCard extends Component {
 
   render() {
     return (
-      <a href={"/messages/" + this.state._id} className="messages__onemessage">
+      <a href={'/messages/' + this.state._id} className="messages__onemessage">
         {!!this.state.correspondent && (
           <>
-            <img
+            {/* <img
               src={this.state.correspondent.profilePicture}
               className="messages__avatar"
               alt=""
-            />
+            /> */}
+            <div
+              className="messages__avatar"
+              style={{
+                backgroundImage: `url(${this.state.correspondent.profilePicture})`,
+              }}
+            ></div>
             <div className="messages__info">
               <div className="messages__header">
                 <div className="messages__correspondent">
@@ -57,8 +63,8 @@ export default class MessageCard extends Component {
               {!!this.state.lastMessage && (
                 <div className="messages__lastmessage">
                   {this.state.lastMessage.author === this.state.user._id
-                    ? "You: "
-                    : this.state.correspondent.name + ": "}
+                    ? 'You: '
+                    : this.state.correspondent.name + ': '}
                   {this.truncateMessage(this.state.lastMessage.content, 100)}
                 </div>
               )}

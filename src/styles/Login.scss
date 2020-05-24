@@ -95,3 +95,10 @@
     }
   }
 }
+
+@media (min-width: 769px) {
+  .login-container {
+    max-width: 600px;
+    margin: $NavBar-height auto;
+  }
+}
