@@ -57,10 +57,13 @@ class About extends Component {
     return (
       <div className="about container">
         <h1 className="about__title-main">
-          Freely is <span className="about__title-main--span">the</span>{' '}
-          freelancer platform{' '}
-          <span className="about__title-main--span">for</span> freelancers
+          Where <span className="about__title-main--span">freelancers</span>{' '}
+          connect — and team up
         </h1>
+        {/* <h1 className="about__title-main">
+          Freely is the freelancer platform for{' '}
+          <span className="about__title-main--span">freelancers</span>
+        </h1> */}
         <div className="about__body">
           <p className="about__text">
             There are a lot of freelancer platforms out there, but most of them
