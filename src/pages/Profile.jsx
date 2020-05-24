@@ -232,11 +232,6 @@ class Profile extends Component {
                             backgroundImage: `url("${collab.image}")`,
                           }}
                         ></div>
-                        {/* <img
-                          src={collab.image}
-                          alt=""
-                          className="display__collabcardimage"
-                        /> */}
                         <h3 className="display__collabcardtitle">
                           {collab.title}
                         </h3>
