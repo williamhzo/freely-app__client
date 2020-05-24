@@ -70,39 +70,6 @@ class NavBar extends Component {
               <p className="Nav__plus-icon-text">Create a Project</p>
             </NavLink>
           </li>
-          <li className="Nav__item">
-            <NavLink
-              className="Nav__link"
-              activeClassName="Nav__active"
-              onClick={this.props.click}
-              to={
-                this.props.context.user
-                  ? `/${this.props.context.user.userName}`
-                  : '/login'
-              }
-            >
-              {/* <div
-                  className="Nav__avatar"
-                  style={{
-                    backgroundImage: context.user
-                      ? `url(${context.user.profilePicture})`
-                      : 'url("media/avatar2.png")',
-                  }}
-                ></div> */}
-              {/* {context.user && (
-                  <div
-                    className="Nav__avatar"
-                    style={{
-                      backgroundImage: `url(${context.user.profilePicture})`,
-                    }}
-                  ></div>
-                )} */}
-              {this.props.context.user && (
-                <div>{this.props.context.user.name}</div>
-              )}
-              {!this.props.context.user && <div>Profile</div>}
-            </NavLink>
-          </li>
           <li className="Nav__item hamburger__button">
             <HamburgerButton
               click={this.props.hamburgerClickHandler}
@@ -133,6 +100,23 @@ class NavBar extends Component {
               to="/about"
             >
               About
+            </NavLink>
+          </li>
+          <li className="Nav__item">
+            <NavLink
+              className="Nav__link"
+              activeClassName="Nav__active"
+              onClick={this.props.click}
+              to={
+                this.props.context.user
+                  ? `/${this.props.context.user.userName}`
+                  : '/login'
+              }
+            >
+              {this.props.context.user && (
+                <div>{this.props.context.user.name}</div>
+              )}
+              {!this.props.context.user && <div>Profile</div>}
             </NavLink>
           </li>
           {this.props.context.user && (

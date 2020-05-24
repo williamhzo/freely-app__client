@@ -118,6 +118,9 @@
     // height: 100%;
     background-position: center center;
     background-size: cover;
+    -moz-box-shadow: inset 0 0 8px rgba(150, 150, 150, 0.3);
+    -webkit-box-shadow: inset 0 0 8px rgba(150, 150, 150, 0.3);
+    box-shadow: inset 0 0 8px rgba(150, 150, 150, 0.3);
   }
 
   &__title {
@@ -136,8 +139,10 @@
 }
 
 .card-about {
-  padding: $component-margin * 2;
+  padding: $component-margin $component-margin * 2;
   flex-direction: column;
+  background-color: $primary-font-color;
+  color: $background-color;
 }
 
 .card-about__chevron {
@@ -157,7 +162,7 @@
 }
 
 .card-about__title {
-  margin: $component-margin 0;
+  margin: $component-margin/2 0 $component-margin 0;
   font-size: 1.3rem;
 }
 
