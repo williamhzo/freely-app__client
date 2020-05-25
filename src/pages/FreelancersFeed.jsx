@@ -45,7 +45,7 @@ class FreelancersFeed extends Component {
         <div className="feed__card-wrapper">
           {this.state.filteredFreelancers.map((freelancer, index) => (
             <>
-              {index === 3 && <AboutUsCard />}
+              {index === 5 && <AboutUsCard />}
               <FreelancerCard key={index} freelancer={freelancer} />
             </>
           ))}

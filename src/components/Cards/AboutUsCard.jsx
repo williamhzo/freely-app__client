@@ -5,11 +5,17 @@ const AboutUsCard = () => {
   return (
     <div className="card card-about">
       <h1 className="about__title card-about__title">
-        Freely is{' '}
-        <span className="about__title--span card-about-span">the</span>{' '}
-        freelancer platform{' '}
-        <span className="about__title--span card-about-span">for</span>{' '}
-        freelancers
+        <span className="about__title--span card-about-span--bold">Freely</span>{' '}
+        <span className="about__title--span-bis card-about-span-bis">
+          is the
+        </span>{' '}
+        <span className="about__title--span card-about-span--lora">
+          freelance platform
+        </span>{' '}
+        <span className="about__title--span-bis card-about-span-bis">for</span>{' '}
+        <span className="about__title--span card-about-span--lora">
+          freelancers
+        </span>
       </h1>
       <Link className="card-about__link" to="/about">
         How it Works <span className="card-about__chevron">></span>

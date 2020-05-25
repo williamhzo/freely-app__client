@@ -47,7 +47,7 @@ class CollabsFeed extends React.Component {
         <div className="feed__card-wrapper--collab">
           {this.state.filteredCollabs.map((collab, index) => (
             <>
-              {index === 3 && <AboutUsCard />}
+              {index === 5 && <AboutUsCard />}
               <CollabCard key={index} collab={collab} />
             </>
           ))}

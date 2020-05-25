@@ -147,7 +147,7 @@
   padding: $component-margin $component-margin * 2;
   flex-direction: column;
   background-color: $primary-font-color;
-  color: $background-color
+  color: $background-color;
 }
 
 .card-about__chevron {
@@ -156,12 +156,26 @@
   font-size: 0.9rem;
 }
 
-.card-about-span {
-  font-weight: 400;
-  font-family: 'Lora';
-  font-style: italic;
-  color: $success-color;
+.card-about-span--bold {
+  font-weight: 600;
 }
+
+.card-about-span-bis {
+  font-weight: 400;
+}
+
+.card-about-span--lora {
+  font-family: 'lora';
+  font-weight: 400;
+  font-style: italic;
+}
+
+// .card-about-span {
+//   font-weight: 400;
+//   font-family: 'Lora';
+//   font-style: italic;
+//   color: $success-color;
+// }
 
 .body-about {
   text-align: center;
@@ -173,8 +187,7 @@
 }
 
 .card-about__link {
-  font-family: 'Lora';
-  color: $success-color;
+  font-weight: 600;
 }
 
 .filter {
