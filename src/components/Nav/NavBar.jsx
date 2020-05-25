@@ -70,13 +70,13 @@ class NavBar extends Component {
               <p className="Nav__plus-icon-text">Create a Project</p>
             </NavLink>
           </li>
-          <li className="Nav__item hamburger__button">
+          {/* <li className="Nav__item hamburger__button">
             <HamburgerButton
               click={this.props.hamburgerClickHandler}
               hamburgerToggle={this.props.toggled}
               // context={context}
             />
-          </li>
+          </li> */}
           {this.props.context.user && (
             <li className="Nav__item hamburger__item  Nav__messages">
               <NavLink
@@ -119,6 +119,13 @@ class NavBar extends Component {
               )}
               {!this.props.context.user && <div>Log In</div>}
             </NavLink>
+          </li>
+          <li className="Nav__item hamburger__button">
+            <HamburgerButton
+              click={this.props.hamburgerClickHandler}
+              hamburgerToggle={this.props.toggled}
+              // context={context}
+            />
           </li>
           {this.props.context.user && (
             <li className="Nav__item hamburger__item">
