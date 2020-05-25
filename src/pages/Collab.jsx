@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import apiHandler from "../api/apiHandler";
-import "../styles/Display.scss";
-import Badges from "../components/Badges";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import apiHandler from '../api/apiHandler';
+import '../styles/Display.scss';
+import Badges from '../components/Badges';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUserFriends,
   faUserLock,
   faPenFancy,
   faCommentAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { withUser } from "../components/Auth/withUser";
+} from '@fortawesome/free-solid-svg-icons';
+import { withUser } from '../components/Auth/withUser';
 
 class Collab extends Component {
   state = {
     categoryOptions: [],
     skillOptions: [],
     saved: true,
-    title: "",
-    creator: "",
+    title: '',
+    creator: '',
     contributors: [],
-    description: "",
+    description: '',
     skillsNeeded: [],
     categoryNeeded: [],
-    image: "",
+    image: '',
     open: false,
   };
   componentDidMount() {
@@ -38,7 +38,7 @@ class Collab extends Component {
         {this.state.image && (
           <div
             className="display__collabimagebox"
-            style={{ backgroundImage: "url(" + this.state.image + ")" }}
+            style={{ backgroundImage: 'url(' + this.state.image + ')' }}
           ></div>
         )}
         <div className="container display display__collabbody">
@@ -50,7 +50,7 @@ class Collab extends Component {
                     className="btn btn__standard btn__blue btn__hover"
                     onClick={() => {
                       this.props.history.push(
-                        "/collab/" + this.props.match.params.id + "/edit"
+                        '/collab/' + this.props.match.params.id + '/edit'
                       );
                     }}
                   >
@@ -78,38 +78,38 @@ class Collab extends Component {
             </li>
             <li className="display__bullet">
               <FontAwesomeIcon icon={faPenFancy} />
-              Created by{" "}
+              Created by{' '}
               <Link
                 className="display__contributor"
-                to={"/" + this.state.creator.userName}
+                to={'/' + this.state.creator.userName}
               >
                 {this.state.creator.name}
               </Link>
             </li>
-            {this.state.creator.preferredContact && (
+            {/* {this.state.creator.preferredContact && (
               <li className="display__bullet">
                 <FontAwesomeIcon icon={faCommentAlt} />
                 Preferred method of contact:{" "}
                 {this.state.creator.preferredContact}
               </li>
-            )}
+            )} */}
           </ul>
           <Badges
-            heading={"Roles Needed"}
+            heading={'Roles Needed'}
             data={this.state.categoryNeeded}
-            label={"name"}
+            label={'name'}
             className="display__fullwidth"
           />
           <Badges
-            heading={"Skills Needed"}
+            heading={'Skills Needed'}
             data={this.state.skillsNeeded}
-            label={"name"}
+            label={'name'}
             className="display__fullwidth"
           />
           <Badges
-            heading={"Collaborators"}
+            heading={'Collaborators'}
             data={this.state.contributors}
-            label={"name"}
+            label={'name'}
             className="display__fullwidth"
             linked={true}
           />
