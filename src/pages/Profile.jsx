@@ -55,7 +55,10 @@ class Profile extends Component {
     apiHandler.getAllMessages(this.props.context.user._id).then((messages) => {
       // console.log(messages);
       let filtered = messages.filter((message) => {
-        let recipients = [message.recipients[0]._id, message.recipients[1]._id];
+        let recipients;
+        if (message.recipients.length > 1) {
+          recipients = [message.recipients[0]._id, message.recipients[1]._id];
+        }
         return (
           recipients.includes(this.state._id) &&
           recipients.includes(this.props.context.user._id)
