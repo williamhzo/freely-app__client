@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const CollabCard = ({ collab }) => {
   return (
@@ -10,11 +10,15 @@ const CollabCard = ({ collab }) => {
       ></div>
       <div className="card--collab__body--collab">
         <h3 className="card--collab__title">{collab.title}</h3>
-        <p className="card--collab__copy">{collab.description}</p>
+        <p className="card--collab__copy">
+          {collab.description.length > 100
+            ? collab.description.substring(0, 100) + "..."
+            : collab.description}
+        </p>
         <p className="card--collab__copy">
           {collab.open
-            ? 'Accepting coworkers!'
-            : 'This project team is complete.'}
+            ? "Accepting coworkers!"
+            : "This project team is complete."}
         </p>
       </div>
     </Link>
