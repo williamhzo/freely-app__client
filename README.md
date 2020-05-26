@@ -44,9 +44,7 @@ Screenshots from the app:
 
 ![Freely landing page](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely-landing-page_g6qanw.png)
 
-![Freely projects](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely_projects_pbtnse.png)
-
-![Freely profile](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely-profile_iotkil.png)
+![Freely projects](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely_projects_pbtnse.png) ![Freely profile](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely-profile_iotkil.png)
 
 ## Technologies
 
