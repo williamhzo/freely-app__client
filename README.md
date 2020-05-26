@@ -42,11 +42,11 @@ If you’d like to get in touch, you can find us on our profiles: [Sam Littlefai
 
 Screenshots from the app:
 
-- ![Freely landing page](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-projects.png?raw=true)
+- ![Freely landing page](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely-landing-page_g6qanw.png)
 
-- ![Freely projects](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-landing-page.png?raw=true)
+- ![Freely projects](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely_projects_pbtnse.png)
 
-- ![Freely profile](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-profile.png?raw=true)
+- ![Freely profile](https://res.cloudinary.com/flextance/image/upload/v1590513341/freely-profile_iotkil.png)
 
 ## Technologies
 
