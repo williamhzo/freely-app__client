@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Freely app
 
-## Available Scripts
+https://freely.cool/
 
-In the project directory, you can run:
+Freely is the freelance platform for freelancers. It's an open community where they can meet, connect and team-up to build awesome projects.
 
-### `npm start`
+## Table of contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Contributors](#contributors)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## General info
 
-### `npm test`
+This project was built from scratch in 10 days, in the frame of Ironhack's Web Development's bootcamp. It has been awarded 'Best Web Development App' of the Hackshow (140+ people), on 25th May 2020.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Freely. Where freelancers connect — and team up.
 
-### `npm run build`
+There are a lot of freelancer platforms out there, but most of them are targeted at big companies looking to save costs with inexpensive labor. We wanted to build a freelancer platform that serves freelancers, not corporations.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+That’s why we made Freely. It’s a place where freelancers can meet, share ideas, and team up.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### How does it work?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### 1. Put Yourself Out There
 
-### `npm run eject`
+First, create a profile. This will let other freelancers discover you. It serves as your introduction and portfolio.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### 2. Connect With Other Freelancers
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Browse profiles and projects to see what other freelancers are working on. If you see someone working on something that interests you, send them a message. You can offer to collaborate, or just have a conversation.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### 3. Create Something
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Do you have a great idea that you need some help with? Post a project. Include information about the project: what you have in mind, what roles and skills you need, and how you envision collaborating.
 
-## Learn More
+#### Who are we?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+We are William Hermozo and Sam Littlefair. We’re students at the Ironhack Full-Stack Web Development Bootcamp in Paris, France. We created Freely for our final project. As of May 25, we are both looking for positions as web developers.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you’d like to get in touch, you can find us on our profiles: [Sam Littlefair](https://github.com/samlfair) and [William Hermozo](https://github.com/williamhzo/).
 
-### Code Splitting
+Screenshots from the app:
+![Freely landing page](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-projects.png?raw=true)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![Freely projects](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-landing-page.png?raw=true)
 
-### Analyzing the Bundle Size
+![Freely profile](https://github.com/williamhzo/freely-app__client/tree/master/public/freely-profile.png?raw=true)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Technologies
 
-### Making a Progressive Web App
+Freely is built with the MERN stack:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- React.js
+- MongoDB
+- Express.js
+- Node.js
+- HTML5 / CSS3 (scss + BEM methodology)
 
-### Advanced Configuration
+## Contributors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Freely was built from scratch by [Sam Littlefair](https://github.com/samlfair) and [William Hermozo](https://github.com/williamhzo/)
